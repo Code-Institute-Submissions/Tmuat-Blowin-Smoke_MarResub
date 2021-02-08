@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<video src="{{ url_for('static', filename='media/video/billowing-smoke.mp4') }}" type="video/mp4" autoplay loop playsinline muted></video>
+<!-- Landing Video -->
+<!-- basic video landing image code taken from  https://css-tricks.com/full-page-background-video-styles/ -->
+<video src="{{ url_for('static', filename='media/video/billowing-smoke.mp4') }}" type="video/mp4" autoplay loop
+    playsinline muted></video>
+<div class="viewport-landing-text">
+    <h1 class="white-text landing-text">
+        “Freedom Lies In Barbeque”
+        <span class="landing-text-author">
+            Robert Frost
+        </span>
+    </h1>
+</div>
+<!-- Landing Video end-->
 {% endblock %}

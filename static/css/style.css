@@ -48,13 +48,38 @@ html {
 /* ---------------------------------------------- Index Styling start */
 
 video {
-  object-fit: cover;
-  width: 100vw;
-  height: 75vh;
-  position: fixed;
-  top: 0;
-  left: 0;
+    object-fit: cover;
+    width: 100vw;
+    height: 75vh;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
+
+.viewport-landing-text {
+    position: relative;
+    top: -64px;
+    height: 75vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.landing-text {
+    font-weight: bold;
+    font-size: 70px;
+    align-items: center;
+    text-align: center;
+}
+
+.landing-text-author {
+    font-style: italic;
+    font-weight: 800;
+    font-size: 50px;
+    display: block;
+}
+
 
 /* ---------------------------------------------- Index Styling end */
 
@@ -78,6 +103,10 @@ video {
 @media screen and (max-width: 600px) {
     .logo-font{
         font-size: 35px !important;
+    }
+
+    .viewport-landing-text {
+        top: -56px;
     }
 }
 
