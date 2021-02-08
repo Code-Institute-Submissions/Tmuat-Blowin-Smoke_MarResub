@@ -37,9 +37,26 @@ html {
     color: #D95E16 !important;
 }
 
+.no-shadows {
+    box-shadow: none!important;
+}
+
 /* --------------------- Navbar Styling end */
 
 /* ---------------------------------------------- Global Styling end */
+
+/* ---------------------------------------------- Index Styling start */
+
+video {
+  object-fit: cover;
+  width: 100vw;
+  height: 75vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* ---------------------------------------------- Index Styling end */
 
 /* ---------------------------------------------- Media Queries start */
 
