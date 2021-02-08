@@ -20,8 +20,8 @@ html {
 }
 
 .logo-font{
-  font-family: 'Lily Script One', sans-serif;
-  font-size: 45px !important;
+    font-family: 'Lily Script One', sans-serif;
+    font-size: 45px !important;
 }
 
 .logo-font li a {
@@ -43,6 +43,14 @@ html {
 
 /* --------------------- Navbar Styling end */
 
+/* --------------------- Footer Styling start */
+
+.footer-font{
+    font-family: 'Lily Script One', sans-serif;
+}
+
+/* --------------------- Footer Styling end */
+
 /* ---------------------------------------------- Global Styling end */
 
 /* ---------------------------------------------- Index Styling start */
@@ -50,7 +58,7 @@ html {
 video {
     object-fit: cover;
     width: 100vw;
-    height: 75vh;
+    height: 90vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -59,7 +67,7 @@ video {
 .viewport-landing-text {
     position: relative;
     top: -64px;
-    height: 75vh;
+    height: 90vh;
     text-align: center;
     display: flex;
     align-items: center;
