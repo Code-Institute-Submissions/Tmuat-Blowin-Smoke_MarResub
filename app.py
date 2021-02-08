@@ -1,4 +1,5 @@
 import os
+import datetime
 from flask import (
     Flask,
     flash,
@@ -29,6 +30,20 @@ def index():
     context = {
     }
     return render_template("index.html")
+
+
+# Function to return the current year, for use with copyright year
+def get_current_year_to_context():
+    current_datetime = datetime.datetime.now()
+    return current_datetime.year
+
+
+# Context processor for all templates
+@app.context_processor
+def context_processor():
+    return {
+        'year': get_current_year_to_context
+    }
 
 
 if __name__ == "__main__":
