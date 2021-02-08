@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blow'n Smoke</title>
-</head>
-<body>
+  <head>
+ 
+    {% block meta %}
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% endblock %}
+
+    {% block extra_meta %}
+    {% endblock %}
     
-</body>
+    {% block corecss %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+            integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A=="
+            crossorigin="anonymous" type="text/css" />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Raleway:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    {% endblock %}
+
+    {% block extra_css %}
+    {% endblock %}
+
+    <title>Blow'n Smoke {% block extra_title %}{% endblock %}</title>
+  </head>
+  <body>
+	<header>
+        <!-- top navbar -->
+
+        <!-- mobile sidenav -->
+
+	</header>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    {% block corejs %}
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+            integrity="sha512-NiWqa2rceHnN3Z5j6mSAvbwwg3tiwVNxiAQaaSMSXnRRDh5C2mk/+sKQRw8qjV1vN4nf8iK2a0b048PnHbyx+Q=="
+            crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% endblock %}
+
+    {% block extra_js %}
+    {% endblock %}
+
+  </body>
 </html>
