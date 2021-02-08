@@ -28,9 +28,37 @@
   <body>
 	<header>
         <!-- top navbar -->
+        <!-- basic navbar code taken from  https://materializecss.com/navbar.html -->
+        <div class="navbar-fixed">
+            <nav class="nav-extended transparent">
+                <div class="nav-wrapper nav-padding">
+                    <a id="logo-container" href="{{ url_for('index') }}" class="brand-logo left logo-font">Blow'n Smoke!</a>
+                    <a href="#" data-target="mobile-nav" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                    <ul class="right hide-on-med-and-down logo-font">
+                        <li><a class="active" href="{{ url_for('index') }}">Home</a></li>
+                        <li><a href="#">Recipes</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- top navbar end -->
 
         <!-- mobile sidenav -->
-
+        <ul class="sidenav" id="mobile-nav">
+            <li><h4 class="center-align text-orange logo-font">Blow'n Smoke!</h4></li>
+            <li><a class="active" href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="#">Recipes</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+        <!-- mobile sidenav end -->
+		
 	</header>
 
     <main class="container">
