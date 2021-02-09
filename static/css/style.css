@@ -1,6 +1,6 @@
 /* ---------------------------------------------- Font Import start */
 
-@import url('https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Raleway:wght@400;700;900&display=swap');
 
 /* ---------------------------------------------- Font Import end */
 
@@ -68,6 +68,10 @@ html {
     background-color: #070707;
 }
 
+.bg-off-white {
+    background-color: rgb(216, 207, 203);
+}
+
 
 /* --------------------- Colours Styling end */
 
@@ -126,13 +130,27 @@ html {
     display: block;
 }
 
+.sub-section-header {
+    font-weight: 900;
+    font-size: 100px;
+}
+
+.sub-section-text {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 47px;
+}
+
 /* ---------------------------------------------- Index Styling end */
 
 /* ---------------------------------------------- Media Queries start */
 
 /* Medium & down */
 @media screen and (max-width: 992px) {
-
+    .sub-section-text {
+        font-size: 25px;
+        line-height: 35px;
+    }
 }
 
 /* Small & down */
@@ -145,6 +163,14 @@ html {
     }
     .landing-text-author {
         font-size: 35px;
+    }
+    .sub-section-header {
+        font-weight: 900;
+        font-size: 60px;
+    }
+    .sub-section-text {
+        font-size: 20px;
+        line-height: 25px;
     }
 }
 
