@@ -43,9 +43,25 @@ html {
 
 /* --------------------- Footer Styling start */
 
-
+.footer-title-font{
+    font-family: 'Lily Script One', sans-serif;
+    font-size: 40px !important;
+}
 
 /* --------------------- Footer Styling end */
+
+/* --------------------- Colours Styling start */
+
+.bg-off-black {
+    background-color: #181717;
+}
+
+.bg-black {
+    background-color: #070707;
+}
+
+
+/* --------------------- Colours Styling end */
 
 /* ---------------------------------------------- Global Styling end */
 
@@ -112,7 +128,13 @@ html {
 /* Small & down */
 @media screen and (max-width: 600px) {
     .logo-font{
-        font-size: 35px !important;
+        font-size: 30px !important;
+    }
+    .landing-text {
+        font-size: 50px;
+    }
+    .landing-text-author {
+        font-size: 35px;
     }
 }
 
