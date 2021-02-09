@@ -83,6 +83,8 @@ html {
     position: absolute;
 
     height: 90vh;
+    min-width: 100%;
+    
     top: 45%;
     left: 50%;
     transform: translate(-50%, -45%);
