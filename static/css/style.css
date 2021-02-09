@@ -30,7 +30,8 @@ html {
     font-size: 25px;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:focus {
     color: rgb(209, 148, 112) !important;
 }
 
@@ -46,6 +47,12 @@ html {
 .footer-title-font{
     font-family: 'Lily Script One', sans-serif;
     font-size: 40px !important;
+}
+
+.footer-link:hover,
+.footer-link:focus {
+    color: rgb(209, 148, 112) !important;
+    text-decoration: none;
 }
 
 /* --------------------- Footer Styling end */
