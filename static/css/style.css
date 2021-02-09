@@ -81,7 +81,7 @@ html {
 
 .full-screen-video-container {
     position: relative;
-    height: 90vh;
+    height: 93vh;
     width: 100vw;
 
     overflow: hidden;
@@ -94,10 +94,10 @@ html {
 .full-screen-video-container video {
     position: absolute;
 
-    height: 90vh;
+    height: 93vh;
     min-width: 100%;
     
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -45%);
 
@@ -107,7 +107,7 @@ html {
 }
 
 .full-screen-video-content {
-    height: 90vh;
+    height: 93vh;
 
     z-index: 1;
 
