@@ -1,5 +1,6 @@
 import os
 import datetime
+import random
 from flask import (
     Flask,
     flash,
@@ -27,10 +28,19 @@ mongo = PyMongo(app)
 # Function to return the home page (index.html) of the site
 @app.route("/")
 def index():
+    """
+    The below accesses MongoDB quotes table and gets a
+    list of all quotes objects before selecting one
+    at random to be shown on page load. Everytime the page
+    is refreshed a new random quote will be found.
+    """
+
+    single_quote = random.choice(list(mongo.db.quotes.find()))
 
     context = {
+        "quote": single_quote,
     }
-    return render_template("index.html")
+    return render_template("index.html", **context)
 
 
 # Function to return the current year, for use with copyright year
