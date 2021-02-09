@@ -9,45 +9,41 @@
 body,
 html {
     height: 100%;
+    margin: 0;
+
     font-family: "Raleway", sans-serif;
     background-color: #000000;
 }
 
 /* --------------------- Navbar Styling start */
 
-.nav-padding {
-    padding: 0px 30px 0px 30px;
+.navbar {
+    background-color: transparent;
 }
 
 .logo-font{
     font-family: 'Lily Script One', sans-serif;
-    font-size: 45px !important;
+    font-size: 40px !important;
 }
 
 .logo-font li a {
     font-size: 25px;
 }
 
-.logo-font li a:hover {
-    color: rgb(209, 148, 112);
+.nav-link:hover {
+    color: rgb(209, 148, 112) !important;
 }
 
-.text-orange,
+.nav-link.active:hover,
 .active {
     color: #D95E16 !important;
-}
-
-.no-shadows {
-    box-shadow: none!important;
 }
 
 /* --------------------- Navbar Styling end */
 
 /* --------------------- Footer Styling start */
 
-.footer-font{
-    font-family: 'Lily Script One', sans-serif;
-}
+
 
 /* --------------------- Footer Styling end */
 
@@ -55,19 +51,36 @@ html {
 
 /* ---------------------------------------------- Index Styling start */
 
-video {
-    object-fit: cover;
-    width: 100vw;
+.full-screen-video-container {
+    position: relative;
     height: 90vh;
-    position: fixed;
-    top: 0;
-    left: 0;
+    width: 100vw;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.viewport-landing-text {
-    position: relative;
-    top: -64px;
+.full-screen-video-container video {
+    position: absolute;
+
     height: 90vh;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+
+    z-index: 0;
+
+    object-fit: cover;
+}
+
+.full-screen-video-content {
+    height: 90vh;
+
+    z-index: 1;
+
     text-align: center;
     display: flex;
     align-items: center;
@@ -77,44 +90,29 @@ video {
 .landing-text {
     font-weight: bold;
     font-size: 70px;
-    align-items: center;
-    text-align: center;
 }
 
 .landing-text-author {
     font-style: italic;
     font-weight: 800;
     font-size: 50px;
+
     display: block;
 }
-
 
 /* ---------------------------------------------- Index Styling end */
 
 /* ---------------------------------------------- Media Queries start */
 
-/* Between medium & large */
-@media screen and (min-width: 992px) and (max-width: 1200px) {
-    nav ul a {
-        padding: 0px 0px 0px 15px;
-    }
-}
-
 /* Medium & down */
 @media screen and (max-width: 992px) {
-    .nav-padding {
-        padding: 0px;
-    }
+
 }
 
 /* Small & down */
 @media screen and (max-width: 600px) {
     .logo-font{
         font-size: 35px !important;
-    }
-
-    .viewport-landing-text {
-        top: -56px;
     }
 }
 

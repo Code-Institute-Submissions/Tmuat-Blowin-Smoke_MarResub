@@ -3,15 +3,67 @@
 {% block content %}
 <!-- Landing Video -->
 <!-- basic video landing image code taken from  https://css-tricks.com/full-page-background-video-styles/ -->
-<video src="{{ url_for('static', filename='media/video/billowing-smoke.mp4') }}" type="video/mp4" autoplay loop
-    playsinline muted loading="lazy"></video>
-<div class="viewport-landing-text">
-    <h1 class="white-text landing-text">
-        “Freedom Lies In Barbeque”
-        <span class="landing-text-author">
-            Robert Frost
-        </span>
-    </h1>
-</div>
-<!-- Landing Video end-->
+<section id="landing-video" class="full-screen-video-container">
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <source src="{{ url_for('static', filename='media/video/billowing-smoke.mp4') }}" type="video/mp4">
+    </video>
+    <div class="full-screen-video-content">
+        <div class="w-100 text-white">
+            <h1 class="landing-text">
+                “Freedom Lies In Barbeque”
+                <span class="landing-text-author">
+                    Robert Frost
+                </span>
+            </h1>
+        </div>
+    </div>
+</section>
+<!-- Landing Video end -->
+<!-- Recipe Sub Section -->
+<section id="recipe-header" class="bg-light">
+    <div class="w-100">
+        <h1>Recipes</h1>
+    </div>
+
+</section>
+<!-- Recipe Sub Section end -->
 {% endblock %}
+
+<!-- <section id="landing-video">
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <source src="{{ url_for('static', filename='media/video/billowing-smoke.mp4') }}" type="video/mp4">
+    </video>
+</section>
+<section class="section-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <p>The HTML5 video element uses an mp4 video as a source. Change the source video to add in your own
+                    background! The header text is vertically centered using flex utilities that are build into
+                    Bootstrap 4.</p>
+                <p>The overlay color can be changed by changing the <code>background-color</code> of the
+                    <code>.overlay</code> class in the CSS.</p>
+                <p>Set the mobile fallback image in the CSS by changing the background image of the header element
+                    within the media query at the bottom of the CSS snippet.</p>
+                <p class="mb-0">
+                    Created by <a href="https://startbootstrap.com">Start Bootstrap</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<!-- <div class="video-text container">
+        <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+                <h1 class="landing-text">
+                    “Freedom Lies In Barbeque”
+                    <span class="landing-text-author">
+                        Robert Frost
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div> -->
+
+<!-- Landing Video end-->
