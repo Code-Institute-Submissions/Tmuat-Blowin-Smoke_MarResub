@@ -2,6 +2,7 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" type="text/css">
 {% endblock %}
 
 {% block content %}
@@ -41,7 +42,7 @@
         <!-- Recipe Cards Carousel Section -->
         <!-- basic card carousel code taken from https://github.com/ganlanyuan/tiny-slider -->
         <div class="w-100 bg-light">
-            <div class="container">
+            <div class="container" data-aos="fade-up">
                 <div class="row mx-1 recipe-slider mt-5 mb-5">
                     <div class="card-outer">
                         <div class="card">
@@ -132,6 +133,7 @@
         <!-- Recipe Cards Carousel Section end -->
     </section>
     <!-- Recipe Sub Section end -->
+
     <!-- Products Sub Section -->
     <section id="products-header" class="bg-off-white">
         <div class="container">
@@ -148,7 +150,7 @@
         <!-- Products Cards Carousel Section -->
         <!-- basic card carousel code taken from https://github.com/ganlanyuan/tiny-slider -->
         <div class="w-100 bg-light">
-            <div class="container">
+            <div class="container" data-aos="fade-up">
                 <div class="row mx-1 product-slider mt-5 mb-5">
                     <div class="card-outer">
                         <div class="card">
@@ -243,8 +245,9 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"
         integrity="sha512-D/zaRVk05q6ERt1JgWB49kL6tyerY7a94egaVv6ObiGcw3OCEv0tvoPDEsVqL28HyAZhDd483ix8gkWQGDgEKw=="
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
