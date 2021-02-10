@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" type="text/css">
+{% endblock %}
+
+{% block extra_title %}| Products{% endblock %}
+
+{% block content %}
+    <!-- Landing Image -->
+    <section id="landing-image" class="container-fluid no-gutters recipe-landing-container">
+        <img src="{{ url_for('static', filename='media/images/recipes.jpg') }}" alt="picture of a smoking bbq">
+        <div class="recipe-content overlay">
+            <div class="w-100 text-white">
+                <h1 class="recipe-landing-text text-uppercase">
+                    Products
+                </h1>
+            </div>
+        </div>
+    </section>
+    <!-- Landing Image end -->
+
+    <!-- Recipes Section -->
+    <section id="recipe-header" class="bg-off-white">
+        <div class="container">
+            <div class="row w-100 m-0">
+                <div class="col-12 text-center filter mt-4 mb-3">
+                    <h5 class="pt-3 title-font filter-title">Select A Filter</h5>
+                    <div class="inner-filter pt-2 pb-3">
+                        <div class="filter-group pb-3">
+                            <a href="" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3">Beef</a>
+                        </div>
+                        <h5 class="title-font filter-title">Or...</h5>
+                        <div class=" mx-auto input-group custom-width mb-3">
+                            <input type="text" class="form-control custom-input" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn bg-custom-orange text-white custom-input search" type="button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row mx-1 mt-3">
+                <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
+                    <div class="card-outer box-shadow">
+                        <div class="card">
+                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title font-weight-bold">Card title 1</h5>
+                                <a href="#"
+                                    class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Lets Start Cooking</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
+                    <div class="card-outer card-shadow">
+                        <div class="card">
+                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title font-weight-bold">Card title 1</h5>
+                                <a href="#"
+                                    class="btn title-font custom-btn bg-custom-orange individual-item-btn text-white pl-4 pr-4">Lets Start Cooking</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
+                    <div class="card-outer card-shadow">
+                        <div class="card">
+                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
+                            <div class="card-body text-center bg-light">
+                                <h5 class="card-title font-weight-bold">Card title 1</h5>
+                                <a href="#"
+                                    class="btn title-font custom-btn bg-custom-orange individual-item-btn text-white pl-4 pr-4">Lets Start Cooking</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-1 pb-5">
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2">
+                    <p class="sub-section-text mb-0 text-center">Not impressed with the recipes you’ve found or simply want to show off your masterful
+                        recipe. Add a recipe below (login required).</p>
+                </div>
+                <div class="col-12 text-center pt-3">
+                    <a href="#" class="btn title-font custom-btn view-all-btn bg-custom-orange box-shadow text-white pl-3 pr-3">View all products!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Recipes Section end -->
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="https://unpkg.com/aos@next/dist/aos.js"></script>
+{% endblock %}

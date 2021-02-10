@@ -57,6 +57,21 @@ def recipes():
     return render_template("recipes.html", **context)
 
 
+@app.route("/products/")
+def products():
+    """
+    A function to render a page of all products, with options
+    to filter and search.
+    """
+
+    products = list(mongo.db.quotes.find())
+
+    context = {
+        "products": products,
+    }
+    return render_template("products.html", **context)
+
+
 def get_current_year():
     """
     Function to return the current year, for use with copyright in footer
