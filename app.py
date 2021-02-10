@@ -84,6 +84,18 @@ def login():
     return render_template("login.html", **context)
 
 
+@app.route("/register/")
+def register():
+    """
+    A function to render a page for the purpose of
+    registering a user.
+    """
+
+    context = {
+    }
+    return render_template("register.html", **context)
+
+
 def get_current_year():
     """
     Function to return the current year, for use with copyright in footer
