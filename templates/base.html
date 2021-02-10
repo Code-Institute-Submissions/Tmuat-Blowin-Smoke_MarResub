@@ -39,10 +39,18 @@
                 <div class="collapse navbar-collapse" id="navbarToggler">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0 logo-font">
                         <li class="nav-item">
-                            <a class="nav-link text-white active" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white {{ 'active' if request.path == url_for('index') }}" href="{{ url_for('index') }}">Home
+                                {%- if request.path == url_for('index') -%}
+                                <span class="sr-only">(current)</span>
+                                {% endif %}
+                            </a>
                         </li>
                         <li>
-                            <a class="nav-link text-white" href="#">Recipes</a>
+                            <a class="nav-link text-white {{ 'active' if request.path == url_for('recipes') }}" href="{{ url_for('recipes') }}">Recipes
+                                {%- if request.path == url_for('recipes') -%}
+                                <span class="sr-only">(current)</span>
+                                {% endif %}
+                            </a>
                         </li>
                         <li>
                             <a class="nav-link text-white" href="#">Products</a>
