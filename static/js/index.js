@@ -24,4 +24,27 @@ $(document).ready(function () {
         }
 
     });
+    var slider = tns({
+        container: '.product-slider',
+        slideBy: 'page',
+        loop: true,
+        speed: 1000,
+        items: 1,
+        nav: false,
+        mouseDrag: true,
+        gutter: 50,
+        controlsContainer: "#custom-controls2",
+        responsive: {
+            576: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 3,
+            }
+        }
+
+    });
 });
