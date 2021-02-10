@@ -79,6 +79,8 @@ html {
 
 /* ---------------------------------------------- Index Styling start */
 
+/* --------------------- Video Styling start */
+
 .full-screen-video-container {
     position: relative;
     height: 92vh;
@@ -130,6 +132,10 @@ html {
     display: block;
 }
 
+/* --------------------- Video Styling end */
+
+/* --------------------- Recipe Styling start */
+
 .sub-section-header {
     font-weight: 900;
     font-size: 100px;
@@ -140,6 +146,21 @@ html {
     font-size: 30px;
     line-height: 47px;
 }
+
+.controls {
+    list-style: none;
+    width: 100%;    
+    top: 50%;
+    transform: translatey(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.card-control:hover {
+    cursor: pointer;
+}
+
+/* --------------------- Recipe Styling end */
 
 /* ---------------------------------------------- Index Styling end */
 
