@@ -193,7 +193,7 @@ html {
 
 /* ---------------------------------------------- Recipe Styling start */
 
-.recipe-landing-container {
+.image-landing-container {
     position: relative;
     height: 50vh;
     width: 100vw;
@@ -205,7 +205,7 @@ html {
     align-items: flex-start;
 }
 
-.recipe-landing-container img {
+.image-landing-container img {
     position: absolute;
 
     height: 50vh;
@@ -220,7 +220,7 @@ html {
     object-fit: cover;
 }
 
-.recipe-content {
+.image-content {
     height: 50vh;
 
     z-index: 1;
@@ -231,7 +231,7 @@ html {
     justify-content: center;
 }
 
-.recipe-landing-text {
+.image-landing-text {
     font-weight: 900;
     font-size: 100px;
 }
