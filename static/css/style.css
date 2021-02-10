@@ -72,6 +72,10 @@ html {
     background-color: rgb(216, 207, 203);
 }
 
+.bg-custom-orange {
+    background-color: #D95E16;
+}
+
 
 /* --------------------- Colours Styling end */
 
@@ -158,6 +162,25 @@ html {
 
 .card-control:hover {
     cursor: pointer;
+}
+
+.btn-font {
+    font-family: 'Lily Script One', sans-serif;
+}
+
+.view-all-btn {
+    font-size: 25px;
+}
+
+.custom-btn {
+    border-radius: 25px;
+    border: solid #D95E16;
+}
+
+.custom-btn:hover,
+.custom-btn:focus {
+    background-color: #fff;
+    color: #D95E16 !important;
 }
 
 /* --------------------- Recipe Styling end */
