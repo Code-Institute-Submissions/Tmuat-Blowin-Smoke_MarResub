@@ -43,7 +43,7 @@ def index():
     return render_template("index.html", **context)
 
 
-# Function to return the current year, for use with copyright year
+# Function to return the current year, for use with copyright in footer
 def get_current_year():
     current_datetime = datetime.datetime.now()
     return current_datetime.year
