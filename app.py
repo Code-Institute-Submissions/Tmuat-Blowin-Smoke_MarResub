@@ -43,6 +43,22 @@ def index():
     return render_template("index.html", **context)
 
 
+# Function to return the home page (index.html) of the site
+@app.route("/recipes/")
+def recipes():
+    """
+    A function to render a page of all recipes, with options
+    to filter and search.
+    """
+
+    recipes = list(mongo.db.quotes.find())
+
+    context = {
+        "recipes": recipes,
+    }
+    return render_template("recipes.html", **context)
+
+
 # Function to return the current year, for use with copyright in footer
 def get_current_year():
     current_datetime = datetime.datetime.now()
