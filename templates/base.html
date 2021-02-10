@@ -65,7 +65,10 @@
                                 {% endif %}
                         </li>
                         <li>
-                            <a class="nav-link text-white" href="#">Register</a>
+                            <a class="nav-link text-white {{ 'active' if request.path == url_for('register') }}" href="{{ url_for('register') }}">Register</a>
+                            {%- if request.path == url_for('register') -%}
+                                <span class="sr-only">(current)</span>
+                                {% endif %}
                         </li>
                         <li>
                             <a class="nav-link text-white" href="#">Contact Us</a>
