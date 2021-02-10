@@ -25,7 +25,6 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# Function to return the home page (index.html) of the site
 @app.route("/")
 def index():
     """
@@ -43,7 +42,6 @@ def index():
     return render_template("index.html", **context)
 
 
-# Function to return the home page (index.html) of the site
 @app.route("/recipes/")
 def recipes():
     """
