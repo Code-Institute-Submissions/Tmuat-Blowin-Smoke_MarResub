@@ -164,7 +164,7 @@ html {
     cursor: pointer;
 }
 
-.btn-font {
+.title-font {
     font-family: 'Lily Script One', sans-serif;
 }
 
@@ -245,6 +245,30 @@ html {
     height: 100%;
 }
 
+.filter {
+    background: #F9F9F9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.filter-title {
+    font-size: 30px;
+}
+
+.search:hover,
+.search:focus {
+    background-color: rgb(226, 129, 73) !important;
+}
+
+.custom-input:focus {
+    border-color: #D95E16;
+    box-shadow: 0 0 0 0.2rem rgb(217 94 22 / 25%);
+}
+
+.custom-width {
+    width: 70%;
+}
+
 /* ---------------------------------------------- Recipe Styling end */
 
 /* ---------------------------------------------- Media Queries start */
@@ -254,6 +278,9 @@ html {
     .sub-section-text {
         font-size: 25px;
         line-height: 35px;
+    }
+    .custom-width {
+        width: 90%;
     }
 }
 
@@ -279,6 +306,9 @@ html {
     .recipe-landing-text {
         font-weight: 900;
         font-size: 70px;
+    }
+    .custom-width {
+        width: 100%;
     }
 }
 

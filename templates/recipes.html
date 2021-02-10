@@ -24,108 +24,23 @@
     <section id="recipe-header" class="bg-off-white">
         <div class="container">
             <div class="row w-100 m-0">
-                <div class="col-12 text-center">
-                    <h1 class="sub-section-header text-uppercase pt-4 pb-2 mb-0">Recipes</h1>
-                </div>
-                <div class="col-12 text-center pb-5 mb-0">
-                    <p class="sub-section-text mb-0">Looking for inspiration for your next meal? <br>
-                        We've got a wide range of fantastic recipes to impress all your friends; from beef to chicken through to
-                        fish.</p>
+                <div class="col-12 text-center filter mt-4 mb-3">
+                    <h5 class="pt-3 title-font filter-title">Select A Filter</h5>
+                    <div class="inner-filter pt-2 pb-3">
+                        <div class="filter-group pb-3">
+                            <a href="" class="btn custom-btn bg-custom-orange text-white font-weight-bold pl-3 pr-3">Beef</a>
+                        </div>
+                        <h5 class="title-font filter-title">Or...</h5>
+                        <div class=" mx-auto input-group custom-width mb-3">
+                            <input type="text" class="form-control custom-input" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn bg-custom-orange text-white custom-input search" type="button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Recipe Cards Carousel Section -->
-        <!-- basic card carousel code taken from https://github.com/ganlanyuan/tiny-slider -->
-        <div class="w-100 bg-light">
-            <div class="container" data-aos="fade-up">
-                <div class="row mx-1 recipe-slider mt-5 mb-5">
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange individual-item-btn text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange individual-item-btn text-white pl-4 pr-4">View This Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="controls justify-content-center p-0 mb-0" id="custom-controls" aria-label="Carousel Navigation" tabindex="0">
-                    <li class="prev card-control pr-3" data-controls="prev" aria-controls="customize" tabindex="-1">
-                        <i class="fas fa-caret-left fa-3x ml-2 mr-2"></i>
-                    </li>
-                    <li class="next card-control pl-3" data-controls="next" aria-controls="customize" tabindex="-1">
-                        <i class="fas fa-caret-right fa-3x ml-2 mr-2"></i>
-                    </li>
-                </ul>
-                <div class="row justify-content-center pb-5">
-                    <a href="#" class="btn btn-font custom-btn view-all-btn bg-custom-orange text-white pl-3 pr-3">Find all the recipes!</a>
-                </div>
-            </div>
-        </div>
-        <!-- Recipe Cards Carousel Section end -->
     </section>
     <!-- Recipes Section end -->
 
