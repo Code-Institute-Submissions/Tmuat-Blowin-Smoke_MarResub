@@ -3,16 +3,22 @@
 {% block extra_title %}| Login{% endblock %}
 
 {% block content %}
-    <!-- Landing Video -->
-    <!-- basic video landing image code taken from https://codepen.io/WebDevSimplified/pen/oaxjQb -->
-    <section id="landing-video" class="full-screen-video-container container-fluid no-gutters">
-        <div class="full-screen-video-content">
+    <!-- Login Section -->
+    <section id="login" class="full-page-container container-fluid no-gutters">
+        <img src="{{ url_for('static', filename='media/images/smoke.jpg') }}" alt="a picture of wisps of smoke">
+        <div class="full-page-content">
             <div class="w-100 text-white">
-                <h1 class="landing-text">
-                    Login
-                </h1>
+                <div class="row">
+                    <form class="col-12 col-md-6 offset-md-3" method="POST" action="{{ url_for('login') }}">
+                        <div class="card white-grey-card p-3">
+                            <h3 class="title-font text-body card-title mb-0">Login</h3>
+                            <hr class="mx-auto w-75 border-dark">
+                        
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
-    <!-- Landing Video end -->
+    <!-- Login Section end -->
 {% endblock %}
