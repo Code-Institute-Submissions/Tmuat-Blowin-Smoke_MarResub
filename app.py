@@ -72,6 +72,18 @@ def products():
     return render_template("products.html", **context)
 
 
+@app.route("/login/")
+def login():
+    """
+    A function to render a page for the purpose of
+    logging the user in to the site.
+    """
+
+    context = {
+    }
+    return render_template("login.html", **context)
+
+
 def get_current_year():
     """
     Function to return the current year, for use with copyright in footer
