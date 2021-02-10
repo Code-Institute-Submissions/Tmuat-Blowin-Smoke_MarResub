@@ -57,15 +57,19 @@ def recipes():
     return render_template("recipes.html", **context)
 
 
-# Function to return the current year, for use with copyright in footer
 def get_current_year():
+    """
+    Function to return the current year, for use with copyright in footer
+    """
     current_datetime = datetime.datetime.now()
     return current_datetime.year
 
 
-# Context processor for all templates
 @app.context_processor
 def context_processor():
+    """
+    Context processor for all templates
+    """
     return {
         'year': get_current_year
     }
