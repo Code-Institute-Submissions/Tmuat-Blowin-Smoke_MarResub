@@ -32,7 +32,7 @@ $(function () {
             email: "Please enter a valid email address",
             password: {
                 required: "Please provide a password",
-                minlength: "Your password must be at least 5 characters long"
+                minlength: "Password must be > 5 characters long"
             },
             password2: {
                 equalTo: "The password don't match!"
