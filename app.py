@@ -205,11 +205,21 @@ def profile(username):
     A function to render a user profile page.
     """
     # grab the session user's username from db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+    user = mongo.db.users.find_one({"username": session["user"]})
+
+    # A for loop to delete the password key from the user dict
+    password_key = "password"
+    for key in user.keys():
+        if key == password_key:
+            del user[key]
+            break
+
+    context = {
+        "user": user,
+    }
 
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("profile.html", **context)
 
     return redirect(url_for("login"))
 

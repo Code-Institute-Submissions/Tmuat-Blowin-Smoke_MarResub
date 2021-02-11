@@ -3,15 +3,37 @@
 {% block extra_title %}| Profile{% endblock %}
 
 {% block content %}
-    <!-- Login Section -->
-    <section id="login">
+    <!-- Profile & Recipes Section -->
+    <section id="profile">
         <div class="landing-image">
-            <div class="container">
-                <div class="row align-items-center custom-form-row">
-                    Profile
+            <div class="container-fluid">
+                <div class="row align-items-top custom-form-row">
+                    <!-- User Profile Section -->
+                    <div class="col-12 col-lg-4 text-center mx-auto pt-3">
+                        <div class="card white-grey-card p-3">
+                            <h3 class="title-font text-body card-title-font mb-4">My Profile</h3>
+                            <div class="container text-body">
+                                <h4 class="title-font">Username</h4>
+                                <p>{{ user.username|title }}</p>
+                                <h4 class="title-font">First Name</h4>
+                                <p>{{ user.first_name|title }}</p>
+                                <h4 class="title-font">Last Name</h4>
+                                <p>{{ user.last_name|title }}</p>
+                                <h4 class="title-font">Email</h4>
+                                <p>{{ user.email|title }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- User Profile Section end -->
+                    <div class="col-12 col-lg-7 text-center mx-auto pt-3">
+                        <div class="card white-grey-card p-3">
+                            <h3 class="title-font text-body card-title-font mb-4">My Recipes</h3>
+                            <div class="container text-body"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Login Section end -->
+    <!-- Profile & Recipes Section end -->
 {% endblock %}
