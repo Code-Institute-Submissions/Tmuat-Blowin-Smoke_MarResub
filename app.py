@@ -44,6 +44,22 @@ def login_required(f):
     return decorated_function
 
 
+def anonymous_required(f):
+    """
+    A decorator to protect views that are only accessible
+    if the user is anonymous. Code adapted from
+    https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "user" in session:
+            flash("That page is only for unauthenticated users."
+                  " Please logout if you wish to access this.", "error")
+            return redirect("..")
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @app.route("/")
 def index():
     """
@@ -92,6 +108,7 @@ def products():
 
 
 @app.route("/login/", methods=["GET", "POST"])
+@anonymous_required
 def login():
     """
     A function to render a page for the purpose of
@@ -124,6 +141,7 @@ def login():
 
 
 @app.route("/logout/")
+@login_required
 def logout():
     """
     A function to logout a user; removing the username
@@ -135,6 +153,7 @@ def logout():
 
 
 @app.route("/register/", methods=["GET", "POST"])
+@anonymous_required
 def register():
     """
     A function to render a page for the purpose of
@@ -180,6 +199,7 @@ def register():
 
 
 @app.route("/profile/<username>/")
+@login_required
 def profile(username):
     """
     A function to render a user profile page.
