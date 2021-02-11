@@ -152,8 +152,8 @@
                         <h5 class="footer-title-font">Useful Links</h5>
         
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><a class="text-white footer-link" href="#!">Recipes</a></li>
-                            <li class="mb-2"><a class="text-white footer-link" href="#!">Products</a></li>
+                            <li class="mb-2"><a class="text-white footer-link" href="{{ url_for('recipes') }}">Recipes</a></li>
+                            <li class="mb-2"><a class="text-white footer-link" href="{{ url_for('products') }}">Products</a></li>
                             <li class="mb-2">
                                 <a class="text-white ml-2 mr-2 footer-link" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter-square fa-lg"></i></a>
                                 <a class="text-white ml-2 mr-2 footer-link" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square fa-lg"></i></a>
@@ -165,8 +165,13 @@
                         <h5 class="footer-title-font">Blow'n Links</h5>
         
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a class="text-white footer-link" href="#!">Login</a></li>
-                            <li class="mb-2"><a class="text-white footer-link" href="#!">Register</a></li>
+                            {% if session.user %}
+                            <li class="mb-2"><a class="text-white footer-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                            <li class="mb-2"><a class="text-white footer-link" href="{{ url_for('logout') }}">Logout</a></li>
+                            {% else %}
+                            <li class="mb-2"><a class="text-white footer-link" href="{{ url_for('login') }}">Login</a></li>
+                            <li class="mb-2"><a class="text-white footer-link" href="{{ url_for('register') }}">Register</a></li>
+                            {% endif %}
                             <li class="mb-2"><a class="text-white footer-link" href="#!">Contact Us</a></li>
                         </ul>
                     </div>
