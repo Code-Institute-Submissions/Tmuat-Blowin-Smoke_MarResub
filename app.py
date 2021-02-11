@@ -107,6 +107,17 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/logout/")
+def logout():
+    """
+    A function to logout a user; removing the username
+    from session cookies.
+    """
+    flash("You have been logged out.", "success")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
 @app.route("/register/", methods=["GET", "POST"])
 def register():
     """
