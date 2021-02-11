@@ -29,7 +29,7 @@ $(function () {
         messages: {
             firstname: "Please enter your firstname",
             lastname: "Please enter your lastname",
-            email: "Please enter a valid email address",
+            email: "Email not valid",
             password: {
                 required: "Please provide a password",
                 minlength: "Password must be > 5 characters long"
