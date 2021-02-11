@@ -37,14 +37,14 @@ $(function () {
             firstname: "Please enter your firstname",
             lastname: "Please enter your lastname",
             username: {
-                minlength: "Username must be > 5 characters long",
-                maxlength: "Username must be < 15 characters long",
+                minlength: "Username > 5 characters long",
+                maxlength: "Username < 15 characters long",
             },
             email: "Email not valid",
             password: {
                 required: "Please provide a password",
-                minlength: "Password must be > 5 characters long",
-                maxlength: "Password must be < 15 characters long",
+                minlength: "Password > 5 characters long",
+                maxlength: "Password < 15 characters long",
             },
             password2: {
                 equalTo: "The password don't match!"
