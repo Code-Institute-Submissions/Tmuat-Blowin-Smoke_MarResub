@@ -327,6 +327,45 @@ html {
     font-size: 60px;
 }
 
+/* --------------------- Form Styling start */
+
+/* CSS transition from https://www.youtube.com/watch?v=PTGnpXbMU1U */
+
+.container .input-box {
+    position: relative;
+    height: 46px;
+}
+
+.container .input-box input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 16px;
+}
+
+.container .input-box span {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    padding: 0.375rem;
+    display: inline-block;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.container .input-box input:focus ~ span,
+.container .input-box input:valid ~ span {
+    transform: translateX(-5px) translateY(-32px);
+    font-size: 12px;
+}
+
+/* --------------------- Form Styling end */
+
 /* ---------------------------------------------- Misc Page Styling end */
 
 /* ---------------------------------------------- Media Queries start */

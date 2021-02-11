@@ -12,6 +12,10 @@ from flask import (
 )
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from werkzeug.security import (
+    generate_password_hash,
+    check_password_hash
+)
 if os.path.exists("env.py"):
     import env
 
@@ -84,7 +88,7 @@ def login():
     return render_template("login.html", **context)
 
 
-@app.route("/register/")
+@app.route("/register/", methods=["GET", "POST"])
 def register():
     """
     A function to render a page for the purpose of
