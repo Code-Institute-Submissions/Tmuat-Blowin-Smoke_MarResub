@@ -25,7 +25,7 @@
 
         <title>Blow'n Smoke {% block extra_title %}{% endblock %}</title>
     </head>
-    <body class="d-flex flex-column min-vh-100">
+    <body>
         <header>
             <!-- Top Nav -->
             <!-- basic nav code taken from  https://getbootstrap.com/docs/4.5/components/navbar/ -->
@@ -58,18 +58,24 @@
                                 <span class="sr-only">(current)</span>
                                 {% endif %}
                         </li>
-                        <li>
-                            <a class="nav-link text-white {{ 'active' if request.path == url_for('login') }}" href="{{ url_for('login') }}">Login</a>
-                            {%- if request.path == url_for('login') -%}
-                                <span class="sr-only">(current)</span>
-                                {% endif %}
-                        </li>
-                        <li>
-                            <a class="nav-link text-white {{ 'active' if request.path == url_for('register') }}" href="{{ url_for('register') }}">Register</a>
-                            {%- if request.path == url_for('register') -%}
-                                <span class="sr-only">(current)</span>
-                                {% endif %}
-                        </li>
+                        {% if session.user %}
+                            <li>
+                                <a class="nav-link text-white" href="{{ url_for('logout') }}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a class="nav-link text-white {{ 'active' if request.path == url_for('login') }}" href="{{ url_for('login') }}">Login</a>
+                                {%- if request.path == url_for('login') -%}
+                                    <span class="sr-only">(current)</span>
+                                    {% endif %}
+                            </li>
+                            <li>
+                                <a class="nav-link text-white {{ 'active' if request.path == url_for('register') }}" href="{{ url_for('register') }}">Register</a>
+                                {%- if request.path == url_for('register') -%}
+                                    <span class="sr-only">(current)</span>
+                                    {% endif %}
+                            </li>
+                        {% endif %}
                         <li>
                             <a class="nav-link text-white" href="#">Contact Us</a>
                         </li>
