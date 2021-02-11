@@ -164,6 +164,21 @@ def register():
     return render_template("register.html")
 
 
+@app.route("/profile/<username>/")
+def profile(username):
+    """
+    A function to render a user profile page.
+    """
+    # grab the session user's username from db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return redirect(url_for("login"))
+
+
 def get_current_year():
     """
     Function to return the current year, for use with copyright in footer
