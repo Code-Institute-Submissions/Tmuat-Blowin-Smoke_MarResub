@@ -42,6 +42,21 @@ html {
 
 /* --------------------- Navbar Styling end */
 
+/* --------------------- Toast Styling start */
+
+.flash-container {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    z-index: 99999999999;
+}
+
+.custom-flash-toast {
+
+}
+
+/* --------------------- Toast Styling end */
+
 /* --------------------- Footer Styling start */
 
 .footer-title-font{
@@ -277,19 +292,22 @@ html {
 
 /* ---------------------------------------------- Misc Page Styling start */
 
-.full-page-container {
-    position: relative;
-    height: 100vh;
+.landing-image {
+    background-image: url("/static/media/images/smoke.jpg");
+    min-height: 100vh;
     width: 100vw;
-
     overflow: hidden;
 
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.full-page-container img {
+.landing-image img {
     position: absolute;
 
     height: 100vh;
@@ -304,17 +322,11 @@ html {
     object-fit: cover;
 }
 
-.full-page-content {
-    height: 100vh;
-
-    width: 100%;
-
-    z-index: 1;
-
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.custom-form-row {
+    position: relative;
+    min-height: 100vh;
+    padding-top: 86px;
+    padding-bottom: 50px;
 }
 
 .white-grey-card {
@@ -333,7 +345,12 @@ html {
 
 .container .input-box {
     position: relative;
-    height: 46px;
+    height: 40px;
+    margin-bottom: 2.5rem;
+}
+
+.container .input-box:last-child {
+    margin-bottom: 2rem;
 }
 
 .container .input-box input {
@@ -361,14 +378,13 @@ html {
 .container .input-box input:focus ~ span,
 .container .input-box input:valid ~ span,
 .container .input-box .error ~ span {
-    transform: translateX(-5px) translateY(-32px);
+    transform: translateX(-5px) translateY(-26px);
     font-size: 12px;
 }
 
 .error {
-    position: absolute;
+    position: relative;
     top: 40px;
-    left: 5px;
     margin-bottom: 0px;
 
     font-size: 14px;
