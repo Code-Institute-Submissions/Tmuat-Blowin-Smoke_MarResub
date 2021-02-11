@@ -1,7 +1,7 @@
 // When the user scrolls down 30px from the top of the document, add background to navbar
 $(window).scroll(function () {
     let scroll = $(window).scrollTop();    
-    if (scroll >= 0.25 * $(window).height()) {
+    if (scroll >= 0.1 * $(window).height()) {
         $('.navbar').addClass('bg-black shadow');
     } else {
         $('.navbar').removeClass('bg-black shadow');
