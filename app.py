@@ -11,6 +11,7 @@ from flask import (
     url_for
 )
 from flask_pymongo import PyMongo
+from functools import wraps
 from bson.objectid import ObjectId
 from werkzeug.security import (
     generate_password_hash,
@@ -27,6 +28,20 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+
+
+def login_required(f):
+    """
+    A decorator to protect views that are only accessible
+    if the user is logged in. Code from
+    https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "user" not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 @app.route("/")
