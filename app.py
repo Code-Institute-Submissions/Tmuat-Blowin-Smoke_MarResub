@@ -120,7 +120,7 @@ def register():
         register = {
             "username": request.form.get("username").lower(),
             "first_name": request.form.get("firstname").lower(),
-            "last_name": request.form.get("last_name").lower(),
+            "last_name": request.form.get("lastname").lower(),
             "email": request.form.get("email").lower(),
             "password": generate_password_hash(password1)
         }
