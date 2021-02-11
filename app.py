@@ -100,21 +100,21 @@ def register():
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            flash("Username already exists")
+            flash("Username already exists!", "error")
             return redirect(url_for("register"))
 
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("email").lower()})
 
         if existing_email:
-            flash("Email already exists")
+            flash("Email already exists!", "error")
             return redirect(url_for("register"))
 
         password1 = request.form.get("password")
         password2 = request.form.get("password2")
 
         if password1 != password2:
-            flash("Both passwords must match!")
+            flash("Both passwords must match!", "error")
             return redirect(url_for("register"))
 
         register = {
@@ -128,7 +128,7 @@ def register():
 
         # Put the current user into "session" so they are logged in.
         session["user"] = request.form.get("username").lower()
-        flash("Registration Successfull")
+        flash("Registration Successfull!", "success")
 
     context = {
     }
