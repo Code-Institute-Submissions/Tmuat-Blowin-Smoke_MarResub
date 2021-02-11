@@ -10,35 +10,35 @@
             <div class="w-100 text-white">
                 <div class="row">
                     <!-- Registration Form start -->
-                    <form class="col-12 col-md-6 offset-md-3" method="POST" action="{{ url_for('register') }}">
+                    <form class="col-12 col-md-8  col-lg-6 offset-md-2 offset-lg-3" method="POST" action="{{ url_for('register') }}" name="registration">
                         <div class="card white-grey-card p-3">
                             <h3 class="title-font text-body card-title-font mb-4">Register</h3>
                             <div class="container text-body">
                                 <div class="form-row mx-auto">
                                     <!-- First Name -->
-                                    <div class="col-12 col-lg-5 input-box mx-auto mb-4">
-                                        <input type="text" class="form-control custom-input" required>
+                                    <div class="col-12 col-lg-5 input-box mx-auto mb-5">
+                                        <input id="firstname" name="firstname" type="text" class="form-control custom-input valid-border" required>
                                         <span class="">First Name</span>
                                     </div>
                                     <!-- Last Name -->
-                                    <div class="col-12 col-lg-5 input-box mx-auto mb-4">
-                                        <input type="text" class="form-control custom-input" required>
+                                    <div class="col-12 col-lg-5 input-box mx-auto mb-5">
+                                        <input id="lastname" name="lastname" type="text" class="form-control custom-input valid-border" required>
                                         <span class="">Last Name</span>
                                     </div>
                                     <!-- Email -->
-                                    <div class="col-12 col-lg-11 input-box mx-auto mb-4">
-                                        <input type="text" class="form-control custom-input" required>
+                                    <div class="col-12 col-lg-11 input-box mx-auto mb-5">
+                                        <input id="email" name="email" type="email" class="form-control custom-input valid-border" required>
                                         <span class="">Email</span>
                                     </div>
                                     <!-- Password -->
-                                    <div class="col-12 col-lg-5 input-box mx-auto mb-4">
-                                        <input type="text" class="form-control custom-input" required>
+                                    <div class="col-12 col-lg-5 input-box mx-auto mb-5">
+                                        <input id="password" name="password" type="password" class="form-control custom-input valid-border" required>
                                         <span class="">Password</span>
                                     </div>
                                     <!-- Repeat Password -->
-                                    <div class="col-12 col-lg-5 input-box mx-auto mb-4">
-                                        <input type="text" class="form-control custom-input" required>
-                                        <span class="">Repeat Password</span>
+                                    <div class="col-12 col-lg-5 input-box mx-auto mb-5">
+                                        <input id="password2" name="password2" type="password" class="form-control custom-input valid-border" required>
+                                        <span class="">Confirm Password</span>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn bg-custom-orange custom-btn box-shadow text-white pl-3 pr-3">Sign Up</button>
@@ -51,4 +51,11 @@
         </div>
     </section>
     <!-- Register Section end -->
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"
+        integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg=="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/register.js') }}"></script>
 {% endblock %}

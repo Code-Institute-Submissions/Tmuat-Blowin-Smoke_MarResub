@@ -359,9 +359,28 @@ html {
 }
 
 .container .input-box input:focus ~ span,
-.container .input-box input:valid ~ span {
+.container .input-box input:valid ~ span,
+.container .input-box .error ~ span {
     transform: translateX(-5px) translateY(-32px);
     font-size: 12px;
+}
+
+.error {
+    position: absolute;
+    top: 40px;
+    left: 5px;
+    margin-bottom: 0px;
+
+    font-size: 14px;
+    color: rgb(247, 0, 0);
+}
+
+.valid-border.error {
+    border-color: rgb(247, 0, 0);
+}
+
+.valid-border.valid {
+    border-color: rgb(23, 255, 2);
 }
 
 /* --------------------- Form Styling end */
