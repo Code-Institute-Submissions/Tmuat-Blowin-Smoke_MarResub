@@ -10,6 +10,11 @@ $(function () {
             // on the right side
             firstname: "required",
             lastname: "required",
+            username: {
+                required: true,
+                minlength: 5,
+                maxlength: 15
+            },
             email: {
                 required: true,
                 // Specify that email should be validated
@@ -18,10 +23,12 @@ $(function () {
             },
             password: {
                 required: true,
-                minlength: 5
+                minlength: 5,
+                maxlength: 15
             },
             password2: {
                 minlength: 5,
+                maxlength: 15,
                 equalTo: "#password"
             },
         },
