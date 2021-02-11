@@ -294,7 +294,7 @@ html {
 
 .landing-image {
     background-image: url("/static/media/images/smoke.jpg");
-    min-height: 100vh;
+    min-height: calc(100vh - 264px);
     width: 100vw;
     overflow: hidden;
 
@@ -310,7 +310,7 @@ html {
 .landing-image img {
     position: absolute;
 
-    height: 100vh;
+    height: calc(100vh - 264px);
     min-width: 100%;
     
     top: 50%;
@@ -324,7 +324,7 @@ html {
 
 .custom-form-row {
     position: relative;
-    min-height: 100vh;
+    min-height: calc(100vh - 264px);
     padding-top: 86px;
     padding-bottom: 50px;
 }
