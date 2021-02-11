@@ -76,16 +76,35 @@ def products():
     return render_template("products.html", **context)
 
 
-@app.route("/login/")
+@app.route("/login/", methods=["GET", "POST"])
 def login():
     """
     A function to render a page for the purpose of
     logging the user in to the site.
     """
+    if request.method == "POST":
+        # Check if email is in db
+        user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
 
-    context = {
-    }
-    return render_template("login.html", **context)
+        if user:
+            # Check hashed password is valid
+            if check_password_hash(
+                user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    flash("Welcome, {}".format(request.form.get("username")),
+                    "success")
+            else:
+                # Invalid password
+                flash("Incorect Username and/or Password", "error")
+                return redirect(url_for("login"))
+
+        else:
+            # Username doesn't exist
+            flash("Incorect Username and/or Password", "error")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
 
 
 @app.route("/register/", methods=["GET", "POST"])
@@ -130,9 +149,7 @@ def register():
         session["user"] = request.form.get("username").lower()
         flash("Registration Successfull!", "success")
 
-    context = {
-    }
-    return render_template("register.html", **context)
+    return render_template("register.html")
 
 
 def get_current_year():
