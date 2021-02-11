@@ -94,6 +94,41 @@ def register():
     A function to render a page for the purpose of
     registering a user.
     """
+    if request.method == "POST":
+        # Check if email is in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            flash("Username already exists")
+            return redirect(url_for("register"))
+
+        existing_email = mongo.db.users.find_one(
+            {"email": request.form.get("email").lower()})
+
+        if existing_email:
+            flash("Email already exists")
+            return redirect(url_for("register"))
+
+        password1 = request.form.get("password")
+        password2 = request.form.get("password2")
+
+        if password1 != password2:
+            flash("Both passwords must match!")
+            return redirect(url_for("register"))
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "first_name": request.form.get("firstname").lower(),
+            "last_name": request.form.get("last_name").lower(),
+            "email": request.form.get("email").lower(),
+            "password": generate_password_hash(password1)
+        }
+        mongo.db.users.insert_one(register)
+
+        # Put the current user into "session" so they are logged in.
+        session["user"] = request.form.get("username").lower()
+        flash("Registration Successfull")
 
     context = {
     }
