@@ -24,7 +24,9 @@
                     <h5 class="pt-3 title-font filter-title">Select A Filter</h5>
                     <div class="inner-filter pt-2 pb-3">
                         <div class="filter-group pb-3">
-                            <a href="" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3">Beef</a>
+                            {% for category in categories %}
+                            <a href="" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ category.category|title }}</a>
+                            {% endfor %}
                         </div>
                         <h5 class="title-font filter-title">Or...</h5>
                         <div class=" mx-auto input-group custom-width mb-3">
