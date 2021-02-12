@@ -50,17 +50,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="" method="POST" action="{{ url_for('profile', username=session['user']) }}">
+                    <form class="" method="POST" action="{{ url_for('profile', username=session['user']) }}" name="profile">
                         <div class="container text-body">
                             <div class="form-row mx-auto">
                                 <!-- First Name -->
-                                <div class="col-12 col-md-10 col-lg-8 input-box mx-auto">
-                                    <input id="firstname" name="firstname" type="text" class="form-control custom-input valid-border" value="{{ user.first_name }}" required>
+                                <div class="col-12 col-md-10 col-lg-8 input-box mx-auto mt-3">
+                                    <input id="firstname" name="firstname" type="text" class="form-control custom-input valid-border"
+                                        value="{{ user.first_name }}" required>
                                     <span class="">First Name</span>
                                 </div>
                                 <!-- Last Name -->
                                 <div class="col-12 col-md-10 col-lg-8 input-box mx-auto">
-                                    <input id="lastname" name="lastname" type="text" class="form-control custom-input valid-border" value="{{ user.last_name }}" required>
+                                    <input id="lastname" name="lastname" type="text" class="form-control custom-input valid-border"
+                                        value="{{ user.last_name }}" required>
                                     <span class="">Last Name</span>
                                 </div>
                                 <!-- Username -->
@@ -70,21 +72,29 @@
                                     <span class="">Username</span>
                                 </div>
                                 <!-- Email -->
-                                <div class="col-12 col-md-10 col-lg-8 input-box mx-auto">
-                                    <input id="email" name="email" type="email" class="form-control custom-input valid-border" value="{{ user.email }}" required>
+                                <div class="col-12 col-md-10 col-lg-8 input-box mx-auto mb-3">
+                                    <input id="email" name="email" type="email" class="form-control custom-input valid-border" value="{{ user.email }}"
+                                        required>
                                     <span class="">Email</span>
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn bg-custom-orange bg-custom-orange-hover text-white">Save changes</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn bg-custom-orange bg-custom-orange-hover text-white">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal Code end -->
     <!-- Profile & Recipes Section end -->
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"
+        integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg=="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/profile.js') }}"></script>
 {% endblock %}
