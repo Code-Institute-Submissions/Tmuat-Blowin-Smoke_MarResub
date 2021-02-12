@@ -46,9 +46,9 @@
                 <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
                     <div class="card-outer box-shadow">
                         <div class="card">
-                            <img src="{{ recipe.image_url }}" onerror="this.src='{{ url_for('static', filename='media/images/default.jpg') }}'" class="card-img-top" alt="{{ recipe.name }}">
+                            <img src="{{ recipe.image_url }}" onerror="this.src='{{ url_for('static', filename='media/images/default.jpg') }}'" class="card-img-top custom-card-image" alt="{{ recipe.name }}">
                             <div class="card-body text-center bg-light">
-                                <h5 class="card-title font-weight-bold">{{ recipe.name }}</h5>
+                                <h5 class="card-title font-weight-bold">{{ recipe.name|title }}</h5>
                                 <a href="#"
                                     class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Lets Start Cooking</a>
                             </div>
