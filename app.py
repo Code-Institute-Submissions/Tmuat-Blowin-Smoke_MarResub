@@ -38,8 +38,35 @@ def login_required(f):
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if "user" not in session:
+        user = mongo.db.users.find_one(
+            {"username": session["user"].lower()})
+        if not user:
             return redirect(url_for('login'))
+        elif "user" not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+def is_admin(f):
+    """
+    A decorator to protect views that are only accessible
+    if the user is admin and the user is logged in. Code from
+    https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user = mongo.db.users.find_one(
+            {"username": session["user"].lower()})
+        if not user:
+            flash("User not recognised!", "error")
+            return redirect(url_for('index'))
+        elif user["admin"].lower() == "false":
+            flash("This page is for admin only!", "error")
+            return redirect(url_for('index'))
+        elif "admin" not in session:
+            flash("This page is for admin only!", "error")
+            return redirect(url_for('index'))
         return f(*args, **kwargs)
     return decorated_function
 
@@ -201,18 +228,32 @@ def login():
             {"username": request.form.get("username").lower()})
 
         if user:
-            # Check hashed password is valid
-            if check_password_hash(
-                user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(request.form.get("username")),
-                    "success")
-                    return redirect(url_for("index"))
+            # Check if user is admin
+            if user["admin"].lower() == "true":
+                # Check hashed password is valid
+                if check_password_hash(
+                    user["password"], request.form.get("password")):
+                        session["user"] = request.form.get("username").lower()
+                        session["admin"] = "true"
+                        flash("Welcome, {} (Admin)".format(request.form.get("username")),
+                        "success")
+                        return redirect(url_for("index"))
+                else:
+                    # Invalid password
+                    flash("Incorect Username and/or Password", "error")
+                    return redirect(url_for("login"))
             else:
-                # Invalid password
-                flash("Incorect Username and/or Password", "error")
-                return redirect(url_for("login"))
-
+                # Check hashed password is valid
+                if check_password_hash(
+                    user["password"], request.form.get("password")):
+                        session["user"] = request.form.get("username").lower()
+                        flash("Welcome, {}".format(request.form.get("username")),
+                        "success")
+                        return redirect(url_for("index"))
+                else:
+                    # Invalid password
+                    flash("Incorect Username and/or Password", "error")
+                    return redirect(url_for("login"))
         else:
             # Username doesn't exist
             flash("Incorect Username and/or Password", "error")
@@ -230,6 +271,8 @@ def logout():
     """
     flash("You have been logged out.", "success")
     session.pop("user")
+    if "admin" in session:
+        session.pop("admin")
     return redirect(url_for("login"))
 
 
@@ -270,7 +313,8 @@ def register():
             "first_name": request.form.get("firstname").lower(),
             "last_name": request.form.get("lastname").lower(),
             "email": request.form.get("email").lower(),
-            "password": generate_password_hash(password1)
+            "password": generate_password_hash(password1),
+            "admin": "false"
         }
         mongo.db.users.insert_one(register)
 
