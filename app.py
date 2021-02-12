@@ -275,7 +275,7 @@ def profile(username):
             "email": request.form.get("email"),
         }}
 
-        mongo.db.users.update({"username": session["user"]}, submit)
+        mongo.db.users.update_one({"username": session["user"]}, submit)
         flash("Profile Updated", "success")
         return redirect(url_for('profile', username=session["user"]))
 
