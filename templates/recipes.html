@@ -29,12 +29,14 @@
                             {% endfor %}
                         </div>
                         <h5 class="title-font filter-title">Or...</h5>
-                        <div class=" mx-auto input-group custom-width mb-3">
-                            <input type="text" class="form-control custom-input" placeholder="Search By Recipe Name" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn bg-custom-orange text-white custom-input search" type="button"><i class="fas fa-search"></i></button>
+                        <form method="GET" action="{{ url_for('recipes_search') }}">
+                            <div class=" mx-auto input-group custom-width mb-3">
+                                <input type="text" class="form-control custom-input" placeholder="Search By Recipe Name" aria-label="Search" id="q" minlength="3" name="q">
+                                <div class="input-group-append">
+                                    <button class="btn bg-custom-orange text-white custom-input search" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -44,24 +46,32 @@
                 <div class="col-12 text-center">
                     {% if filter %}
                         <h5 class="title-font">Filter: {{ filter|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
+                    {% elif query %}
+                        {% if recipes|length == 0 %}
+                            <h5 class="title-font text-danger">No Results Found!</h5>
+                        {% else %}
+                            <h5 class="title-font">Query: {{ query|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
+                        {% endif %}
                     {% endif %}
                     <h5 class="title-font">Number of recipes: {{ results }}</h5>
                 </div>
                 <!-- recipes For Loop start -->
-                {% for recipe in recipes %}
-                <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
-                    <div class="card-outer box-shadow">
-                        <div class="card">
-                            <img src="{{ recipe.image_url }}" onerror="this.src='{{ url_for('static', filename='media/images/default.jpg') }}'" class="card-img-top custom-card-image" alt="{{ recipe.name }}">
-                            <div class="card-body text-center bg-light">
-                                <h5 class="card-title font-weight-bold">{{ recipe.name|title }}</h5>
-                                <a href="#"
-                                    class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Lets Start Cooking</a>
+                {% if recipes|length > 0 %}
+                    {% for recipe in recipes %}
+                        <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
+                            <div class="card-outer box-shadow">
+                                <div class="card">
+                                    <img src="{{ recipe.image_url }}" onerror="this.src='{{ url_for('static', filename='media/images/default.jpg') }}'" class="card-img-top custom-card-image" alt="{{ recipe.name }}">
+                                    <div class="card-body text-center bg-light">
+                                        <h5 class="card-title font-weight-bold">{{ recipe.name|title }}</h5>
+                                        <a href="#"
+                                            class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Lets Start Cooking</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                {% endif %}
                 <!-- recipes For Loop end -->
             </div>
             <div class="row mx-1 pb-5">

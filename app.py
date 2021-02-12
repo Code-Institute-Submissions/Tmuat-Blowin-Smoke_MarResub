@@ -55,7 +55,7 @@ def anonymous_required(f):
         if "user" in session:
             flash("That page is only for unauthenticated users."
                   " Please logout if you wish to access this.", "error")
-            return redirect("..")
+            return redirect(url_for('index'))
         return f(*args, **kwargs)
     return decorated_function
 
@@ -128,14 +128,27 @@ def recipes_filter(category):
     return render_template("recipes.html", **context)
 
 
-@app.route("/recipes/<category>/", methods=["GET", "POST"])
-def recipes_search(category):
+@app.route("/recipes/search")
+def recipes_search():
     """
     A function to render a page of recipes filtered by
-    category.
+    search term.
     """
 
-    recipes = list(mongo.db.recipes.find({"category": category}))
+    if request.method == "GET":
+        args = request.args
+        if 'q' in args:
+            query = args["q"]
+            if not query:
+                flash("You didn't enter any search criteria", "error")
+                return redirect(url_for("recipes"))
+            else:
+                recipes = list(mongo.db.recipes.find(
+                    {"$text": {"$search": query}}))
+        else:
+            return redirect(url_for("recipes"))
+    else:
+        return redirect(url_for("recipes"))
 
     results = len(recipes)
 
@@ -145,7 +158,7 @@ def recipes_search(category):
         "recipes": recipes,
         "categories": categories,
         "results": results,
-        "filter": category
+        "query": query
     }
     return render_template("recipes.html", **context)
 
