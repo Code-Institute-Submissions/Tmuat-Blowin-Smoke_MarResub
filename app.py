@@ -194,6 +194,7 @@ def register():
         # Put the current user into "session" so they are logged in.
         session["user"] = request.form.get("username").lower()
         flash("Registration Successfull!", "success")
+        return redirect(url_for("index"))
 
     return render_template("register.html")
 
@@ -202,8 +203,22 @@ def register():
 @login_required
 def profile(username):
     """
-    A function to render a user profile page.
+    A function to render a user profile page; including
+    profile & users recipes. A modal is included to edit
+    the users profile.
     """
+
+    if request.method == "POST":
+        submit = {'$set': {
+            "first_name": request.form.get("firstname"),
+            "last_name": request.form.get("lastname"),
+            "email": request.form.get("email"),
+        }}
+
+        mongo.db.users.update({"username": session["user"]}, submit)
+        flash("Profile Updated", "success")
+        return redirect(url_for('profile', username=session["user"]))
+
     # grab the session user's username from db
     user = mongo.db.users.find_one({"username": session["user"]})
 
