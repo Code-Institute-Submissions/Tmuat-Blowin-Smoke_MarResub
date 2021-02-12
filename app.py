@@ -1,5 +1,5 @@
 import os
-import datetime
+from datetime import date, datetime
 import random
 from flask import (
     Flask,
@@ -274,22 +274,36 @@ def add_recipe():
                     for_loop_idx_steps += 1
 
         recipe = {
-            # "name": request.form.get("recipename").lower(),
-            # "description": request.form.get("recipedesc").lower(),
+            "name": request.form.get("recipename").lower(),
+            "category": request.form.get("category").lower(),
+            "description": request.form.get("recipedesc").lower(),
+            "cook_time": request.form.get("cooktime"),
+            "prep_time": request.form.get("preptime"),
+            "image_url": request.form.get("imageurl").lower(),
             "ingridients": ingridients,
-            "steps": steps
+            "steps": steps,
+            "created": str(date.today().strftime("%x")),
+            "created_by": session["user"]
         }
 
-        pass
+        mongo.db.recipes.insert_one(recipe)
+        flash("Recipe Successfully Added", "success")
+        return redirect(url_for('profile', username=session["user"]))
+    
+    categories = mongo.db.categories.find().sort("category", 1)
 
-    return render_template("add-recipe.html")
+    context = {
+        "categories": categories,
+    }
+
+    return render_template("add-recipe.html", **context)
 
 
 def get_current_year():
     """
     Function to return the current year, for use with copyright in footer
     """
-    current_datetime = datetime.datetime.now()
+    current_datetime = datetime.now()
     return current_datetime.year
 
 
