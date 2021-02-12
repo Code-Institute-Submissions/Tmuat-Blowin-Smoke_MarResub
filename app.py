@@ -84,7 +84,7 @@ def recipes():
     to filter and search.
     """
 
-    recipes = list(mongo.db.recipes.find().sort("created", 1))
+    recipes = list(mongo.db.recipes.find())
 
     categories = list(mongo.db.categories.find().sort("category", 1))
 
