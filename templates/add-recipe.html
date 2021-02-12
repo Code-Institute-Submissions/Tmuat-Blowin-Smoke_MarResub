@@ -18,30 +18,34 @@
                                     <!-- Recipe Name -->
                                     <div class="col-12 col-md-10 mx-auto mb-2">
                                         <input id="recipename" name="recipename" type="text" placeholder="Recipe Name"
-                                            class="form-control custom-input valid-border" autocomplete="nope" required>
+                                            class="form-control custom-input" autocomplete="nope" required>
                                     </div>
                                     <!-- Category Name -->
                                     <div class="col-12 col-md-10 mx-auto mb-2">
-                                        <input id="category" name="category" type="text" placeholder="Category"
-                                            class="form-control custom-input valid-border" autocomplete="nope" required>
+                                        <select id="category" name="category" class="form-control custom-input" required>
+                                            <option value="" disabled selected>Choose Category</option>
+                                            {% for category in categories %}
+                                                <option value="{{ category.category }}">{{ category.category|title }}</option>
+                                            {% endfor %}
+                                        </select>
                                     </div>
                                     <!-- Recipe Description -->
                                     <div class="col-12 col-md-10 mx-auto mb-2">
                                         <textarea id="recipedesc" name="recipedesc" type="text" placeholder="Recipe Description"
-                                            class="form-control custom-input valid-border" autocomplete="nope" max="250" required></textarea>
+                                            class="form-control custom-input" autocomplete="nope" max="250" required></textarea>
                                     </div>
                                     <div class=" col-12 col-md-10 mx-auto">
                                         <div class="row">
                                             <!-- Prep Time -->
                                             <div class="col-12 col-md-6 mb-2">
                                                 <input id="preptime" name="preptime" type="number" placeholder="Prep Time (Mins)"
-                                                    class="form-control custom-input valid-border" autocomplete="nope" required
+                                                    class="form-control custom-input" autocomplete="nope" required
                                                     min="1" max="240">
                                             </div>
                                             <!-- Cook Time -->
                                             <div class="col-12 col-md-6 mb-2">
                                                 <input id="cooktime" name="cooktime" type="number" placeholder="Cook Time (Hours)"
-                                                    class="form-control custom-input valid-border" autocomplete="nope" require
+                                                    class="form-control custom-input" autocomplete="nope" require
                                                     min="0" max="24" step=".1">
                                             </div>
                                         </div>
@@ -49,7 +53,7 @@
                                     <!-- Recipe URL -->
                                     <div class="col-12 col-md-10 mx-auto mb-2">
                                         <input id="imageurl" name="imageurl" type="url" placeholder="Recipe Image URL"
-                                            class="form-control custom-input valid-border" autocomplete="nope" required>
+                                            class="form-control custom-input" autocomplete="nope" required>
                                     </div>
                                     <!-- Ingridients -->
                                     <div class="col-12 col-md-10 mx-auto">
@@ -57,16 +61,18 @@
                                             <input type="hidden" value="2" id="total_ing_input" name="total_ing_input">
                                             <div class="col-12 mb-1">
                                                 <label for="ingridients1" class="title-font mb-0">List of Ingridients</label>
-                                                <button type="button" class="btn bg-success btn-sm text-white add-ing">Add</button>
-                                                <button type="button" class="btn bg-danger btn-sm text-white remove-ing">Remove</button>
+                                                <div class="d-block d-sm-inline-block">
+                                                    <button type="button" class="btn bg-success btn-sm text-white add-ing">Add</button>
+                                                    <button type="button" class="btn bg-danger btn-sm text-white remove-ing">Remove</button>
+                                                </div>
                                             </div>
                                             <div class="col-12 col-md-6 mb-2">
                                                 <input id="ingridients1" name="ingridients1" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
-                                                class="form-control custom-input valid-border" autocomplete="nope" required>
+                                                class="form-control custom-input" autocomplete="nope" required>
                                             </div>
                                             <div class="col-12 col-md-6 mb-2">
                                                 <input id="ingridients2" name="ingridients2" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
-                                                class="form-control custom-input valid-border" autocomplete="nope" required>
+                                                class="form-control custom-input" autocomplete="nope" required>
                                             </div>
                                         </div>
                                     </div>
@@ -76,16 +82,18 @@
                                             <input type="hidden" value="2" id="total_steps_input" name="total_steps_input">
                                             <div class="col-12 mb-1">
                                                 <label for="steps1" class="title-font mb-0">List of Cooking Steps</label>
-                                                <button type="button" class="btn bg-success btn-sm text-white add-steps">Add</button>
-                                                <button type="button" class="btn bg-danger btn-sm text-white remove-steps">Remove</button>
+                                                <div class="d-block d-sm-inline-block">
+                                                    <button type="button" class="btn bg-success btn-sm text-white add-steps">Add</button>
+                                                    <button type="button" class="btn bg-danger btn-sm text-white remove-steps">Remove</button>
+                                                </div>
                                             </div>
                                             <div class="col-12 col-md-6 mb-2">
                                                 <textarea id="steps1" name="steps1" type="text" placeholder="Cooking Steps"
-                                                class="form-control custom-input valid-border" autocomplete="nope" required></textarea>
+                                                class="form-control custom-input" autocomplete="nope" required></textarea>
                                             </div>
                                             <div class="col-12 col-md-6 mb-2">
                                                 <textarea id="steps2" name="steps2" type="text" placeholder="Cooking Steps"
-                                                class="form-control custom-input valid-border" autocomplete="nope" required></textarea>
+                                                class="form-control custom-input" autocomplete="nope" required></textarea>
                                             </div>
                                         </div>
                                     </div>
