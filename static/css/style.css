@@ -91,6 +91,10 @@ html {
     background-color: #D95E16;
 }
 
+.bg-custom-orange-hover:hover {
+    background-color: rgb(168, 63, 2);
+}
+
 
 /* --------------------- Colours Styling end */
 
@@ -197,9 +201,11 @@ html {
 }
 
 .custom-btn:hover,
+.custom-btn:active,
 .custom-btn:focus {
     background-color: #fff;
     color: #D95E16 !important;
+    box-shadow: 0 0 0 0.2rem rgb(217 94 22 / 25%);
 }
 
 /* --------------------- Recipe (home) Styling end */
@@ -402,6 +408,14 @@ html {
 /* --------------------- Form Styling end */
 
 /* ---------------------------------------------- Misc Page Styling end */
+
+/* ---------------------------------------------- Profile Page Styling start */
+
+.profile-sub-font {
+    font-size: 30px;
+}
+
+/* ---------------------------------------------- Profile Page Styling end */
 
 /* ---------------------------------------------- Media Queries start */
 

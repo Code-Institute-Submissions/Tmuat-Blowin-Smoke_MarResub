@@ -13,18 +13,20 @@
                         <div class="card white-grey-card p-3">
                             <h3 class="title-font text-body card-title-font mb-4">My Profile</h3>
                             <div class="container text-body">
-                                <h4 class="title-font">Username</h4>
-                                <p>{{ user.username|title }}</p>
-                                <h4 class="title-font">First Name</h4>
-                                <p>{{ user.first_name|title }}</p>
-                                <h4 class="title-font">Last Name</h4>
-                                <p>{{ user.last_name|title }}</p>
-                                <h4 class="title-font">Email</h4>
-                                <p>{{ user.email|title }}</p>
+                                <h4 class="profile-sub-font title-font">Username</h4>
+                                <p class="">{{ user.username|title }}</p>
+                                <h4 class="profile-sub-font title-font">First Name</h4>
+                                <p class="">{{ user.first_name|title }}</p>
+                                <h4 class="profile-sub-font title-font">Last Name</h4>
+                                <p class="">{{ user.last_name|title }}</p>
+                                <h4 class="profile-sub-font title-font">Email</h4>
+                                <p class="">{{ user.email|title }}</p>
+                                <button type="button" data-toggle="modal" data-target="#profile-edit-modal"
+                                    class="btn bg-custom-orange custom-btn box-shadow text-white pl-5 pr-5">Edit</button>
                             </div>
                         </div>
                     </div>
-                    <!-- User Profile Section end -->
+                    <!-- User Profile Section end  class-->
                     <div class="col-12 col-lg-7 text-center mx-auto pt-3">
                         <div class="card white-grey-card p-3">
                             <h3 class="title-font text-body card-title-font mb-4">My Recipes</h3>
@@ -35,5 +37,54 @@
             </div>
         </div>
     </section>
+    <!-- Modal Code start -->
+    <!-- Modal code from https://getbootstrap.com/docs/4.0/components/modal/ -->
+    <div class="modal fade" id="profile-edit-modal" tabindex="-1" role="dialog" aria-labelledby="profile-edit-modal-title"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content white-grey-card">
+                <div class="modal-header">
+                    <h5 class="modal-title title-font" id="profile-edit-modal-title">Profile Edit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="" method="POST" action="{{ url_for('profile', username=session['user']) }}">
+                        <div class="container text-body">
+                            <div class="form-row mx-auto">
+                                <!-- First Name -->
+                                <div class="col-12 col-md-10 col-lg-8 input-box mx-auto">
+                                    <input id="firstname" name="firstname" type="text" class="form-control custom-input valid-border" value="{{ user.first_name }}" required>
+                                    <span class="">First Name</span>
+                                </div>
+                                <!-- Last Name -->
+                                <div class="col-12 col-md-10 col-lg-8 input-box mx-auto">
+                                    <input id="lastname" name="lastname" type="text" class="form-control custom-input valid-border" value="{{ user.last_name }}" required>
+                                    <span class="">Last Name</span>
+                                </div>
+                                <!-- Username -->
+                                <div class="col-12 col-md-10 col-lg-8 input-box mx-auto">
+                                    <input id="username" name="username" type="text" class="form-control custom-input valid-border"
+                                        pattern="^[a-zA-Z0-9]{5,15}$" autocomplete="nope" value="{{ user.username }}" required>
+                                    <span class="">Username</span>
+                                </div>
+                                <!-- Email -->
+                                <div class="col-12 col-md-10 col-lg-8 input-box mx-auto">
+                                    <input id="email" name="email" type="email" class="form-control custom-input valid-border" value="{{ user.email }}" required>
+                                    <span class="">Email</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn bg-custom-orange bg-custom-orange-hover text-white">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Code end -->
     <!-- Profile & Recipes Section end -->
 {% endblock %}

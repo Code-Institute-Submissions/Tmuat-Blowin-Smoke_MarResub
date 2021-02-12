@@ -198,7 +198,7 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/profile/<username>/")
+@app.route("/profile/<username>/", methods=["GET", "POST"])
 @login_required
 def profile(username):
     """
