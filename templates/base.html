@@ -52,6 +52,15 @@
                                 {% endif %}
                             </a>
                         </li>
+                        {% if session.user %}
+                            <li>
+                                <a class="nav-link text-white {{ 'active' if request.path == url_for('add_recipe') }}" href="{{ url_for('add_recipe') }}">Add Recipe
+                                    {%- if request.path == url_for('add_recipe') -%}
+                                    <span class="sr-only">(current)</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                        {% endif %}
                         <li>
                             <a class="nav-link text-white {{ 'active' if request.path == url_for('products') }}" href="{{ url_for('products') }}">Products</a>
                             {%- if request.path == url_for('products') -%}
