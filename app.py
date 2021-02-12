@@ -98,10 +98,40 @@ def recipes():
     return render_template("recipes.html", **context)
 
 
-@app.route("/recipes/<category>/", methods=["GET", "POST"])
+@app.route("/recipes/category/<category>/")
 def recipes_filter(category):
     """
-    A function to render a page of recipes filtered by 
+    A function to render a page of recipes filtered by
+    category.
+    """
+    # Check if category is in db
+    existing_category = mongo.db.categories.find_one(
+            {"category": category.lower()})
+
+    # If category does not exist, return to recipes with error message
+    if not existing_category:
+        flash("No such category exists!", "error")
+        return redirect(url_for("recipes"))
+
+    recipes = list(mongo.db.recipes.find({"category": category}))
+
+    results = len(recipes)
+
+    categories = list(mongo.db.categories.find().sort("category", 1))
+
+    context = {
+        "recipes": recipes,
+        "categories": categories,
+        "results": results,
+        "filter": category
+    }
+    return render_template("recipes.html", **context)
+
+
+@app.route("/recipes/<category>/", methods=["GET", "POST"])
+def recipes_search(category):
+    """
+    A function to render a page of recipes filtered by
     category.
     """
 
