@@ -71,8 +71,18 @@ def index():
 
     single_quote = random.choice(list(mongo.db.quotes.find()))
 
+    recipe_list = list(mongo.db.recipes.find())
+
+    if len(recipe_list) < 7:
+        sample = len(recipe_list)
+    else:
+        sample = 6
+
+    recipes = random.sample(list(mongo.db.recipes.find()), k=sample)
+
     context = {
         "quote": single_quote,
+        "recipes": recipes,
     }
     return render_template("index.html", **context)
 
