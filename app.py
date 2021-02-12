@@ -84,7 +84,7 @@ def recipes():
     to filter and search.
     """
 
-    recipes = list(mongo.db.quotes.find())
+    recipes = list(mongo.db.recipes.find().sort("created", 1))
 
     context = {
         "recipes": recipes,
@@ -289,7 +289,7 @@ def add_recipe():
         mongo.db.recipes.insert_one(recipe)
         flash("Recipe Successfully Added", "success")
         return redirect(url_for('profile', username=session["user"]))
-    
+
     categories = mongo.db.categories.find().sort("category", 1)
 
     context = {
