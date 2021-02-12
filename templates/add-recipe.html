@@ -9,36 +9,78 @@
             <div class="container">
                 <div class="row align-items-center custom-form-row">
                     <!-- Recipe Form start -->
-                    <form class="col-12 col-md-8 offset-md-2 text-center" method="POST" action="{{ url_for('add_recipe') }}"
+                    <form class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 text-center" method="POST" action="{{ url_for('add_recipe') }}"
                         name="recipe">
                         <div class="card white-grey-card p-3">
                             <h3 class="title-font text-body card-title-font mb-4">Recipe</h3>
                             <div class="container text-body">
                                 <div class="form-row mx-auto">
                                     <!-- Recipe Name -->
-                                    <div class="col-12 col-md-10 mx-auto mb-3">
+                                    <div class="col-12 col-md-10 mx-auto mb-2">
                                         <input id="recipename" name="recipename" type="text" placeholder="Recipe Name"
                                             class="form-control custom-input valid-border" autocomplete="nope" required>
                                     </div>
                                     <!-- Recipe Description -->
-                                    <div class="col-12 col-md-10 mx-auto mb-3">
+                                    <div class="col-12 col-md-10 mx-auto mb-2">
                                         <textarea id="recipedesc" name="recipedesc" type="text" placeholder="Recipe Description"
                                             class="form-control custom-input valid-border" autocomplete="nope" required></textarea>
                                     </div>
-                                    <!-- Prep Time -->
-                                    <div class="col-12 col-md-10 mx-auto mb-3">
-                                        <input id="preptime" name="preptime" type="text" placeholder="Preperation Time (E.g. 15 Mins)"
-                                            class="form-control custom-input valid-border" autocomplete="nope" required>
-                                    </div>
-                                    <!-- Cook Time -->
-                                    <div class="col-12 col-md-10 mx-auto mb-3">
-                                        <input id="cooktime" name="cooktime" type="text" placeholder="Cooking Time (E.g. 3 Hours)"
-                                            class="form-control custom-input valid-border" autocomplete="nope" required>
+                                    <div class=" col-12 col-md-10 mx-auto">
+                                        <div class="row">
+                                            <!-- Prep Time -->
+                                            <div class="col-12 col-md-6 mb-2">
+                                                <input id="preptime" name="preptime" type="text" placeholder="Prep Time (E.g. 15 Mins)"
+                                                    class="form-control custom-input valid-border" autocomplete="nope" required>
+                                            </div>
+                                            <!-- Cook Time -->
+                                            <div class="col-12 col-md-6 mb-2">
+                                                <input id="cooktime" name="cooktime" type="text" placeholder="Cook Time (E.g. 3 Hours)"
+                                                    class="form-control custom-input valid-border" autocomplete="nope" required>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Recipe URL -->
-                                    <div class="col-12 col-md-10 mx-auto mb-3">
+                                    <div class="col-12 col-md-10 mx-auto mb-2">
                                         <input id="imageurl" name="imageurl" type="url" placeholder="Recipe Image URL"
                                             class="form-control custom-input valid-border" autocomplete="nope" required>
+                                    </div>
+                                    <!-- Ingridients -->
+                                    <div class="col-12 col-md-10 mx-auto">
+                                        <div id="new_ing_input" class="row">
+                                            <input type="hidden" value="2" id="total_ing_input" name="total_ing_input">
+                                            <div class="col-12 mb-1">
+                                                <label for="ingridients1" class="title-font mb-0">List of Ingridients</label>
+                                                <button type="button" class="btn bg-success btn-sm text-white add-ing">Add</button>
+                                                <button type="button" class="btn bg-danger btn-sm text-white remove-ing">Remove</button>
+                                            </div>
+                                            <div class="col-12 col-md-6 mb-2">
+                                                <input id="ingridients1" name="ingridients1" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
+                                                class="form-control custom-input valid-border" autocomplete="nope" required>
+                                            </div>
+                                            <div class="col-12 col-md-6 mb-2">
+                                                <input id="ingridients2" name="ingridients2" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
+                                                class="form-control custom-input valid-border" autocomplete="nope" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Steps -->
+                                    <div class="col-12 col-md-10 mx-auto">
+                                        <div id="new_steps_input" class="row">
+                                            <input type="hidden" value="2" id="total_steps_input" name="total_steps_input">
+                                            <div class="col-12 mb-1">
+                                                <label for="steps1" class="title-font mb-0">List of Cooking Steps</label>
+                                                <button type="button" class="btn bg-success btn-sm text-white add-steps">Add</button>
+                                                <button type="button" class="btn bg-danger btn-sm text-white remove-steps">Remove</button>
+                                            </div>
+                                            <div class="col-12 col-md-6 mb-2">
+                                                <textarea id="steps1" name="steps1" type="text" placeholder="Cooking Steps"
+                                                class="form-control custom-input valid-border" autocomplete="nope" required></textarea>
+                                            </div>
+                                            <div class="col-12 col-md-6 mb-2">
+                                                <textarea id="steps2" name="steps2" type="text" placeholder="Cooking Steps"
+                                                class="form-control custom-input valid-border" autocomplete="nope" required></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn bg-custom-orange custom-btn box-shadow text-white pl-3 pr-3">Add Recipe</button>
@@ -54,8 +96,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"
-        integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg=="
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/recipe.js') }}"></script>
 {% endblock %}

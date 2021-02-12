@@ -247,11 +247,38 @@ def add_recipe():
     the user adding recipes.
     """
     if request.method == "POST":
+        """
+        As the recipe form allows a dynamic amount of
+        ingridients and steps, the below loops through
+        the ingridients/steps creating a string split
+        by the character "~".
+        """
+        ingridients = ""
+        steps = ""
+        for_loop_idx_ing = 0
+        for_loop_idx_steps = 0
+        for key, val in request.form.items():
+            if key.startswith("ingridients"):
+                if for_loop_idx_ing > 0:
+                    ingridients += " ~ " + val
+                    for_loop_idx_ing += 1
+                else:
+                    ingridients += val
+                    for_loop_idx_ing += 1
+            if key.startswith("step"):
+                if for_loop_idx_steps > 0:
+                    steps += " ~ " + val
+                    for_loop_idx_steps += 1
+                else:
+                    steps += val
+                    for_loop_idx_steps += 1
+
         recipe = {
-            "name": request.form.get("recipename").lower(),
-            "description": request.form.get("recipedesc").lower(),
+            # "name": request.form.get("recipename").lower(),
+            # "description": request.form.get("recipedesc").lower(),
+            "ingridients": ingridients,
+            "steps": steps
         }
-        print(recipe)
 
         pass
 
