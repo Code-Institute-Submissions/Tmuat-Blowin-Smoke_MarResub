@@ -239,6 +239,25 @@ def profile(username):
     return redirect(url_for("login"))
 
 
+@app.route("/add-recipe/", methods=["GET", "POST"])
+@login_required
+def add_recipe():
+    """
+    A function to render a page for the purpose of
+    the user adding recipes.
+    """
+    if request.method == "POST":
+        recipe = {
+            "name": request.form.get("recipename").lower(),
+            "description": request.form.get("recipedesc").lower(),
+        }
+        print(recipe)
+
+        pass
+
+    return render_template("add-recipe.html")
+
+
 def get_current_year():
     """
     Function to return the current year, for use with copyright in footer

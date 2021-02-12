@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block extra_title %}| Add Recipe{% endblock %}
+
+{% block content %}
+    <!-- Recipe Section -->
+    <section id="recipe">
+        <div class="landing-image">
+            <div class="container">
+                <div class="row align-items-center custom-form-row">
+                    <!-- Recipe Form start -->
+                    <form class="col-12 col-md-8 offset-md-2 text-center" method="POST" action="{{ url_for('add_recipe') }}"
+                        name="recipe">
+                        <div class="card white-grey-card p-3">
+                            <h3 class="title-font text-body card-title-font mb-4">Recipe</h3>
+                            <div class="container text-body">
+                                <div class="form-row mx-auto">
+                                    <!-- Recipe Name -->
+                                    <div class="col-12 col-md-10 mx-auto mb-3">
+                                        <input id="recipename" name="recipename" type="text" placeholder="Recipe Name"
+                                            class="form-control custom-input valid-border" autocomplete="nope" required>
+                                    </div>
+                                    <!-- Recipe Description -->
+                                    <div class="col-12 col-md-10 mx-auto mb-3">
+                                        <textarea id="recipedesc" name="recipedesc" type="text" placeholder="Recipe Description"
+                                            class="form-control custom-input valid-border" autocomplete="nope" required></textarea>
+                                    </div>
+                                    <!-- Prep Time -->
+                                    <div class="col-12 col-md-10 mx-auto mb-3">
+                                        <input id="preptime" name="preptime" type="text" placeholder="Preperation Time (E.g. 15 Mins)"
+                                            class="form-control custom-input valid-border" autocomplete="nope" required>
+                                    </div>
+                                    <!-- Cook Time -->
+                                    <div class="col-12 col-md-10 mx-auto mb-3">
+                                        <input id="cooktime" name="cooktime" type="text" placeholder="Cooking Time (E.g. 3 Hours)"
+                                            class="form-control custom-input valid-border" autocomplete="nope" required>
+                                    </div>
+                                    <!-- Recipe URL -->
+                                    <div class="col-12 col-md-10 mx-auto mb-3">
+                                        <input id="imageurl" name="imageurl" type="url" placeholder="Recipe Image URL"
+                                            class="form-control custom-input valid-border" autocomplete="nope" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn bg-custom-orange custom-btn box-shadow text-white pl-3 pr-3">Add Recipe</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Recipe Form end -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Recipe Section end -->
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"
+        integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg=="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
