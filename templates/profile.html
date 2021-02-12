@@ -56,19 +56,19 @@
                                 <!-- First Name -->
                                 <div class="col-12 col-md-10 col-lg-8 input-box mx-auto mt-3">
                                     <input id="firstname" name="firstname" type="text" class="form-control custom-input valid-border"
-                                        value="{{ user.first_name }}" required>
+                                        value="{{ user.first_name|title }}" required>
                                     <span class="">First Name</span>
                                 </div>
                                 <!-- Last Name -->
                                 <div class="col-12 col-md-10 col-lg-8 input-box mx-auto">
                                     <input id="lastname" name="lastname" type="text" class="form-control custom-input valid-border"
-                                        value="{{ user.last_name }}" required>
+                                        value="{{ user.last_name|title }}" required>
                                     <span class="">Last Name</span>
                                 </div>
                                 <!-- Email -->
                                 <div class="col-12 col-md-10 col-lg-8 input-box mx-auto mb-3">
-                                    <input id="email" name="email" type="email" class="form-control custom-input valid-border" value="{{ user.email }}"
-                                        required>
+                                    <input id="email" name="email" type="email" class="form-control custom-input valid-border"
+                                        value="{{ user.email|title }}" required>
                                     <span class="">Email</span>
                                 </div>
                             </div>
