@@ -29,13 +29,15 @@
                                         <div class="row">
                                             <!-- Prep Time -->
                                             <div class="col-12 col-md-6 mb-2">
-                                                <input id="preptime" name="preptime" type="text" placeholder="Prep Time (E.g. 15 Mins)"
-                                                    class="form-control custom-input valid-border" autocomplete="nope" required>
+                                                <input id="preptime" name="preptime" type="number" placeholder="Prep Time (Mins)"
+                                                    class="form-control custom-input valid-border" autocomplete="nope" required
+                                                    min="1" max="240">
                                             </div>
                                             <!-- Cook Time -->
                                             <div class="col-12 col-md-6 mb-2">
-                                                <input id="cooktime" name="cooktime" type="text" placeholder="Cook Time (E.g. 3 Hours)"
-                                                    class="form-control custom-input valid-border" autocomplete="nope" required>
+                                                <input id="cooktime" name="cooktime" type="number" placeholder="Cook Time (Hours)"
+                                                    class="form-control custom-input valid-border" autocomplete="nope" require
+                                                    min="0.1" max="24">
                                             </div>
                                         </div>
                                     </div>
