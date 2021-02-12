@@ -86,11 +86,14 @@ def recipes():
 
     recipes = list(mongo.db.recipes.find())
 
+    results = len(recipes)
+
     categories = list(mongo.db.categories.find().sort("category", 1))
 
     context = {
         "recipes": recipes,
         "categories": categories,
+        "results": results
     }
     return render_template("recipes.html", **context)
 
