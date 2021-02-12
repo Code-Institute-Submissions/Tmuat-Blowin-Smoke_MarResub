@@ -218,7 +218,7 @@ def register():
     registering a user.
     """
     if request.method == "POST":
-        # Check if email is in db
+        # Check if user is in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
@@ -226,6 +226,7 @@ def register():
             flash("Username already exists!", "error")
             return redirect(url_for("register"))
 
+        # Check if email is in db
         existing_email = mongo.db.users.find_one(
             {"email": request.form.get("email").lower()})
 
@@ -233,6 +234,7 @@ def register():
             flash("Email already exists!", "error")
             return redirect(url_for("register"))
 
+        # Check if password1 & password2 match
         password1 = request.form.get("password")
         password2 = request.form.get("password2")
 
