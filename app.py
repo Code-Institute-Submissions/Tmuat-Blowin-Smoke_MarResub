@@ -98,6 +98,28 @@ def recipes():
     return render_template("recipes.html", **context)
 
 
+@app.route("/recipes/<category>/", methods=["GET", "POST"])
+def recipes_filter(category):
+    """
+    A function to render a page of recipes filtered by 
+    category.
+    """
+
+    recipes = list(mongo.db.recipes.find({"category": category}))
+
+    results = len(recipes)
+
+    categories = list(mongo.db.categories.find().sort("category", 1))
+
+    context = {
+        "recipes": recipes,
+        "categories": categories,
+        "results": results,
+        "filter": category
+    }
+    return render_template("recipes.html", **context)
+
+
 @app.route("/products/")
 def products():
     """

@@ -8,7 +8,7 @@
         <img src="{{ url_for('static', filename='media/images/recipes.jpg') }}" alt="picture of sliced steak">
         <div class="image-content overlay">
             <div class="w-100 text-white">
-                <h1 class="image-landing-text text-uppercase">
+                <h1 id="recipe" class="image-landing-text text-uppercase">
                     Recipes
                 </h1>
             </div>
@@ -25,7 +25,7 @@
                     <div class="inner-filter pt-2 pb-3">
                         <div class="filter-group pb-3">
                             {% for category in categories %}
-                            <a href="" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ category.category|title }}</a>
+                            <a href="{{ url_for('recipes_filter', category=category.category)}}" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ category.category|title }}</a>
                             {% endfor %}
                         </div>
                         <h5 class="title-font filter-title">Or...</h5>
@@ -42,6 +42,9 @@
         <div class="container">
             <div class="row mx-1 mt-3">
                 <div class="col-12 text-center">
+                    {% if filter %}
+                        <h5 class="title-font">Filter: {{ filter|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
+                    {% endif %}
                     <h5 class="title-font">Number of recipes: {{ results }}</h5>
                 </div>
                 <!-- recipes For Loop start -->
