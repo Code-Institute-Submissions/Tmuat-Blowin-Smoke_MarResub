@@ -59,12 +59,16 @@
                 <!-- recipes For Loop end -->
             </div>
             <div class="row mx-1 pb-5">
-                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2">
-                    <p class="sub-section-text mb-0 text-center">Not impressed with the recipes you’ve found or simply want to show off your masterful
-                        recipe. Add a recipe below (login required).</p>
-                </div>
-                <div class="col-12 text-center pt-3">
-                    <a href="#" class="btn title-font custom-btn view-all-btn bg-custom-orange box-shadow text-white pl-3 pr-3">View all products!</a>
+                <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 text-center">
+                    {% if session.user %}
+                        <p class="sub-section-text mb-0 text-center">Not impressed with the recipes you’ve found or simply want to show off your masterful
+                            recipe. Add a recipe with the link below.</p>
+                        <a href="{{ url_for('add_recipe') }}" class="btn title-font custom-btn view-all-btn bg-custom-orange box-shadow text-white pl-3 pr-3 mt-3">Add Recipe!</a>
+                    {% else %}
+                        <p class="sub-section-text mb-0 text-center">If you want to share a masterful recipe of your own, sign in or sign up!</p>
+                        <a href="{{ url_for('login') }}" class="btn title-font custom-btn view-all-btn bg-custom-orange box-shadow text-white pl-3 pr-3 mr-2 mt-3">Sign In!</a>
+                        <a href="{{ url_for('register') }}" class="btn title-font custom-btn view-all-btn bg-custom-orange box-shadow text-white pl-3 pr-3 ml-2 mt-3">Sign Up!</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
