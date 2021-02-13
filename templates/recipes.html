@@ -60,20 +60,36 @@
                     <nav aria-label="Page navigation" class="pt-2">
                         <ul class="pagination justify-content-center">
                             {% if prev %}
+                            {% if request.path == url_for('recipes_filter', category=filter) %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ prev }}" aria-label="Previous">
+                                    <span aria-hidden="true" class="text-body">&laquo;</span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('recipes') }}{{ prev }}" aria-label="Previous">
+                                    <span aria-hidden="true" class="text-body">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                        <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
+                        {% if next %}
+                            {% if request.path == url_for('recipes_filter', category=filter) %}
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('recipes') }}{{ prev }}" aria-label="Previous">
-                                        <span aria-hidden="true" class="text-body">&laquo;</span>
+                                    <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ next }}" aria-label="Next">
+                                        <span aria-hidden="true" class="text-body">&raquo;</span>
                                     </a>
                                 </li>
-                            {% endif %}
-                            <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
-                            {% if next %}
+                            {% else %}
                                 <li class="page-item">
                                     <a class="page-link" href="{{ url_for('recipes') }}{{ next }}" aria-label="Next">
                                         <span aria-hidden="true" class="text-body">&raquo;</span>
                                     </a>
                                 </li>
                             {% endif %}
+                        {% endif %}
                         </ul>
                     </nav>
                     <!-- Pagination end -->
@@ -100,19 +116,35 @@
                 <nav aria-label="Page navigation" class="pt-2 col-12">
                     <ul class="pagination justify-content-center">
                         {% if prev %}
-                        <li class="page-item">
-                            <a class="page-link" href="{{ url_for('recipes') }}{{ prev }}" aria-label="Previous">
-                                <span aria-hidden="true" class="text-body">&laquo;</span>
-                            </a>
-                        </li>
+                            {% if request.path == url_for('recipes_filter', category=filter) %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ prev }}" aria-label="Previous">
+                                    <span aria-hidden="true" class="text-body">&laquo;</span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('recipes') }}{{ prev }}" aria-label="Previous">
+                                    <span aria-hidden="true" class="text-body">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
                         {% endif %}
                         <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
                         {% if next %}
-                        <li class="page-item">
-                            <a class="page-link" href="{{ url_for('recipes') }}{{ next }}" aria-label="Next">
-                                <span aria-hidden="true" class="text-body">&raquo;</span>
-                            </a>
-                        </li>
+                            {% if request.path == url_for('recipes_filter', category=filter) %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ next }}" aria-label="Next">
+                                        <span aria-hidden="true" class="text-body">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('recipes') }}{{ next }}" aria-label="Next">
+                                        <span aria-hidden="true" class="text-body">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
                         {% endif %}
                     </ul>
                 </nav>

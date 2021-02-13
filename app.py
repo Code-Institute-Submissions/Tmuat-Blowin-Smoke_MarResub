@@ -120,9 +120,7 @@ def recipes():
     """
     A function to render a page of all recipes, with options
     to filter and search.
-    """
 
-    """
     This code allows pagination of results
     Code from https://www.youtube.com/watch?v=Lnt6JqtzM7I
     """
@@ -162,7 +160,7 @@ def recipes():
                         .limit(limit))
 
     # Getting the next & prev url
-    if offset + 1 == total_recipes:
+    if offset + limit >= total_recipes:
         next_url = None
     else:
         next_url = "?p=" + str(page + 1)
@@ -190,8 +188,11 @@ def recipes():
 def recipes_filter(category):
     """
     A function to render a page of recipes filtered by
-    category.
+    category. The same pagination code used as in recipe.
     """
+    # Number of items per page
+    limit = 3
+
     # Check if category is in db
     existing_category = mongo.db.categories.find_one(
             {"category": category.lower()})
@@ -201,18 +202,65 @@ def recipes_filter(category):
         flash("No such category exists!", "error")
         return redirect(url_for("recipes"))
 
-    recipes = list(mongo.db.recipes.find({"category": category}))
+    # Getting the first id in the filtered queryset
+    starting_id = list(mongo.db.recipes.find(
+        {"category": category}).sort("_id", -1))
 
-    results = len(recipes)
+    # Getting the length of the list of recipes to display
+    total_recipes = len(starting_id)
+
+    # Getting the offset (page number)
+    if 'p' in request.args:
+        if int(request.args['p']) <= 1:
+            page = 1
+            offset = 0
+            redirect(url_for("recipes"))
+        elif ((int(request.args['p']) * limit) - limit) > total_recipes:
+            page = math.ceil((total_recipes/limit))
+            offset = limit * (page - 1)
+            flash("Page out of range", "error")
+        else:
+            page = int(request.args['p'])
+            offset = limit * (page - 1)
+    else:
+        page = 1
+        offset = 0
+
+    # Getting the last id to with the offset used
+    last_id = starting_id[offset]["_id"]
+
+    # Getting the page recipes using the last ID to offset and
+    # limit to get set amount of results
+    all_recipes_category = list(mongo.db.recipes.find(
+                                {'_id': {'$lte': last_id}})
+                                .sort("_id", -1))
+
+    filtering_recipes = [key for key in all_recipes_category if key['category'] == category]
+    recipe = filtering_recipes[:limit]
+
+    # Getting the next & prev url
+    if offset + limit >= total_recipes:
+        next_url = None
+    else:
+        next_url = "?p=" + str(page + 1)
+
+    if offset == 0:
+        prev_url = None
+    else:
+        prev_url = "?p=" + str(page - 1)
 
     categories = list(mongo.db.categories.find().sort("category", 1))
 
     context = {
-        "recipes": recipes,
+        "recipes": recipe,
         "categories": categories,
-        "results": results,
-        "filter": category
+        "results": total_recipes,
+        "filter": category,
+        "next": next_url,
+        "prev": prev_url,
+        "page": page
     }
+
     return render_template("recipes.html", **context)
 
 
