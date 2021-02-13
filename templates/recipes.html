@@ -59,7 +59,7 @@
                     <!-- Pagination -->
                     <nav aria-label="Page navigation" class="pt-2">
                         <ul class="pagination justify-content-center">
-                            {% if prev %}
+                        {% if prev %}
                             {% if request.path == url_for('recipes_filter', category=filter) %}
                             <li class="page-item">
                                 <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ prev }}" aria-label="Previous">

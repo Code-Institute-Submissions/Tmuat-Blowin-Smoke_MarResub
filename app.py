@@ -191,7 +191,7 @@ def recipes_filter(category):
     category. The same pagination code used as in recipe.
     """
     # Number of items per page
-    limit = 3
+    limit = 9
 
     # Check if category is in db
     existing_category = mongo.db.categories.find_one(
