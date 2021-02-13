@@ -74,7 +74,9 @@
                             </li>
                             {% endif %}
                         {% endif %}
+                        {% if page %}
                         <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
+                        {% endif %}
                         {% if next %}
                             {% if request.path == url_for('recipes_filter', category=filter) %}
                                 <li class="page-item">
@@ -130,7 +132,9 @@
                             </li>
                             {% endif %}
                         {% endif %}
+                        {% if page %}
                         <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
+                        {% endif %}
                         {% if next %}
                             {% if request.path == url_for('recipes_filter', category=filter) %}
                                 <li class="page-item">
