@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block extra_title %}| Add Recipe{% endblock %}
+{% block extra_title %}| Edit Recipe{% endblock %}
 
 {% block content %}
     <!-- Recipe Section -->
@@ -9,43 +9,46 @@
             <div class="container">
                 <div class="row align-items-center custom-form-row">
                     <!-- Recipe Form start -->
-                    <form class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 text-center" method="POST" action="{{ url_for('add_recipe') }}"
+                    <form class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 text-center" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}"
                         name="recipe">
                         <div class="card white-grey-card p-3">
-                            <h3 class="title-font text-body card-title-font mb-4">Recipe</h3>
+                            <h3 class="title-font text-body card-title-font mb-4">Edit Recipe</h3>
                             <div class="container text-body">
                                 <div class="form-row mx-auto">
                                     <!-- Recipe Name -->
                                     <div class="col-12 col-md-10 mx-auto mb-2">
                                         <input id="recipename" name="recipename" type="text" placeholder="Recipe Name"
-                                            class="form-control custom-input" autocomplete="nope" required>
+                                            class="form-control custom-input" value="{{ recipe.name|title }}" required>
                                     </div>
                                     <!-- Category Name -->
                                     <div class="col-12 col-md-10 mx-auto mb-2">
                                         <select id="category" name="category" class="form-control custom-input" required>
-                                            <option value="" disabled selected>Choose Category</option>
                                             {% for category in categories %}
-                                                <option value="{{ category.category }}">{{ category.category|title }}</option>
+                                                {% if category.category == recipe.category %}
+                                                    <option value="{{ category.category }}" selected>{{ category.category|title }}</option>
+                                                {% else %}
+                                                    <option value="{{ category.category }}">{{ category.category|title }}</option>
+                                                {% endif %}
                                             {% endfor %}
                                         </select>
                                     </div>
                                     <!-- Recipe Description -->
                                     <div class="col-12 col-md-10 mx-auto mb-2">
                                         <textarea id="recipedesc" name="recipedesc" type="text" placeholder="Recipe Description"
-                                            class="form-control custom-input" autocomplete="nope" max="250" required></textarea>
+                                            class="form-control custom-input" max="250" required>{{ recipe.description|capitalize }}</textarea>
                                     </div>
                                     <div class=" col-12 col-md-10 mx-auto">
                                         <div class="row">
                                             <!-- Prep Time -->
                                             <div class="col-12 col-md-6 mb-2">
                                                 <input id="preptime" name="preptime" type="number" placeholder="Prep Time (Mins)"
-                                                    class="form-control custom-input" autocomplete="nope" required
+                                                    class="form-control custom-input" value="{{ recipe.prep_time }}" required
                                                     min="1" max="240">
                                             </div>
                                             <!-- Cook Time -->
                                             <div class="col-12 col-md-6 mb-2">
                                                 <input id="cooktime" name="cooktime" type="number" placeholder="Cook Time (Hours)"
-                                                    class="form-control custom-input" autocomplete="nope" require
+                                                    class="form-control custom-input" value="{{ recipe.cook_time }}" require
                                                     min="0" max="24" step=".1">
                                             </div>
                                         </div>
@@ -53,12 +56,12 @@
                                     <!-- Recipe URL -->
                                     <div class="col-12 col-md-10 mx-auto mb-2">
                                         <input id="imageurl" name="imageurl" type="url" placeholder="Recipe Image URL"
-                                            class="form-control custom-input" autocomplete="nope" required>
+                                            class="form-control custom-input" value="{{ recipe.image_url }}" required>
                                     </div>
                                     <!-- Ingridients -->
                                     <div class="col-12 col-md-10 mx-auto">
                                         <div id="new_ing_input" class="row">
-                                            <input type="hidden" value="2" id="total_ing_input" name="total_ing_input">
+                                            <input type="hidden" value="{{ recipe_ings|length }}" id="total_ing_input" name="total_ing_input">
                                             <div class="col-12 mb-1">
                                                 <label for="ingridients1" class="title-font mb-0">List of Ingridients</label>
                                                 <div class="d-block d-sm-inline-block">
@@ -66,20 +69,18 @@
                                                     <button type="button" class="btn bg-danger btn-sm text-white remove-ing">Remove</button>
                                                 </div>
                                             </div>
-                                            <div id="ingridients_div1" class="col-12 col-md-6 mb-2">
-                                                <input id="ingridients1" name="ingridients1" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
-                                                class="form-control custom-input" autocomplete="nope" required>
+                                            {% for ingridient in recipe_ings %}
+                                            <div id="ingridients_div{{ loop.index }}" class="col-12 col-md-6 mb-2">
+                                                <input id="ingridients{{loop.counter}}" name="ingridients{{ loop.index }}" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
+                                                class="form-control custom-input" value="{{ ingridient }}" required>
                                             </div>
-                                            <div id="ingridients_div2" class="col-12 col-md-6 mb-2">
-                                                <input id="ingridients2" name="ingridients2" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
-                                                class="form-control custom-input" autocomplete="nope" required>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                     <!-- Steps -->
                                     <div class="col-12 col-md-10 mx-auto">
                                         <div id="new_steps_input" class="row">
-                                            <input type="hidden" value="2" id="total_steps_input" name="total_steps_input">
+                                            <input type="hidden" value="{{ recipe_steps|length }}" id="total_steps_input" name="total_steps_input">
                                             <div class="col-12 mb-1">
                                                 <label for="steps1" class="title-font mb-0">List of Cooking Steps</label>
                                                 <div class="d-block d-sm-inline-block">
@@ -87,18 +88,17 @@
                                                     <button type="button" class="btn bg-danger btn-sm text-white remove-steps">Remove</button>
                                                 </div>
                                             </div>
-                                            <div id="step_div_div1" class="col-12 col-md-6 mb-2">
-                                                <textarea id="steps1" name="steps1" type="text" placeholder="Cooking Steps"
-                                                class="form-control custom-input" autocomplete="nope" required></textarea>
+                                            {% for step in recipe_steps %}
+                                            <div id="step_div{{ loop.index }}" class="col-12 col-md-6 mb-2">
+                                                <textarea id="steps{{ loop.index }}" name="steps{{ loop.index }}" type="text" placeholder="Cooking Steps"
+                                                class="form-control custom-input" required>{{ step }}</textarea>
                                             </div>
-                                            <div id="step_div_div2" class="col-12 col-md-6 mb-2">
-                                                <textarea id="steps2" name="steps2" type="text" placeholder="Cooking Steps"
-                                                class="form-control custom-input" autocomplete="nope" required></textarea>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn bg-custom-orange custom-btn box-shadow text-white pl-3 pr-3">Add Recipe</button>
+                                <a href="{{ url_for('profile', username=session['user']) }}" class="btn custom-btn-danger box-shadow text-white pl-3 pr-3">Cancel</a>
+                                <button type="submit" class="btn bg-custom-orange custom-btn box-shadow text-white pl-3 pr-3">Save</button>
                             </div>
                         </div>
                     </form>

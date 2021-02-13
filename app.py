@@ -548,17 +548,17 @@ def add_recipe():
         for key, val in request.form.items():
             if key.startswith("ingridients"):
                 if for_loop_idx_ing > 0:
-                    ingridients += " ~ " + val
+                    ingridients += " ~ " + val.lower()
                     for_loop_idx_ing += 1
                 else:
-                    ingridients += val
+                    ingridients += val.lower()
                     for_loop_idx_ing += 1
-            if key.startswith("step"):
+            if key.startswith("steps"):
                 if for_loop_idx_steps > 0:
-                    steps += " ~ " + val
+                    steps += " ~ " + val.lower()
                     for_loop_idx_steps += 1
                 else:
-                    steps += val
+                    steps += val.lower()
                     for_loop_idx_steps += 1
 
         recipe = {
@@ -585,6 +585,71 @@ def add_recipe():
     }
 
     return render_template("add-recipe.html", **context)
+
+
+@app.route("/edit-recipe/<recipe_id>", methods=["GET", "POST"])
+@login_required
+def edit_recipe(recipe_id):
+    """
+    A function to render a page for the purpose of
+    the editing recipes.
+    """
+    if request.method == "POST":
+        """
+        As the recipe form allows a dynamic amount of
+        ingridients and steps, the below loops through
+        the ingridients/steps creating a string split
+        by the character "~".
+        """
+        ingridients = ""
+        steps = ""
+        for_loop_idx_ing = 0
+        for_loop_idx_steps = 0
+        for key, val in request.form.items():
+            if key.startswith("ingridients"):
+                if for_loop_idx_ing > 0:
+                    ingridients += " ~ " + val.lower()
+                    for_loop_idx_ing += 1
+                else:
+                    ingridients += val.lower()
+                    for_loop_idx_ing += 1
+            if key.startswith("steps"):
+                if for_loop_idx_steps > 0:
+                    steps += " ~ " + val.lower()
+                    for_loop_idx_steps += 1
+                else:
+                    steps += val.lower()
+                    for_loop_idx_steps += 1
+
+        recipe = {'$set': {
+            "name": request.form.get("recipename").lower(),
+            "category": request.form.get("category").lower(),
+            "description": request.form.get("recipedesc").lower(),
+            "cook_time": request.form.get("cooktime"),
+            "prep_time": request.form.get("preptime"),
+            "image_url": request.form.get("imageurl").lower(),
+            "ingridients": ingridients,
+            "steps": steps
+        }}
+
+        mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)}, recipe)
+        flash("Recipe Updated Successfully", "success")
+        return redirect(url_for('profile', username=session["user"]))
+
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    recipe_ings = recipe["ingridients"].split(" ~ ")
+    recipe_steps = recipe["steps"].split(" ~ ")
+
+    categories = mongo.db.categories.find().sort("category", 1)
+
+    context = {
+        "categories": categories,
+        "recipe": recipe,
+        "recipe_steps": recipe_steps,
+        "recipe_ings": recipe_ings
+    }
+
+    return render_template("edit-recipe.html", **context)
 
 
 def get_current_year():

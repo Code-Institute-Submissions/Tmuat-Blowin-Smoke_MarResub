@@ -1,15 +1,4 @@
-{% extends "base.html" %}
-
-{% block extra_title %}| Add Recipe{% endblock %}
-
-{% block content %}
-    <!-- Recipe Section -->
-    <section id="recipe">
-        <div class="landing-image">
-            <div class="container">
-                <div class="row align-items-center custom-form-row">
-                    <!-- Recipe Form start -->
-                    <form class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 text-center" method="POST" action="{{ url_for('add_recipe') }}"
+<form class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 text-center" method="POST" action="{{ url_for('add_recipe') }}"
                         name="recipe">
                         <div class="card white-grey-card p-3">
                             <h3 class="title-font text-body card-title-font mb-4">Recipe</h3>
@@ -66,11 +55,11 @@
                                                     <button type="button" class="btn bg-danger btn-sm text-white remove-ing">Remove</button>
                                                 </div>
                                             </div>
-                                            <div id="ingridients_div1" class="col-12 col-md-6 mb-2">
+                                            <div class="col-12 col-md-6 mb-2">
                                                 <input id="ingridients1" name="ingridients1" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
                                                 class="form-control custom-input" autocomplete="nope" required>
                                             </div>
-                                            <div id="ingridients_div2" class="col-12 col-md-6 mb-2">
+                                            <div class="col-12 col-md-6 mb-2">
                                                 <input id="ingridients2" name="ingridients2" type="text" placeholder="Ingridient (E.g. Beef - 500g)"
                                                 class="form-control custom-input" autocomplete="nope" required>
                                             </div>
@@ -87,11 +76,11 @@
                                                     <button type="button" class="btn bg-danger btn-sm text-white remove-steps">Remove</button>
                                                 </div>
                                             </div>
-                                            <div id="step_div_div1" class="col-12 col-md-6 mb-2">
+                                            <div class="col-12 col-md-6 mb-2">
                                                 <textarea id="steps1" name="steps1" type="text" placeholder="Cooking Steps"
                                                 class="form-control custom-input" autocomplete="nope" required></textarea>
                                             </div>
-                                            <div id="step_div_div2" class="col-12 col-md-6 mb-2">
+                                            <div class="col-12 col-md-6 mb-2">
                                                 <textarea id="steps2" name="steps2" type="text" placeholder="Cooking Steps"
                                                 class="form-control custom-input" autocomplete="nope" required></textarea>
                                             </div>
@@ -102,14 +91,3 @@
                             </div>
                         </div>
                     </form>
-                    <!-- Recipe Form end -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Recipe Section end -->
-{% endblock %}
-
-{% block extra_js %}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/recipe.js') }}"></script>
-{% endblock %}
