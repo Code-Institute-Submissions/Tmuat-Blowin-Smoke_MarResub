@@ -49,7 +49,7 @@
                             <div class="card box-shadow">
                                 <img src="{{ recipe.image_url }}" onerror="this.src='{{ url_for('static', filename='media/images/default.jpg') }}'" class="card-img-top custom-card-image" alt="{{ recipe.name }}">
                                 <div class="card-body text-center bg-off-white">
-                                    <h5 class="card-title font-weight-bold">{{ recipe.name }}</h5>
+                                    <h5 class="card-title font-weight-bold">{{ recipe.name|title }}</h5>
                                     <a href="#" class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">View Recipe</a>
                                 </div>
                             </div>
