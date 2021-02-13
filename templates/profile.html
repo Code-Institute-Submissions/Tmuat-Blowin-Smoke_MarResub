@@ -30,7 +30,21 @@
                     <div class="col-12 col-lg-7 text-center mx-auto pt-3">
                         <div class="card white-grey-card p-3">
                             <h3 class="title-font text-body card-title-font mb-4">My Recipes</h3>
-                            <div class="container text-body"></div>
+                            <div class="container pl-0 pr-0 text-body">
+                                <table class="table table-hover table-borderless table-striped">
+                                    <tbody>
+                                        {% for recipe in recipes %}
+                                        <tr>
+                                            <th scope="row" class="d-none d-md-table-cell">{{loop.index}}</th>
+                                            <td class="title-font">{{ recipe.name|title }}</td>
+                                            <td class="d-none d-md-table-cell font-italic">{{ recipe.category|title }}</td>
+                                            <td><a href="" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
+                                            <td><a href="" class="btn custom-btn-danger box-shadow text-white pt-0 pb-0"><small>Delete</small></a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

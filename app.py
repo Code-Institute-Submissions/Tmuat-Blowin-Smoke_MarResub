@@ -434,6 +434,23 @@ def profile(username):
     the users profile.
     """
 
+    # grab the session user's username from db
+    user = mongo.db.users.find_one({"username": session["user"]})
+
+    # A for loop to delete the password key from the user dict and
+    # get the username value
+    password_key = "password"
+    for key, values in user.items():
+        if key == password_key:
+            del user[key]
+            break
+        if key == "username":
+            username = values
+
+    # get the users recipes
+    recipes = list(mongo.db.recipes.find({"created_by": username}))
+
+    # Function for updaying the user profile
     if request.method == "POST":
         submit = {'$set': {
             "first_name": request.form.get("firstname"),
@@ -445,18 +462,9 @@ def profile(username):
         flash("Profile Updated", "success")
         return redirect(url_for('profile', username=session["user"]))
 
-    # grab the session user's username from db
-    user = mongo.db.users.find_one({"username": session["user"]})
-
-    # A for loop to delete the password key from the user dict
-    password_key = "password"
-    for key in user.keys():
-        if key == password_key:
-            del user[key]
-            break
-
     context = {
         "user": user,
+        "recipes": recipes,
     }
 
     if session["user"]:

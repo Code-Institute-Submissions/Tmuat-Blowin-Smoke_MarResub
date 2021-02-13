@@ -420,6 +420,25 @@ html {
     font-size: 30px;
 }
 
+.table-hover tbody tr:hover {
+    background-color: rgba(217, 93, 22, 0.3);
+}
+
+.custom-btn-danger {
+    border-radius: 25px;
+    border: solid #bd0719;
+    background-color: #bd0719;
+
+}
+
+.custom-btn-danger:hover,
+.custom-btn-danger:active,
+.custom-btn-danger:focus {
+    background-color: #fff;
+    color: #bd0719 !important;
+    box-shadow: 0 0 0 0.2rem rgb(217 94 22 / 25%);
+}
+
 /* ---------------------------------------------- Profile Page Styling end */
 
 /* ---------------------------------------------- Recipe Styling start */
