@@ -1,4 +1,5 @@
 import os
+import math
 from datetime import date, datetime
 import random
 from flask import (
@@ -121,16 +122,66 @@ def recipes():
     to filter and search.
     """
 
-    recipes = list(mongo.db.recipes.find())
+    """
+    This code allows pagination of results
+    Code from https://www.youtube.com/watch?v=Lnt6JqtzM7I
+    """
+    # Number of items per page
+    limit = 9
 
-    results = len(recipes)
+    # Getting the first id in the whole queryset
+    starting_id = list(mongo.db.recipes.find().sort("_id", -1))
 
+    # Getting the length of the all the recipes to display total
+    total_recipes = len(starting_id)
+
+    # Getting the offset (page number)
+    if 'p' in request.args:
+        if int(request.args['p']) <= 1:
+            page = 1
+            offset = 0
+            redirect(url_for("recipes"))
+        elif ((int(request.args['p']) * limit) - limit) > total_recipes:
+            page = 1
+            offset = 0
+            flash("Page out of range", "error")
+            redirect(url_for("recipes"))
+        else:
+            page = int(request.args['p'])
+            offset = limit * (page - 1)
+    else:
+        page = 1
+        offset = 0
+
+    # Getting the last id to with the offset used
+    last_id = starting_id[offset]["_id"]
+
+    # Getting the page recipes using the last ID to offset and
+    # limit to get set amount of results
+    recipes = list(mongo.db.recipes.find({'_id': {'$lte': last_id}})
+                        .sort("_id", -1)
+                        .limit(limit))
+
+    # Getting the next & prev url
+    if offset + 1 == total_recipes:
+        next_url = None
+    else:
+        next_url = "?p=" + str(page + 1)
+
+    if offset == 0:
+        prev_url = None
+    else:
+        prev_url = "?p=" + str(page - 1)
+
+    # Getting categories to be used for filters
     categories = list(mongo.db.categories.find().sort("category", 1))
 
     context = {
         "recipes": recipes,
         "categories": categories,
-        "results": results
+        "results": total_recipes,
+        "next": next_url,
+        "prev": prev_url
     }
     return render_template("recipes.html", **context)
 
