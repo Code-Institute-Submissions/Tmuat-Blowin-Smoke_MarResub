@@ -115,7 +115,7 @@ def index():
     return render_template("index.html", **context)
 
 
-@app.route("/recipes/")
+@app.route("/recipes")
 def recipes():
     """
     A function to render a page of all recipes, with options
@@ -142,10 +142,9 @@ def recipes():
             offset = 0
             redirect(url_for("recipes"))
         elif ((int(request.args['p']) * limit) - limit) > total_recipes:
-            page = 1
-            offset = 0
+            page = math.ceil((total_recipes/limit))
+            offset = limit * (page - 1)
             flash("Page out of range", "error")
-            redirect(url_for("recipes"))
         else:
             page = int(request.args['p'])
             offset = limit * (page - 1)
@@ -186,7 +185,7 @@ def recipes():
     return render_template("recipes.html", **context)
 
 
-@app.route("/recipes/category/<category>/")
+@app.route("/recipes/category/<category>")
 def recipes_filter(category):
     """
     A function to render a page of recipes filtered by
@@ -251,7 +250,7 @@ def recipes_search():
     return render_template("recipes.html", **context)
 
 
-@app.route("/products/")
+@app.route("/products")
 def products():
     """
     A function to render a page of all products, with options
@@ -266,7 +265,7 @@ def products():
     return render_template("products.html", **context)
 
 
-@app.route("/login/", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 @anonymous_required
 def login():
     """
@@ -313,7 +312,7 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/logout/")
+@app.route("/logout")
 @login_required
 def logout():
     """
@@ -327,7 +326,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/register/", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 @anonymous_required
 def register():
     """
@@ -377,7 +376,7 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/profile/<username>/", methods=["GET", "POST"])
+@app.route("/profile/<username>", methods=["GET", "POST"])
 @login_required
 def profile(username):
     """
@@ -417,7 +416,7 @@ def profile(username):
     return redirect(url_for("login"))
 
 
-@app.route("/add-recipe/", methods=["GET", "POST"])
+@app.route("/add-recipe", methods=["GET", "POST"])
 @login_required
 def add_recipe():
     """
