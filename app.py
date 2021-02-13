@@ -236,7 +236,7 @@ def recipes_filter(category):
                                 .sort("_id", -1))
 
     filtering_recipes = [key for key in all_recipes_category if key['category'] == category]
-    recipe = filtering_recipes[:limit]
+    recipes = filtering_recipes[:limit]
 
     # Getting the next & prev url
     if offset + limit >= total_recipes:
@@ -252,7 +252,7 @@ def recipes_filter(category):
     categories = list(mongo.db.categories.find().sort("category", 1))
 
     context = {
-        "recipes": recipe,
+        "recipes": recipes,
         "categories": categories,
         "results": total_recipes,
         "filter": category,
@@ -447,8 +447,58 @@ def profile(username):
         if key == "username":
             username = values
 
+    """
+    The below is to populate the recipes with pagination.
+    """
+
+    # Number of items per page
+    limit = 6
+
     # get the users recipes
-    recipes = list(mongo.db.recipes.find({"created_by": username}))
+    starting_id = list(mongo.db.recipes.find({"created_by": username}).sort("_id", -1))
+
+    # Getting the length of the all the recipes to display total
+    total_recipes = len(starting_id)
+
+    # Getting the offset (page number)
+    if 'p' in request.args:
+        if int(request.args['p']) <= 1:
+            page = 1
+            offset = 0
+            redirect(url_for("recipes"))
+        elif ((int(request.args['p']) * limit) - limit) > total_recipes:
+            page = math.ceil((total_recipes/limit))
+            offset = limit * (page - 1)
+            flash("Page out of range", "error")
+        else:
+            page = int(request.args['p'])
+            offset = limit * (page - 1)
+    else:
+        page = 1
+        offset = 0
+
+    # Getting the last id to with the offset used
+    last_id = starting_id[offset]["_id"]
+
+    # Getting the page recipes using the last ID to offset and
+    # limit to get set amount of results
+    all_recipes_username = list(mongo.db.recipes.find(
+                                {'_id': {'$lte': last_id}})
+                                .sort("_id", -1))
+
+    filtering_recipes = [key for key in all_recipes_username if key['created_by'] == username]
+    recipes = filtering_recipes[:limit]
+
+    # Getting the next & prev url
+    if offset + limit >= total_recipes:
+        next_url = None
+    else:
+        next_url = "?p=" + str(page + 1)
+
+    if offset == 0:
+        prev_url = None
+    else:
+        prev_url = "?p=" + str(page - 1)
 
     # Function for updaying the user profile
     if request.method == "POST":
@@ -465,6 +515,10 @@ def profile(username):
     context = {
         "user": user,
         "recipes": recipes,
+        "results": total_recipes,
+        "next": next_url,
+        "prev": prev_url,
+        "page": page
     }
 
     if session["user"]:

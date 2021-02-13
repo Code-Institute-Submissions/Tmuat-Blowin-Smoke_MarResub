@@ -31,19 +31,45 @@
                         <div class="card white-grey-card p-3">
                             <h3 class="title-font text-body card-title-font mb-4">My Recipes</h3>
                             <div class="container pl-0 pr-0 text-body">
-                                <table class="table table-hover table-borderless table-striped">
+                                <table class="table table-hover table-borderless table-striped mb-1">
+                                    {% if recipes|length > 0 %}
                                     <tbody>
-                                        {% for recipe in recipes %}
-                                        <tr>
-                                            <th scope="row" class="d-none d-md-table-cell">{{loop.index}}</th>
-                                            <td class="title-font">{{ recipe.name|title }}</td>
-                                            <td class="d-none d-md-table-cell font-italic">{{ recipe.category|title }}</td>
-                                            <td><a href="" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
-                                            <td><a href="" class="btn custom-btn-danger box-shadow text-white pt-0 pb-0"><small>Delete</small></a></td>
-                                        </tr>
-                                        {% endfor %}
+                                            {% for recipe in recipes %}
+                                            <tr>
+                                                <td class="title-font">{{ recipe.name|title }}</td>
+                                                <td class="d-none d-md-table-cell font-italic">{{ recipe.category|title }}</td>
+                                                <td><a href="" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
+                                                <td><a href="" class="btn custom-btn-danger box-shadow text-white pt-0 pb-0"><small>Delete</small></a></td>
+                                            </tr>
+                                            {% endfor %}
                                     </tbody>
+                                    {% else %}
+                                        <h2 class="title-font text-danger">You Haven't Added Any!</h2>
+                                    {% endif %}
                                 </table>
+                                <!-- Pagination -->
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center">
+                                        {% if prev %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ url_for('profile', username=session['user']) }}{{ prev }}" aria-label="Previous">
+                                                    <span aria-hidden="true" class="text-body">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        {% if page %}
+                                        <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
+                                        {% endif %}
+                                        {% if next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ url_for('profile', username=session['user']) }}{{ next }}" aria-label="Next">
+                                                    <span aria-hidden="true" class="text-body">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                                <!-- Pagination end -->
                             </div>
                         </div>
                     </div>
