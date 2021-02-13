@@ -36,7 +36,8 @@ html {
 }
 
 .nav-link.active:hover,
-.active {
+.active,
+.text-custom-orange {
     color: #D95E16 !important;
 }
 

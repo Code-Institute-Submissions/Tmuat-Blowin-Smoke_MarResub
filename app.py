@@ -180,7 +180,8 @@ def recipes():
         "categories": categories,
         "results": total_recipes,
         "next": next_url,
-        "prev": prev_url
+        "prev": prev_url,
+        "page": page
     }
     return render_template("recipes.html", **context)
 
