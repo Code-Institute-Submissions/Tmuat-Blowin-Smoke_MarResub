@@ -39,11 +39,16 @@ def login_required(f):
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        user = mongo.db.users.find_one(
-            {"username": session["user"].lower()})
+        if session.get("user") is None:
+            user = None
+        else:
+            user = mongo.db.users.find_one(
+                {"username": session["user"].lower()})
         if not user:
+            flash("User not recognised!", "error")
             return redirect(url_for('login'))
         elif "user" not in session:
+            flash("You must be logged in for this view", "error")
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
@@ -57,8 +62,11 @@ def is_admin(f):
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        user = mongo.db.users.find_one(
-            {"username": session["user"].lower()})
+        if session.get("user") is None:
+            user = None
+        else:
+            user = mongo.db.users.find_one(
+                {"username": session["user"].lower()})
         if not user:
             flash("User not recognised!", "error")
             return redirect(url_for('index'))
@@ -630,17 +638,20 @@ def profile(username):
         page = 1
         offset = 0
 
-    # Getting the last id to with the offset used
-    last_id = starting_id[offset]["_id"]
+    if total_recipes > 0:
+        # Getting the last id to with the offset used
+        last_id = starting_id[offset]["_id"]
 
-    # Getting the page recipes using the last ID to offset and
-    # limit to get set amount of results
-    all_recipes_username = list(mongo.db.recipes.find(
-                                {'_id': {'$lte': last_id}})
-                                .sort("_id", -1))
+        # Getting the page recipes using the last ID to offset and
+        # limit to get set amount of results
+        all_recipes_username = list(mongo.db.recipes.find(
+                                    {'_id': {'$lte': last_id}})
+                                    .sort("_id", -1))
 
-    filtering_recipes = [key for key in all_recipes_username if key['created_by'] == username]
-    recipes = filtering_recipes[:limit]
+        filtering_recipes = [key for key in all_recipes_username if key['created_by'] == username]
+        recipes = filtering_recipes[:limit]
+    else:
+        recipes = []
 
     # Getting the next & prev url
     if offset + limit >= total_recipes:
@@ -726,14 +737,17 @@ def admin(username):
         page = 1
         offset = 0
 
-    # Getting the last id to with the offset used
-    last_id = starting_id[offset]["_id"]
+    if total_products > 0:
+        # Getting the last id to with the offset used
+        last_id = starting_id[offset]["_id"]
 
-    # Getting the page products using the last ID to offset and
-    # limit to get set amount of results
-    products = list(mongo.db.products.find(
-                                {'_id': {'$lte': last_id}})
-                                .sort("_id", -1))
+        # Getting the page products using the last ID to offset and
+        # limit to get set amount of results
+        products = list(mongo.db.products.find(
+                                    {'_id': {'$lte': last_id}})
+                                    .sort("_id", -1))
+    else:
+        products = []
 
     # Getting the next & prev url
     if offset + limit >= total_products:
