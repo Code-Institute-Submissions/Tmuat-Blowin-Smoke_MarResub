@@ -219,7 +219,6 @@ def recipes():
     \n
     \n Reference: \n
     * Pagination code - https://www.youtube.com/watch?v=Lnt6JqtzM7I
-
     """
     # Number of items to be displayed per page
     limit = 9
@@ -441,15 +440,29 @@ def products():
 @app.route("/login", methods=["GET", "POST"])
 @anonymous_required
 def login():
-    """
-    A function to render a page for the purpose of
-    logging the user in to the site.
+    """login: \n
+    * This function renders the login page (login.html). \n
+    * It first checks that the username supplied in the form
+        is in the database. \n
+    * If the user is in the database, it checks to see if the
+        user is an admin. \n
+    * If so it checks the password hash. If all passes it logs
+        the user in whilst adding both 'user' and 'admin' to the
+        session. \n
+    * If the user is not an admin, it checks the password hash.
+        If passing, its logs the user in and puts just 'user'
+        in session. \n
+    * If the username doesn't exist or the password does not
+        match the hashed password it returns the user to the
+        login screen with a toast. \n
+    \n
+    \n Returns: \n
+    * It returns 'login.html' \n
     """
     if request.method == "POST":
-        # Check if email is in db
+        # Check if username is in db
         user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-
         if user:
             # Check if user is admin
             if user["admin"].lower() == "true":
@@ -462,11 +475,11 @@ def login():
                         request.form.get("username")), "success")
                     return redirect(url_for("index"))
                 else:
-                    # Invalid password
+                    # If invalid password
                     flash("Incorect Username and/or Password", "error")
                     return redirect(url_for("login"))
             else:
-                # Check hashed password is valid
+                # Checks if hashed password is valid
                 if check_password_hash(user["password"], request.form.get(
                         "password")):
                     session["user"] = request.form.get("username").lower()
@@ -474,7 +487,7 @@ def login():
                         request.form.get("username")), "success")
                     return redirect(url_for("index"))
                 else:
-                    # Invalid password
+                    # If invalid password
                     flash("Incorect Username and/or Password", "error")
                     return redirect(url_for("login"))
         else:
