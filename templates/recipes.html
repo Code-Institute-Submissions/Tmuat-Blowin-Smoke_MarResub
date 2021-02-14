@@ -39,6 +39,19 @@
                                 </div>
                             </div>
                         </form>
+                        <!-- Show Filter Selected Options -->
+                        <div class="col-12 text-center">
+                            {% if filter %}
+                                <h5 class="title-font">Filter: {{ filter|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
+                            {% elif query %}
+                                {% if recipes|length == 0 %}
+                                    <h5 class="title-font text-danger">No Results Found!</h5>
+                                {% else %}
+                                    <h5 class="title-font">Query: {{ query|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <!-- Show Filter Selected Options end -->
                     </div>
                 </div>
                 <!-- Category & Search Filters end -->
@@ -47,20 +60,6 @@
         </div>
         <div class="container">
             <div class="row mx-1 mt-3">
-
-                <!-- Show Filter Options -->
-                <div class="col-12 text-center">
-                    {% if filter %}
-                        <h5 class="title-font">Filter: {{ filter|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
-                    {% elif query %}
-                        {% if recipes|length == 0 %}
-                            <h5 class="title-font text-danger">No Results Found!</h5>
-                        {% else %}
-                            <h5 class="title-font">Query: {{ query|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
-                        {% endif %}
-                    {% endif %}
-                </div>
-                <!-- Show Filter Options end -->
 
                 <!-- recipes For Loop start -->
                 {% if recipes|length > 0 %}
