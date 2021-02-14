@@ -1084,7 +1084,7 @@ def delete_category(category_id):
 @app.route("/delete-product-category/<category_id>")
 @is_admin
 def delete_product_category(category_id):
-    """delete_category: \n
+    """delete_product_category: \n
     * This function deletes a selected product category. \n
     \n
     \n Args: \n
@@ -1103,6 +1103,17 @@ def delete_product_category(category_id):
 @app.route("/delete-product/<product_id>")
 @is_admin
 def delete_product(product_id):
+    """delete_product: \n
+    * This function deletes a selected product. \n
+    \n
+    \n Args: \n
+    * product_id (str): A id of the obj to be deleted from the
+        database.
+    \n
+    \n Returns: \n
+    * It redirects the user back to the admin page \n
+    * It shows a toast to indicate the product has been deleted \n
+    """
     mongo.db.products.remove({"_id": ObjectId(product_id)})
     flash("Product Successfully Deleted", "success")
     return redirect(url_for("admin", username=session['user']))
