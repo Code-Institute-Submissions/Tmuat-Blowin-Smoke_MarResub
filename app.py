@@ -257,7 +257,9 @@ def recipes_filter(category):
                                 {'_id': {'$lte': last_id}})
                                 .sort("_id", -1))
 
-    filtering_recipes = [key for key in all_recipes_category if key['category'] == category]
+    filtering_recipes = [
+        key for key in all_recipes_category if key['category'] == category
+    ]
     recipes = filtering_recipes[:limit]
 
     # Getting the next & prev url
@@ -361,8 +363,8 @@ def products():
 
     # Getting the page recipes using the last ID to offset and
     # limit to get set amount of results
-    products = list(mongo.db.products.find({'_id': {'$lte': last_id}})
-                        .sort("_id", -1)
+    products = list(mongo.db.products.find(
+        {'_id': {'$lte': last_id}}).sort("_id", -1)
                         .limit(limit))
 
     # Getting the next & prev url
@@ -445,7 +447,9 @@ def products_filter(category):
                                 {'_id': {'$lte': last_id}})
                                 .sort("_id", -1))
 
-    filtering_products = [key for key in all_products_category if key['category'] == category]
+    filtering_products = [
+        key for key in all_products_category if key['category'] == category
+    ]
     products = filtering_products[:limit]
 
     # Getting the next & prev url
@@ -490,25 +494,23 @@ def login():
             # Check if user is admin
             if user["admin"].lower() == "true":
                 # Check hashed password is valid
-                if check_password_hash(
-                    user["password"], request.form.get("password")):
-                        session["user"] = request.form.get("username").lower()
-                        session["admin"] = "true"
-                        flash("Welcome, {} (Admin)".format(request.form.get("username")),
-                        "success")
-                        return redirect(url_for("index"))
+                if check_password_hash(user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    session["admin"] = "true"
+                    flash("Welcome, {} (Admin)".format(
+                        request.form.get("username")), "success")
+                    return redirect(url_for("index"))
                 else:
                     # Invalid password
                     flash("Incorect Username and/or Password", "error")
                     return redirect(url_for("login"))
             else:
                 # Check hashed password is valid
-                if check_password_hash(
-                    user["password"], request.form.get("password")):
-                        session["user"] = request.form.get("username").lower()
-                        flash("Welcome, {}".format(request.form.get("username")),
-                        "success")
-                        return redirect(url_for("index"))
+                if check_password_hash(user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    flash("Welcome, {}".format(
+                        request.form.get("username")), "success")
+                    return redirect(url_for("index"))
                 else:
                     # Invalid password
                     flash("Incorect Username and/or Password", "error")
@@ -615,7 +617,8 @@ def profile(username):
     limit = 6
 
     # get the users recipes
-    starting_id = list(mongo.db.recipes.find({"created_by": username}).sort("_id", -1))
+    starting_id = list(mongo.db.recipes.find(
+        {"created_by": username}).sort("_id", -1))
 
     # Getting the length of the all the recipes to display total
     total_recipes = len(starting_id)
@@ -647,7 +650,10 @@ def profile(username):
                                     {'_id': {'$lte': last_id}})
                                     .sort("_id", -1))
 
-        filtering_recipes = [key for key in all_recipes_username if key['created_by'] == username]
+        filtering_recipes = [
+            key for key in all_recipes_username if key[
+                'created_by'] == username
+        ]
         recipes = filtering_recipes[:limit]
     else:
         recipes = []
@@ -742,9 +748,9 @@ def admin(username):
 
         # Getting the page products using the last ID to offset and
         # limit to get set amount of results
-        products = list(mongo.db.products.find(
-                                    {'_id': {'$lte': last_id}})
-                                    .sort("_id", -1))
+        products = list(
+            mongo.db.products.find({'_id': {'$lte': last_id}}).sort("_id", -1)
+        )
     else:
         products = []
 
@@ -759,7 +765,9 @@ def admin(username):
     else:
         prev_url = "?p=" + str(page - 1)
 
-    product_categories = list(mongo.db.product_categories.find().sort("category", 1))
+    product_categories = list(
+        mongo.db.product_categories.find().sort("category", 1)
+    )
 
     recipe_categories = list(mongo.db.categories.find().sort("category", 1))
 
