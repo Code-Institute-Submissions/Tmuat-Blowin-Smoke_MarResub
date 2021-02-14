@@ -32,10 +32,21 @@ mongo = PyMongo(app)
 
 
 def login_required(f):
-    """
-    A decorator to protect views that are only accessible
-    if the user is logged in. Code from
-    https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
+    """login_required: \n
+    * This function creates a decorator to check if a user is logged in \n
+    * It performs 2 checks, if 'user' is in the session and secondly,
+        if the session user is registered in the database. \n
+    * It performs 2 checks to ensure the user is checked server side
+        and not simply rely on the session. \n
+    \n
+    \n Returns: \n
+    * If the user is logged in and recognised, it allows the user to
+        access the view \n
+    * If the user is not recognised or logged in, they are redirected
+        to the login page \n
+    \n
+    \n Reference: \n
+    * https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -55,10 +66,26 @@ def login_required(f):
 
 
 def is_admin(f):
-    """
-    A decorator to protect views that are only accessible
-    if the user is admin and the user is logged in. Code from
-    https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
+    """is_admin: \n
+    * This function creates a decorator to check if a user is logged in and
+        also if the user is a registered admin. \n
+    * It performs a number of checks, if 'user' is in the session, 
+        if the session user is registered in the database. If these are true,
+        it moves on to check if the user is an admin and then if admin
+        is in the session variables. \n
+    * It checks server side by accessing the database instead of relying
+        solely on the session variables. \n
+    \n
+    \n Returns: \n
+    * If the user is logged in, recognised and an admin, it allows 
+        the user to access the view they were trying to access. \n
+    * If the user is not recognised or logged in, they are redirected
+        to the home page with a toast appearing. \n
+    * If the user is recognised but they aren't a recognised admin it
+        also redirects them to the home page with a toast. \n
+    \n
+    \n Reference: \n
+    * https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -81,10 +108,20 @@ def is_admin(f):
 
 
 def anonymous_required(f):
-    """
-    A decorator to protect views that are only accessible
-    if the user is anonymous. Code adapted from
-    https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
+    """is_admin: \n
+    * This function creates a decorator to check if the visitor is
+        not logged in. Such as accessing the login view once logged in. \n
+    * It performs the opposite of the logged in function, checking to
+        see if 'User' is in the session variables. \n
+    \n
+    \n Returns: \n
+    * If the user is not logged in it allows them access to the view
+        they were trying to access. \n
+    * If the user is in the session, they are redirected to the home 
+        page with a toast appearing. \n
+    \n
+    \n Reference: \n
+    * https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
