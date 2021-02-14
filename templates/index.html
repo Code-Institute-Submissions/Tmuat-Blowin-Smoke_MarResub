@@ -91,79 +91,23 @@
         <div class="w-100 bg-light">
             <div class="container" data-aos="fade-up">
                 <div class="row mx-1 product-slider mt-5 mb-5">
+                    {% for obj in products %}
                     <div class="card-outer">
                         <div class="card box-shadow">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
+                            <img src="{{ obj.image_url }}" 
+                                    onerror="this.src='{{ url_for('static', filename='media/images/default_product.jpg') }}'"
+                                    class="card-img-top custom-card-image"
+                                    alt="{{ obj.name }}">
                             <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <p class="font-italic">Card Category</p>
-                                <a href="#" class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Click To Buy</a>
+                                <h5 class="card-title font-weight-bold">{{ obj.name|title }}</h5>
+                                <p class="font-italic">{{ obj.category|title }}</p>
+                                <a href="{{ obj.purchase }}" 
+                                    class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4"
+                                    target="_blank">Click To Buy</a>
                             </div>
                         </div>
                     </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View This Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-outer">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-off-white">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <a href="#" class="btn btn-font custom-btn bg-custom-orange text-white pl-4 pr-4">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
                 <ul class="controls justify-content-center p-0 mb-0" id="custom-controls2" aria-label="Carousel Navigation" tabindex="0">
                     <li class="prev card-control pr-3" data-controls="prev" aria-controls="customize" tabindex="-1">

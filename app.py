@@ -101,16 +101,26 @@ def index():
 
     recipe_list = list(mongo.db.recipes.find())
 
+    product_list = list(mongo.db.products.find())
+
     if len(recipe_list) < 7:
         sample = len(recipe_list)
     else:
         sample = 6
 
-    recipes = random.sample(list(mongo.db.recipes.find()), k=sample)
+    if len(product_list) < 7:
+        sample_products = len(product_list)
+    else:
+        sample_products = 6
+
+    recipes = random.sample(recipe_list, k=sample)
+
+    products = random.sample(product_list, k=sample_products)
 
     context = {
         "quote": single_quote,
         "recipes": recipes,
+        "products": products
     }
     return render_template("index.html", **context)
 
