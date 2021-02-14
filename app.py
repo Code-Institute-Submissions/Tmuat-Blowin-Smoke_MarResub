@@ -984,8 +984,8 @@ def add_product():
             "name": request.form.get("productname").lower(),
             "category": request.form.get("category").lower(),
             "description": request.form.get("productdesc").lower(),
-            "image_url": request.form.get("imageurl").lower(),
-            "purchase": request.form.get("purchaseurl").lower(),
+            "image_url": request.form.get("imageurl"),
+            "purchase": request.form.get("purchaseurl"),
         }
 
         mongo.db.products.insert_one(product)
@@ -1013,8 +1013,8 @@ def edit_product(product_id):
             "name": request.form.get("productname").lower(),
             "category": request.form.get("category").lower(),
             "description": request.form.get("productdesc").lower(),
-            "image_url": request.form.get("imageurl").lower(),
-            "purchase": request.form.get("purchaseurl").lower(),
+            "image_url": request.form.get("imageurl"),
+            "purchase": request.form.get("purchaseurl"),
         }}
 
         mongo.db.products.update_one({"_id": ObjectId(product_id)}, product)
