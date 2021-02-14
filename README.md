@@ -89,23 +89,23 @@ If the user is an admin, he/she can add, edit and delete their recipes; along wi
 
 #### Registered User:
 **The goals of the first time visitor apply to the registered user with the exception of being able to register.**
-- As a **registered visitor**, I want to be able to login and logout with ease
-- As a **registered visitor**, I want to be able to view my profile information
-- As a **registered visitor**, I want to update my profile information
-- As a **registered visitor**, I want to be able to add my own recipes for all to see
-- As a **registered visitor**, I want to be able to update my recipes that I have already added
-- As a **registered visitor**, I want to be able to delete my recipes if I no longer want to share them
+- As a **registered user**, I want to be able to login and logout with ease
+- As a **registered user**, I want to be able to view my profile information
+- As a **registered user**, I want to update my profile information
+- As a **registered user**, I want to be able to add my own recipes for all to see
+- As a **registered user**, I want to be able to update my recipes that I have already added
+- As a **registered user**, I want to be able to delete my recipes if I no longer want to share them
 
 ---
 
 #### Admin User:
 **The goals of the previous two user's apply to the admin user with the exception of being able to register.**
-- As a **registered visitor**, I want to be able to add categories for recipes to aid with filtering and searching
-- As a **registered visitor**, I want to be manage recipe categories, should I want to update or delete them
-- As a **registered visitor**, I want to be able to add products for users to potentially buy
-- As a **registered visitor**, I want to be able to add categories for products to aid with filtering
-- As a **registered visitor**, I want to be able to update or delete product categories
-- As a **registered visitor**, I want to be able to update or delete products
+- As a **admin user**, I want to be able to add categories for recipes to aid with filtering and searching
+- As a **admin user**, I want to be manage recipe categories, should I want to update or delete them
+- As a **admin user**, I want to be able to add products for users to potentially buy
+- As a **admin user**, I want to be able to add categories for products to aid with filtering
+- As a **admin user**, I want to be able to update or delete product categories
+- As a **admin user**, I want to be able to update or delete products
 
 ---
 
