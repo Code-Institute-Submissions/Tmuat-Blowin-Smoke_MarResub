@@ -209,6 +209,10 @@ def recipes_filter(category):
     # Getting the length of the list of recipes to display
     total_recipes = len(starting_id)
 
+    if total_recipes == 0:
+        flash("No recipes for '{}'!".format(category.capitalize()), "error")
+        return redirect(url_for("recipes"))
+
     # Getting the offset (page number)
     if 'p' in request.args:
         if int(request.args['p']) <= 1:
@@ -304,13 +308,152 @@ def products():
     """
     A function to render a page of all products, with options
     to filter and search.
-    """
 
-    products = list(mongo.db.quotes.find())
+    This code allows pagination of results
+    Code from https://www.youtube.com/watch?v=Lnt6JqtzM7I
+    """
+    # Number of items per page
+    limit = 6
+
+    # Getting the first id in the whole queryset
+    starting_id = list(mongo.db.products.find().sort("_id", -1))
+
+    # Getting the length of the all the products to display total
+    total_products = len(starting_id)
+
+    # Getting the offset (page number)
+    if 'p' in request.args:
+        if int(request.args['p']) <= 1:
+            page = 1
+            offset = 0
+            redirect(url_for("products"))
+        elif ((int(request.args['p']) * limit) - limit) > total_products:
+            page = math.ceil((total_products/limit))
+            offset = limit * (page - 1)
+            flash("Page out of range", "error")
+        else:
+            page = int(request.args['p'])
+            offset = limit * (page - 1)
+    else:
+        page = 1
+        offset = 0
+
+    # Getting the last id to with the offset used
+    last_id = starting_id[offset]["_id"]
+
+    # Getting the page recipes using the last ID to offset and
+    # limit to get set amount of results
+    products = list(mongo.db.products.find({'_id': {'$lte': last_id}})
+                        .sort("_id", -1)
+                        .limit(limit))
+
+    # Getting the next & prev url
+    if offset + limit >= total_products:
+        next_url = None
+    else:
+        next_url = "?p=" + str(page + 1)
+
+    if offset == 0:
+        prev_url = None
+    else:
+        prev_url = "?p=" + str(page - 1)
+
+
+    # Getting product categories to be used for filters
+    categories = list(mongo.db.product_categories.find().sort("category", 1))
+    context = {
+        "products": products,
+        "categories": categories,
+        "results": total_products,
+        "next": next_url,
+        "prev": prev_url,
+        "page": page
+    }
+
+    return render_template("products.html", **context)
+
+
+@app.route("/products/category/<category>")
+def products_filter(category):
+    """
+    A function to render a page of products filtered by
+    category. The same pagination code used as in products.
+    """
+    # Number of items per page
+    limit = 6
+
+    # Check if category is in db
+    existing_category = mongo.db.product_categories.find_one(
+            {"category": category.lower()})
+
+    # If category does not exist, return to products with error message
+    if not existing_category:
+        flash("No such category exists!", "error")
+        return redirect(url_for("products"))
+
+    # Getting the first id in the filtered queryset
+    starting_id = list(mongo.db.products.find(
+        {"category": category}).sort("_id", -1))
+
+    # Getting the length of the list of products to display
+    total_products = len(starting_id)
+
+    if total_products == 0:
+        flash("No items for '{}'!".format(category.capitalize()), "error")
+        return redirect(url_for("products"))
+
+    # Getting the offset (page number)
+    if 'p' in request.args:
+        if int(request.args['p']) <= 1:
+            page = 1
+            offset = 0
+            redirect(url_for("products"))
+        elif ((int(request.args['p']) * limit) - limit) > total_products:
+            page = math.ceil((total_products/limit))
+            offset = limit * (page - 1)
+            flash("Page out of range", "error")
+        else:
+            page = int(request.args['p'])
+            offset = limit * (page - 1)
+    else:
+        page = 1
+        offset = 0
+
+    # Getting the last id to with the offset used
+    last_id = starting_id[offset]["_id"]
+
+    # Getting the page products using the last ID to offset and
+    # limit to get set amount of results
+    all_products_category = list(mongo.db.products.find(
+                                {'_id': {'$lte': last_id}})
+                                .sort("_id", -1))
+
+    filtering_products = [key for key in all_products_category if key['category'] == category]
+    products = filtering_products[:limit]
+
+    # Getting the next & prev url
+    if offset + limit >= total_products:
+        next_url = None
+    else:
+        next_url = "?p=" + str(page + 1)
+
+    if offset == 0:
+        prev_url = None
+    else:
+        prev_url = "?p=" + str(page - 1)
+
+    categories = list(mongo.db.product_categories.find().sort("category", 1))
 
     context = {
         "products": products,
+        "categories": categories,
+        "results": total_products,
+        "filter": category,
+        "next": next_url,
+        "prev": prev_url,
+        "page": page
     }
+
     return render_template("products.html", **context)
 
 
@@ -705,9 +848,3 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
-
-
-' When ready to cook, turn temperature to 375 degrees F and preheat for 10 to 15 minutes.  '
-' Drizzle oil into a large pot of boiling salted water.  '
-' Add the macaroni and cook according to the directions on the package, 6 to 8 minutes.  '
-' Drain well..  '
