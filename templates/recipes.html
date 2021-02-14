@@ -20,16 +20,18 @@
     <section id="recipe-header" class="bg-off-white">
         <div class="container">
             <div class="row w-100 m-0">
+
+                <!-- Category & Search Filters -->
                 <div class="col-12 col-md-8 offset-md-2 text-center filter mt-4 mb-3">
                     <h5 class="pt-3 title-font filter-title">Select A Filter</h5>
                     <div class="inner-filter pt-2 pb-3">
                         <div class="filter-group pb-3">
                             {% for category in categories %}
-                            <a href="{{ url_for('recipes_filter', category=category.category)}}" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ category.category|title }}</a>
+                            <a href="{{ url_for('recipes', category=category.category)}}" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ category.category|title }}</a>
                             {% endfor %}
                         </div>
                         <h5 class="title-font filter-title">Or...</h5>
-                        <form method="GET" action="{{ url_for('recipes_search') }}">
+                        <form method="GET" action="{{ url_for('recipes') }}">
                             <div class=" mx-auto input-group custom-width mb-3">
                                 <input type="text" class="form-control custom-input" placeholder="Search By Recipe Name" aria-label="Search" id="q" minlength="3" name="q">
                                 <div class="input-group-append">
@@ -39,11 +41,14 @@
                         </form>
                     </div>
                 </div>
+                <!-- Category & Search Filters end -->
+
             </div>
         </div>
         <div class="container">
             <div class="row mx-1 mt-3">
-                <!-- Filter Options -->
+
+                <!-- Show Filter Options -->
                 <div class="col-12 text-center">
                     {% if filter %}
                         <h5 class="title-font">Filter: {{ filter|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
@@ -54,48 +59,9 @@
                             <h5 class="title-font">Query: {{ query|title }} <a href="{{ url_for('recipes') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
                         {% endif %}
                     {% endif %}
-                    <h5 class="title-font">Number of recipes: {{ results }}</h5>
-                <!-- Filter Options end -->
-                    <!-- Pagination -->
-                    <nav aria-label="Page navigation" class="pt-2">
-                        <ul class="pagination justify-content-center">
-                        {% if prev %}
-                            {% if request.path == url_for('recipes_filter', category=filter) %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ prev }}" aria-label="Previous">
-                                    <span aria-hidden="true" class="text-body">&laquo;</span>
-                                </a>
-                            </li>
-                            {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('recipes') }}{{ prev }}" aria-label="Previous">
-                                    <span aria-hidden="true" class="text-body">&laquo;</span>
-                                </a>
-                            </li>
-                            {% endif %}
-                        {% endif %}
-                        {% if page %}
-                        <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
-                        {% endif %}
-                        {% if next %}
-                            {% if request.path == url_for('recipes_filter', category=filter) %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ next }}" aria-label="Next">
-                                        <span aria-hidden="true" class="text-body">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% else %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('recipes') }}{{ next }}" aria-label="Next">
-                                        <span aria-hidden="true" class="text-body">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        {% endif %}
-                        </ul>
-                    </nav>
-                    <!-- Pagination end -->
                 </div>
+                <!-- Show Filter Options end -->
+
                 <!-- recipes For Loop start -->
                 {% if recipes|length > 0 %}
                     {% for recipe in recipes %}
@@ -114,45 +80,34 @@
                     {% endfor %}
                 {% endif %}
                 <!-- recipes For Loop end -->
+
                 <!-- Pagination -->
-                <nav aria-label="Page navigation" class="pt-2 col-12">
+                <div class="col-12 text-center">
+                    <nav aria-label="Page navigation" class="pt-2 col-12">
                     <ul class="pagination justify-content-center">
                         {% if prev %}
-                            {% if request.path == url_for('recipes_filter', category=filter) %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ prev }}" aria-label="Previous">
-                                    <span aria-hidden="true" class="text-body">&laquo;</span>
-                                </a>
-                            </li>
-                            {% else %}
                             <li class="page-item">
                                 <a class="page-link" href="{{ url_for('recipes') }}{{ prev }}" aria-label="Previous">
                                     <span aria-hidden="true" class="text-body">&laquo;</span>
                                 </a>
                             </li>
-                            {% endif %}
                         {% endif %}
                         {% if page %}
                         <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
                         {% endif %}
                         {% if next %}
-                            {% if request.path == url_for('recipes_filter', category=filter) %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('recipes_filter', category=filter) }}{{ next }}" aria-label="Next">
-                                        <span aria-hidden="true" class="text-body">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% else %}
                                 <li class="page-item">
                                     <a class="page-link" href="{{ url_for('recipes') }}{{ next }}" aria-label="Next">
                                         <span aria-hidden="true" class="text-body">&raquo;</span>
                                     </a>
                                 </li>
-                            {% endif %}
                         {% endif %}
                     </ul>
-                </nav>
+                    </nav>
+                    <h5 class="title-font">Number of recipes: {{ results }}</h5>
+                </div>
                 <!-- Pagination end -->
+
             </div>
             <div class="row mx-1 pb-5">
                 <div class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 text-center">
