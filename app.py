@@ -272,57 +272,84 @@ def products():
     Code from https://www.youtube.com/watch?v=Lnt6JqtzM7I
     """
     # Number of items per page
-    limit = 6
+    limit = 9
 
-    # Getting the first id in the whole queryset
-    starting_id = list(mongo.db.products.find().sort("_id", -1))
+    if 'category' in request.args:
+        category = request.args.get('category')
+    else:
+        category = None
 
-    # Getting the length of the all the products to display total
-    total_products = len(starting_id)
+    # Getting the total number of products
+    if category:
+        all_products = list(mongo.db.products.find(
+            {"category": category}).sort("_id", -1))
+        if len(all_products) == 0:
+            flash("No '{}' category exists!".format(
+                category.capitalize()), "error")
+            return redirect(url_for("products"))
+    else:
+        all_products = list(mongo.db.products.find().sort("_id", -1))
+
+    total_products = len(all_products)
 
     # Getting the offset (page number)
-    if 'p' in request.args:
-        if int(request.args['p']) <= 1:
+    if 'page' in request.args:
+        if int(request.args['page']) <= 1:
             page = 1
             offset = 0
             redirect(url_for("products"))
-        elif ((int(request.args['p']) * limit) - limit) > total_products:
+        elif ((int(request.args['page']) * limit) - limit) > total_products:
             page = math.ceil((total_products/limit))
             offset = limit * (page - 1)
             flash("Page out of range", "error")
         else:
-            page = int(request.args['p'])
+            page = int(request.args['page'])
             offset = limit * (page - 1)
     else:
         page = 1
         offset = 0
 
     # Getting the last id to with the offset used
-    last_id = starting_id[offset]["_id"]
+    last_id = all_products[offset]["_id"]
 
-    # Getting the page recipes using the last ID to offset and
-    # limit to get set amount of results
-    products = list(mongo.db.products.find(
-        {'_id': {'$lte': last_id}}).sort("_id", -1)
-                        .limit(limit))
+    # Getting the first id in the filtered queryset
+    if category:
+        query = {"$and": [{"category": category}, {'_id': {'$lte': last_id}}]}
+        products = list(
+            mongo.db.products.find(query).sort("_id", -1).limit(limit))
+    else:
+        products = list(
+            mongo.db.products.find(
+                {'_id': {'$lte': last_id}}).sort("_id", -1).limit(limit))
 
     # Getting the next & prev url
-    if offset + limit >= total_products:
-        next_url = None
+    if category:
+        if offset + limit >= total_products:
+            next_url = None
+        else:
+            next_url = "?page=" + str(page + 1) + "&category=" + str(category)
+        if offset == 0:
+            prev_url = None
+        else:
+            prev_url = "?page=" + str(page - 1) + "&category=" + str(category)
     else:
-        next_url = "?p=" + str(page + 1)
+        if offset + limit >= total_products:
+            next_url = None
+        else:
+            next_url = "?page=" + str(page + 1)
+        if offset == 0:
+            prev_url = None
+        else:
+            prev_url = "?page=" + str(page - 1)
 
-    if offset == 0:
-        prev_url = None
-    else:
-        prev_url = "?p=" + str(page - 1)
-
-    # Getting product categories to be used for filters
+    # Getting categories to be used for filters
     categories = list(mongo.db.product_categories.find().sort("category", 1))
+
     context = {
         "products": products,
         "categories": categories,
         "results": total_products,
+        "filter": category,
         "next": next_url,
         "prev": prev_url,
         "page": page
@@ -433,7 +460,8 @@ def login():
             # Check if user is admin
             if user["admin"].lower() == "true":
                 # Check hashed password is valid
-                if check_password_hash(user["password"], request.form.get("password")):
+                if check_password_hash(user["password"], request.form.get(
+                        "password")):
                     session["user"] = request.form.get("username").lower()
                     session["admin"] = "true"
                     flash("Welcome, {} (Admin)".format(
@@ -445,7 +473,8 @@ def login():
                     return redirect(url_for("login"))
             else:
                 # Check hashed password is valid
-                if check_password_hash(user["password"], request.form.get("password")):
+                if check_password_hash(user["password"], request.form.get(
+                        "password")):
                     session["user"] = request.form.get("username").lower()
                     flash("Welcome, {}".format(
                         request.form.get("username")), "success")
