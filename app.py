@@ -1152,8 +1152,12 @@ def get_current_year():
 
 @app.context_processor
 def context_processor():
-    """
-    Context processor for all templates
+    """context_processor: \n
+    * This function is a context processor, passing the
+    context to every template. \n
+    \n
+    \n Returns: \n
+    * It anything passed into return to all templates. \n
     """
     return {
         'year': get_current_year
