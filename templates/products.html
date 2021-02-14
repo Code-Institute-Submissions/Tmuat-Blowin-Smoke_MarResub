@@ -19,6 +19,8 @@
     <!-- Products Section -->
     <section id="products-header" class="bg-off-white">
         <div class="container">
+
+            <!-- Products Filter Section -->
             <div class="row w-100 m-0">
                 <div class="col-12 col-md-8 offset-md-2 text-center filter mt-4 mb-3">
                     <h5 class="pt-3 title-font filter-title">Select A Filter</h5>
@@ -28,62 +30,19 @@
                                 <a href="{{ url_for('products_filter', category=obj.category)}}" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ obj.category|title }}</a>
                             {% endfor %}
                         </div>
+                        <!-- Filter Selected start -->
+                        {% if filter %}
+                            <h5 class="title-font">Filter: {{ filter|title }} <a href="{{ url_for('products') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
+                        {% endif %}
+                        <!-- Filter Selected end -->
                     </div>
                 </div>
             </div>
+            <!-- Products Filter Section end -->
+
         </div>
         <div class="container">
             <div class="row mx-1 mt-3">
-                <div class="col-12 text-center">
-
-                    <!-- Filter Options start -->
-                    {% if filter %}
-                        <h5 class="title-font">Filter: {{ filter|title }} <a href="{{ url_for('products') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
-                    {% endif %}
-                    <h5 class="title-font">Number of products: {{ results }}</h5>
-                    <!-- Filter Options end -->
-
-                    <!-- Pagination -->
-                    <nav aria-label="Page navigation" class="pt-2">
-                        <ul class="pagination justify-content-center">
-                        {% if prev %}
-                            {% if request.path == url_for('products_filter', category=filter) %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('products_filter', category=filter) }}{{ prev }}" aria-label="Previous">
-                                    <span aria-hidden="true" class="text-body">&laquo;</span>
-                                </a>
-                            </li>
-                            {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('products') }}{{ prev }}" aria-label="Previous">
-                                    <span aria-hidden="true" class="text-body">&laquo;</span>
-                                </a>
-                            </li>
-                            {% endif %}
-                        {% endif %}
-                        {% if page %}
-                        <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
-                        {% endif %}
-                        {% if next %}
-                            {% if request.path == url_for('products_filter', category=filter) %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('products_filter', category=filter) }}{{ next }}" aria-label="Next">
-                                        <span aria-hidden="true" class="text-body">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% else %}
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('products') }}{{ next }}" aria-label="Next">
-                                        <span aria-hidden="true" class="text-body">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        {% endif %}
-                        </ul>
-                    </nav>
-                    <!-- Pagination end -->
-
-                </div>
 
                 <!-- Product for loop start -->
                 {% if products|length > 0 %}
@@ -111,43 +70,30 @@
                 <!-- Product for loop end -->
 
                 <!-- Pagination -->
-                <nav aria-label="Page navigation" class="pt-2 col-12">
-                    <ul class="pagination justify-content-center">
-                    {% if prev %}
-                        {% if request.path == url_for('products_filter', category=filter) %}
-                        <li class="page-item">
-                            <a class="page-link" href="{{ url_for('products_filter', category=filter) }}{{ prev }}" aria-label="Previous">
-                                <span aria-hidden="true" class="text-body">&laquo;</span>
-                            </a>
-                        </li>
-                        {% else %}
-                        <li class="page-item">
-                            <a class="page-link" href="{{ url_for('products') }}{{ prev }}" aria-label="Previous">
-                                <span aria-hidden="true" class="text-body">&laquo;</span>
-                            </a>
-                        </li>
-                        {% endif %}
-                    {% endif %}
-                    {% if page %}
-                    <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
-                    {% endif %}
-                    {% if next %}
-                        {% if request.path == url_for('products_filter', category=filter) %}
+                <div class="col-12 text-center">
+                    <h5 class="title-font">Number of products: {{ results }}</h5>
+                    <nav aria-label="Page navigation" class="pt-2 col-12">
+                        <ul class="pagination justify-content-center">
+                        {% if prev %}
                             <li class="page-item">
-                                <a class="page-link" href="{{ url_for('products_filter', category=filter) }}{{ next }}" aria-label="Next">
-                                    <span aria-hidden="true" class="text-body">&raquo;</span>
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url_for('products') }}{{ next }}" aria-label="Next">
-                                    <span aria-hidden="true" class="text-body">&raquo;</span>
+                                <a class="page-link" href="{{ url_for('products') }}{{ prev }}" aria-label="Previous">
+                                    <span aria-hidden="true" class="text-body">&laquo;</span>
                                 </a>
                             </li>
                         {% endif %}
-                    {% endif %}
-                    </ul>
-                </nav>
+                        {% if page %}
+                        <li class="page-item"><a class="page-link text-body font-weight-bold" href="">{{ page }}</a></li>
+                        {% endif %}
+                        {% if next %}
+                            <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('products') }}{{ next }}" aria-label="Next">
+                                        <span aria-hidden="true" class="text-body">&raquo;</span>
+                                    </a>
+                                </li>
+                        {% endif %}
+                        </ul>
+                    </nav>
+                </div>
                 <!-- Pagination end -->
 
             </div>
