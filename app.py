@@ -660,9 +660,25 @@ def view_recipe(recipe_id):
     """
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    recipe_ings = recipe["ingridients"].split(" ~ ")
+    recipe_steps = recipe["steps"].split(" ~ ")
+
+    # The below is used to capitalize the first letter of each sentence
+    recipe_steps_formatted = []
+    for step in recipe_steps:
+        split = step.split(". ")
+        string = []
+        for step in split:
+            sentence = str(step[0].upper() + step[1:] + ".")
+            if sentence[-2:] == ('..'):
+                sentence = sentence[:-1]
+            string.append(sentence)
+        recipe_steps_formatted.append(str(" ".join(string)))
 
     context = {
         "recipe": recipe,
+        "recipe_steps": recipe_steps_formatted,
+        "recipe_ings": recipe_ings
     }
     return render_template("view_recipe.html", **context)
 
@@ -689,3 +705,9 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
+
+
+' When ready to cook, turn temperature to 375 degrees F and preheat for 10 to 15 minutes.  '
+' Drizzle oil into a large pot of boiling salted water.  '
+' Add the macaroni and cook according to the directions on the package, 6 to 8 minutes.  '
+' Drain well..  '
