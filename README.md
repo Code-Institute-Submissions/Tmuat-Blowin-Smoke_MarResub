@@ -6,6 +6,16 @@ View live project [here](http://blowin-smoke.herokuapp.com/).
 ---
 ## Description
 
+BBQ isn't just for summer!! 
+
+For those new to BBQ & smoking, through to seasoned pros; Blow'n Smoke allows everyone to find recipes to wow friends and family with. 
+
+Blow'n Smoke is a recipe website for people who love to BBQ & smoke. The site allows users to search for recipes and also share their own masterful creations. The site also features products to buy to improve their cooking.
+
+If the user has an account, he/she can add, edit and delete their recipes.
+
+If the user is an admin, he/she can add, edit and delete their recipes; along with the ability to add, edit and delete categories and products.
+
 ---
 
 ## Contents
