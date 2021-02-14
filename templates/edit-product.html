@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block extra_title %}| Edit Product{% endblock %}
+
+{% block content %}
+    <!-- Product Section -->
+    <section id="product">
+        <div class="landing-image">
+            <div class="container">
+                <div class="row align-items-center custom-form-row">
+                    <!-- Product Form start -->
+                    <form class="col-12 col-md-10 col-lg-8 offset-md-1 offset-lg-2 text-center" method="POST" action="{{ url_for('edit_product', product_id=product._id) }}"
+                        name="product">
+                        <div class="card white-grey-card p-3">
+                            <h3 class="title-font text-body card-title-font mb-4">Edit Product</h3>
+                            <div class="container text-body">
+                                <div class="form-row mx-auto">
+                                    <!-- Product Name -->
+                                    <div class="col-12 col-md-10 mx-auto mb-2">
+                                        <input id="productname" name="productname" type="text" placeholder="Product Name"
+                                            class="form-control custom-input" value="{{ product.name|title }}" required>
+                                    </div>
+                                    <!-- Category Name -->
+                                    <div class="col-12 col-md-10 mx-auto mb-2">
+                                        <select id="category" name="category" class="form-control custom-input" required>
+                                            {% for category in categories %}
+                                                {% if category.category == product.category %}
+                                                    <option value="{{ category.category }}" selected>{{ category.category|title }}</option>
+                                                {% else %}
+                                                    <option value="{{ category.category }}">{{ category.category|title }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <!-- Product Description -->
+                                    <div class="col-12 col-md-10 mx-auto mb-2">
+                                        <textarea id="productdesc" name="productdesc" type="text" placeholder="Product Description"
+                                            class="form-control custom-input" maxlength="100" required>{{ product.description }}</textarea>
+                                    </div>
+                                    <!-- Image URL -->
+                                    <div class="col-12 col-md-10 mx-auto mb-2">
+                                        <input id="imageurl" name="imageurl" type="url" placeholder="Product Image URL"
+                                            class="form-control custom-input" value="{{ product.image_url }}" required>
+                                    </div>
+                                    <!-- Purchase URL -->
+                                    <div class="col-12 col-md-10 mx-auto mb-2">
+                                        <input id="purchaseurl" name="purchaseurl" type="url" placeholder="Product Purchase URL"
+                                            class="form-control custom-input" value="{{ product.purchase }}" required>
+                                    </div>
+                                </div>
+                                <a href="{{ url_for('admin', username=session['user']) }}" class="btn custom-btn-danger box-shadow text-white pl-3 pr-3">Cancel</a>
+                                <button type="submit" class="btn bg-custom-orange custom-btn box-shadow text-white pl-3 pr-3">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Product Form end -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section end -->
+{% endblock %}
