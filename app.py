@@ -135,11 +135,28 @@ def anonymous_required(f):
 
 @app.route("/")
 def index():
-    """
-    The below accesses MongoDB quotes table and gets a
-    list of all quotes objects before selecting one
-    at random to be shown on page load. Everytime the page
-    is refreshed a new random quote will be found.
+    """index: \n
+    * This function renders the sites home page (index.html). \n
+    * It accesses MongoDB to get a random choice of a single quote to display
+        on page load and passes this to the template as 'quote'. \n
+    * It accesses MongoDB to get a list of recipes in the database. \n
+    * It checks the length of the recipe list to ensure it is more than seven;
+        if it is less than seven it sets a the length as the sample. If over
+        six it defaults to six to be sampled for the home page. \n
+    * It passes the sample of six or less recipes to the template
+        as 'recipes' \n
+    * It accesses MongoDB to get a list of products in the database. \n
+    * It checks the length of the product list to ensure it is more than seven;
+        if it is less than seven it sets a the length as the sample. If over
+        six it defaults to six to be sampled for the home page. \n
+    * It passes the sample of six or less product to the template
+        as 'products' \n
+    \n
+    \n Returns: \n
+    * It returns 'index.html' \n
+    * It returns a single quote \n
+    * It returns a sample of recipes \n
+    * It returns a sample of products \n
     """
 
     single_quote = random.choice(list(mongo.db.quotes.find()))
