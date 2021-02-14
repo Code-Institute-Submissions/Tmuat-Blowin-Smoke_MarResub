@@ -476,6 +476,9 @@ html {
     .recipe-title {
         font-size: 60px;
     }
+    .logo-font li a {
+        font-size: 20px;
+    }
 }
 
 /* Large & down */
