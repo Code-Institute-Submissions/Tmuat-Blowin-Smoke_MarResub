@@ -1,11 +1,8 @@
 # Milestone Project 2 - Visit Kingston
 
-Add mockup
+![Desktop Demo](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/mockup.gif "Desktop Demo")
 
-![Desktop Demo](https://github.com/Tmuat/milestone-project-2/blob/master/assets/media/images/ms2_mockup.gif "Desktop Demo")
-
-View live project.
-
+View live project[here](http://blowin-smoke.herokuapp.com/).
 ---
 ## Description
 
