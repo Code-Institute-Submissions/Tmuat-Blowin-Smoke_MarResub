@@ -189,27 +189,55 @@ def index():
 
 @app.route("/recipes")
 def recipes():
-    """
-    A function to render a page of all recipes, with options
-    to filter and search.
+    """recipes: \n
+    * This function renders the recipes page (recipes.html). \n
+    * It sets a limit of products to be displayed per page (9). \n
+    * It checks if either 'q' for a search query or 'category' for a category
+        filter are in the request arguements to filter the queryset from
+        MongoDB. \n
+    * If a search query or category are in the args, it
+        adjusts the filters sent to MongoDB prior to pagination. \n
+    * It gets the total length of the MongoDB queryset based on the
+        filters or if there aren't any filters. This part of the pagination
+        is a known bug as this produces two database queries (original query
+        & the filtered query). The total recipes returned are passed to the
+        template as 'total_recipes'. \n
+    * It gets the filtered queryset to be passed to the template as
+        'recipes'. \n
+    * From the current page, offset and any filters or search queries
+        it calulates strings for next and previous paginated pages. \n
+    * It accesses MongoDB to get all the recipe categories to be
+        used as filters. They are passed to the template as 'categories'. \n
+    \n
+    \n Returns: \n
+    * It returns 'recipes.html' \n
+    * It returns all recipes or filtered recipes \n
+    * It returns all recipe categories \n
+    * It returns an integer of the total length of the recipe list \n
+    * It returns the filter or query if there was one \n
+    * It returns the pagination info of next_url, prev_url and page.
+    \n
+    \n Reference: \n
+    * Pagination code - https://www.youtube.com/watch?v=Lnt6JqtzM7I
 
-    This code allows pagination of results
-    Code from https://www.youtube.com/watch?v=Lnt6JqtzM7I
     """
-    # Number of items per page
+    # Number of items to be displayed per page
     limit = 9
 
+    # Checks if 'category' in request arguements, if not sets a default
     if 'category' in request.args:
         category = request.args.get('category')
     else:
         category = None
 
+    # Checks if 'q' in request arguements, if not sets a default
     if 'q' in request.args:
         search_key = request.args.get('q')
     else:
         search_key = None
 
-    # Getting the total number of recipes
+    # Gets the filtered lists or by default all recipes. It then checks
+    # if the len is == 0 to avoid server errors if it doesn't exist.
     if category:
         all_recipes = list(mongo.db.recipes.find(
             {"category": category}).sort("_id", -1))
@@ -227,9 +255,12 @@ def recipes():
     else:
         all_recipes = list(mongo.db.recipes.find().sort("_id", -1))
 
+    # Gets the length of the list being sent to the template
     total_recipes = len(all_recipes)
 
-    # Getting the offset (page number)
+    # Setting the offset of the queryset dependent on current page
+    # from request args. Defensive programming to ensure the user
+    # can't force a page out of the queryset range
     if 'page' in request.args:
         if int(request.args['page']) <= 1:
             page = 1
@@ -246,28 +277,27 @@ def recipes():
         page = 1
         offset = 0
 
-    # Getting the last id to with the offset used
+    # Getting the last id to with the offset being passed in
     last_id = all_recipes[offset]["_id"]
 
-    # Getting the page recipes using the last ID to offset and
-    # limit to get set amount of results
-
-    # Getting the first id in the filtered queryset
+    # Getting the filtered queryset including the offset using 'lte'
+    # It then uses the set page limit (9) to get the page recipes.
     if category:
         query = {"$and": [{"category": category}, {'_id': {'$lte': last_id}}]}
-        recipes = list(
+        display_recipes = list(
             mongo.db.recipes.find(query).sort("_id", -1).limit(limit))
     elif search_key:
         query = {"$and": [
             {"$text": {"$search": search_key}}, {'_id': {'$lte': last_id}}]}
-        recipes = list(
+        display_recipes = list(
             mongo.db.recipes.find(query).sort("_id", -1).limit(limit))
     else:
-        recipes = list(
+        display_recipes = list(
             mongo.db.recipes.find(
                 {'_id': {'$lte': last_id}}).sort("_id", -1).limit(limit))
 
-    # Getting the next & prev url
+    # Getting the next & prev url dependent on which parameters are in 
+    # the request arguements.
     if search_key:
         if offset + limit >= total_recipes:
             next_url = None
@@ -300,7 +330,7 @@ def recipes():
     categories = list(mongo.db.categories.find().sort("category", 1))
 
     context = {
-        "recipes": recipes,
+        "recipes": display_recipes,
         "categories": categories,
         "results": total_recipes,
         "filter": category,
