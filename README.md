@@ -1,8 +1,8 @@
-# Milestone Project 2 - Visit Kingston
+# Milestone Project 3 - Blow'n Smoke
 
 ![Desktop Demo](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/mockup.gif "Desktop Demo")
 
-View live project[here](http://blowin-smoke.herokuapp.com/).
+View live project [here](http://blowin-smoke.herokuapp.com/).
 ---
 ## Description
 
