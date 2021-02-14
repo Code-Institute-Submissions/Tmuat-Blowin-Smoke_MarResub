@@ -959,8 +959,38 @@ def edit_recipe(recipe_id):
     return render_template("edit-recipe.html", **context)
 
 
+@app.route("/add-product", methods=["GET", "POST"])
+@is_admin
+def add_product():
+    """
+    A function to render a page for the purpose of
+    the adding a product.
+    """
+
+    if request.method == "POST":
+        product = {
+            "name": request.form.get("productname").lower(),
+            "category": request.form.get("category").lower(),
+            "description": request.form.get("productdesc").lower(),
+            "image_url": request.form.get("imageurl").lower(),
+            "purchase": request.form.get("purchaseurl").lower(),
+        }
+
+        mongo.db.products.insert_one(product)
+        flash("Product Successfully Added", "success")
+        return redirect(url_for('admin', username=session["user"]))
+
+    categories = mongo.db.product_categories.find().sort("category", 1)
+
+    context = {
+        "categories": categories,
+    }
+
+    return render_template("add-product.html", **context)
+
+
 @app.route("/edit-product/<product_id>", methods=["GET", "POST"])
-@login_required
+@is_admin
 def edit_product(product_id):
     """
     A function to render a page for the purpose of
