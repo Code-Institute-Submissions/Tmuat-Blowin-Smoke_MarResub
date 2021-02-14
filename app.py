@@ -1092,6 +1092,34 @@ def view_recipe(recipe_id):
     return render_template("view_recipe.html", **context)
 
 
+@app.route("/delete-category/<category_id>")
+def delete_category(category_id):
+    mongo.db.categories.remove({"_id": ObjectId(category_id)})
+    flash("Category Successfully Deleted", "success")
+    return redirect(url_for("admin", username=session['user']))
+
+
+@app.route("/delete-product-category/<category_id>")
+def delete_product_category(category_id):
+    mongo.db.product_categories.remove({"_id": ObjectId(category_id)})
+    flash("Category Successfully Deleted", "success")
+    return redirect(url_for("admin", username=session['user']))
+
+
+@app.route("/delete-product/<product_id>")
+def delete_product(product_id):
+    mongo.db.products.remove({"_id": ObjectId(product_id)})
+    flash("Product Successfully Deleted", "success")
+    return redirect(url_for("admin", username=session['user']))
+
+
+@app.route("/delete-recipe/<recipe_id>")
+def delete_recipe(recipe_id):
+    mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+    flash("Recipe Successfully Deleted", "success")
+    return redirect(url_for("profile", username=session['user']))
+
+
 def get_current_year():
     """
     Function to return the current year, for use with copyright in footer
