@@ -22,7 +22,7 @@
                                                 {% for obj in recipe_categories %}
                                                 <tr>
                                                     <td class="title-font">{{ obj.category|title }}</td>
-                                                    <td><a href="" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
+                                                    <td><a href="{{ url_for('edit_category_recipe', category_id=obj._id) }}" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
                                                     <td><a href="" class="btn custom-btn-danger box-shadow text-white pt-0 pb-0"><small>Delete</small></a></td>
                                                 </tr>
                                                 {% endfor %}
@@ -44,7 +44,7 @@
                                                 {% for obj in product_categories %}
                                                 <tr>
                                                     <td class="title-font">{{ obj.category|title }}</td>
-                                                    <td><a href="" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
+                                                    <td><a href="{{ url_for('edit_category_product', category_id=obj._id) }}" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
                                                     <td><a href="" class="btn custom-btn-danger box-shadow text-white pt-0 pb-0"><small>Delete</small></a></td>
                                                 </tr>
                                                 {% endfor %}
@@ -70,7 +70,7 @@
                                             <tr>
                                                 <td class="title-font">{{ product.name|title }}</td>
                                                 <td class="d-none d-md-table-cell font-italic">{{ product.category|title }}</td>
-                                                <td><a href="" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
+                                                <td><a href="{{ url_for('edit_product', product_id=product._id) }}" class="btn custom-btn bg-custom-orange box-shadow text-white pt-0 pb-0"><small>Edit</small></a></td>
                                                 <td><a href="" class="btn custom-btn-danger box-shadow text-white pt-0 pb-0"><small>Delete</small></a></td>
                                             </tr>
                                             {% endfor %}
