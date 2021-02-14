@@ -74,6 +74,14 @@
                                     <span class="sr-only">(current)</span>
                                     {% endif %}
                             </li>
+                            {% if session.admin %}
+                                <li>
+                                    <a class="nav-link text-white {{ 'active' if request.path == url_for('admin', username=session['user']) }}" href="{{ url_for('admin', username=session['user']) }}">Admin</a>
+                                    {%- if request.path == url_for('admin', username=session['user']) -%}
+                                        <span class="sr-only">(current)</span>
+                                        {% endif %}
+                                </li>
+                            {% endif %}
                             <li>
                                 <a class="nav-link text-white" href="{{ url_for('logout') }}">Logout</a>
                             </li>

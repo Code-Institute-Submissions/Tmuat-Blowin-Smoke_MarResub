@@ -653,7 +653,7 @@ def profile(username):
     else:
         prev_url = "?p=" + str(page - 1)
 
-    # Function for updaying the user profile
+    # Function for updating the user profile
     if request.method == "POST":
         submit = {'$set': {
             "first_name": request.form.get("firstname"),
@@ -678,6 +678,93 @@ def profile(username):
         return render_template("profile.html", **context)
 
     return redirect(url_for("login"))
+
+
+@app.route("/admin/<username>", methods=["GET", "POST"])
+@is_admin
+def admin(username):
+    """
+    A function to render an admin page; including
+    categories & products.
+    """
+
+    # grab the session user's username from db
+    user = mongo.db.users.find_one({"username": session["user"]})
+
+    # Check the user is an admin user
+    if user["admin"].lower() == "false":
+        flash("This page is for admin only!", "error")
+        return redirect(url_for('index'))
+
+    """
+    The below is to populate the products with pagination.
+    """
+
+    # Number of items per page
+    limit = 6
+
+    # get all the products
+    starting_id = list(mongo.db.products.find().sort("_id", -1))
+
+    # Getting the length of the all the products to display total
+    total_products = len(starting_id)
+
+    # Getting the offset (page number)
+    if 'p' in request.args:
+        if int(request.args['p']) <= 1:
+            page = 1
+            offset = 0
+            redirect(url_for("products"))
+        elif ((int(request.args['p']) * limit) - limit) > total_products:
+            page = math.ceil((total_products/limit))
+            offset = limit * (page - 1)
+            flash("Page out of range", "error")
+        else:
+            page = int(request.args['p'])
+            offset = limit * (page - 1)
+    else:
+        page = 1
+        offset = 0
+
+    # Getting the last id to with the offset used
+    last_id = starting_id[offset]["_id"]
+
+    # Getting the page products using the last ID to offset and
+    # limit to get set amount of results
+    products = list(mongo.db.products.find(
+                                {'_id': {'$lte': last_id}})
+                                .sort("_id", -1))
+
+    # Getting the next & prev url
+    if offset + limit >= total_products:
+        next_url = None
+    else:
+        next_url = "?p=" + str(page + 1)
+
+    if offset == 0:
+        prev_url = None
+    else:
+        prev_url = "?p=" + str(page - 1)
+
+    product_categories = list(mongo.db.product_categories.find().sort("category", 1))
+
+    recipe_categories = list(mongo.db.categories.find().sort("category", 1))
+
+    context = {
+        "user": user,
+        "products": products,
+        "results": total_products,
+        "next": next_url,
+        "prev": prev_url,
+        "page": page,
+        "product_categories": product_categories,
+        "recipe_categories": recipe_categories
+    }
+
+    if session["user"] and session["admin"]:
+        return render_template("admin.html", **context)
+
+    return redirect(url_for("index"))
 
 
 @app.route("/add-recipe", methods=["GET", "POST"])

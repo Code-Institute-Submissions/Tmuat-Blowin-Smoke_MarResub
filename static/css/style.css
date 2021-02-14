@@ -481,7 +481,7 @@ html {
         font-size: 60px;
     }
     .logo-font li a {
-        font-size: 20px;
+        font-size: 19px;
     }
 }
 
@@ -499,6 +499,9 @@ html {
     }
     .image-landing-text {
         font-size: 70px;
+    }
+    .logo-font li a {
+        font-size: 25px;
     }
 }
 
