@@ -1122,6 +1122,17 @@ def delete_product(product_id):
 @app.route("/delete-recipe/<recipe_id>")
 @login_required
 def delete_recipe(recipe_id):
+    """delete_recipe: \n
+    * This function deletes a selected recipe. \n
+    \n
+    \n Args: \n
+    * recipe_id (str): A id of the obj to be deleted from the
+        database.
+    \n
+    \n Returns: \n
+    * It redirects the user back to the profile page \n
+    * It shows a toast to indicate the recipe has been deleted \n
+    """
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted", "success")
     return redirect(url_for("profile", username=session['user']))
