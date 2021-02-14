@@ -1093,6 +1093,7 @@ def view_recipe(recipe_id):
 
 
 @app.route("/delete-category/<category_id>")
+@is_admin
 def delete_category(category_id):
     mongo.db.categories.remove({"_id": ObjectId(category_id)})
     flash("Category Successfully Deleted", "success")
@@ -1100,6 +1101,7 @@ def delete_category(category_id):
 
 
 @app.route("/delete-product-category/<category_id>")
+@is_admin
 def delete_product_category(category_id):
     mongo.db.product_categories.remove({"_id": ObjectId(category_id)})
     flash("Category Successfully Deleted", "success")
@@ -1107,6 +1109,7 @@ def delete_product_category(category_id):
 
 
 @app.route("/delete-product/<product_id>")
+@is_admin
 def delete_product(product_id):
     mongo.db.products.remove({"_id": ObjectId(product_id)})
     flash("Product Successfully Deleted", "success")
@@ -1114,6 +1117,7 @@ def delete_product(product_id):
 
 
 @app.route("/delete-recipe/<recipe_id>")
+@login_required
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted", "success")
