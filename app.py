@@ -798,9 +798,17 @@ def edit_category_recipe(category_id):
 @app.route("/add-category/", methods=["GET", "POST"])
 @is_admin
 def add_category_recipe():
-    """
-    A function to render a page for the purpose of
-    the adding recipe categories.
+    """add_category_recipe: \n
+    * This function renders the login page (add-category.html). \n
+    * It gets the category form input and inserts it into
+        MongoDB with the key of 'category'. \n
+    * It returns a toast to let the user know a category has
+        been added. \n
+    \n
+    \n Returns: \n
+    * It renders the add-category.html \n
+    * It redirects the user back to the admin page if request
+        method is 'POST'. \n
     """
     if request.method == "POST":
 
