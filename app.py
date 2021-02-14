@@ -581,18 +581,18 @@ def profile(username):
     limit = 6
 
     # get the users recipes
-    starting_id = list(mongo.db.recipes.find(
+    user_recipes = list(mongo.db.recipes.find(
         {"created_by": username}).sort("_id", -1))
 
     # Getting the length of the all the recipes to display total
-    total_recipes = len(starting_id)
+    total_recipes = len(user_recipes)
 
     # Getting the offset (page number)
     if 'p' in request.args:
         if int(request.args['p']) <= 1:
             page = 1
             offset = 0
-            redirect(url_for("recipes"))
+            redirect(url_for("profile", username=user["username"]))
         elif ((int(request.args['p']) * limit) - limit) > total_recipes:
             page = math.ceil((total_recipes/limit))
             offset = limit * (page - 1)
@@ -606,7 +606,7 @@ def profile(username):
 
     if total_recipes > 0:
         # Getting the last id to with the offset used
-        last_id = starting_id[offset]["_id"]
+        last_id = user_recipes[offset]["_id"]
 
         # Getting the page recipes using the last ID to offset and
         # limit to get set amount of results
