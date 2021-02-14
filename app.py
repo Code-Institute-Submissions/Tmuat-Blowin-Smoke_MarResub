@@ -268,7 +268,7 @@ def products():
     Code from https://www.youtube.com/watch?v=Lnt6JqtzM7I
     """
     # Number of items per page
-    limit = 9
+    limit = 6
 
     if 'category' in request.args:
         category = request.args.get('category')
