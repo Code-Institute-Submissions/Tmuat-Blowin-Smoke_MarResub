@@ -376,7 +376,6 @@ def products():
     else:
         prev_url = "?p=" + str(page - 1)
 
-
     # Getting product categories to be used for filters
     categories = list(mongo.db.product_categories.find().sort("category", 1))
     context = {
@@ -781,6 +780,60 @@ def admin(username):
     return redirect(url_for("index"))
 
 
+@app.route("/edit-category/<category_id>", methods=["GET", "POST"])
+@is_admin
+def edit_category_recipe(category_id):
+    """
+    A function to render a page for the purpose of
+    the editing categories.
+    """
+    if request.method == "POST":
+
+        submit = {'$set': {
+            "category": request.form.get("category").lower(),
+        }}
+
+        mongo.db.categories.update_one({"_id": ObjectId(category_id)}, submit)
+        flash("Category Updated Successfully", "success")
+        return redirect(url_for('admin', username=session["user"]))
+
+    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+
+    context = {
+        "category": category,
+    }
+
+    return render_template("edit-category.html", **context)
+
+
+@app.route("/edit-category/product/<category_id>", methods=["GET", "POST"])
+@is_admin
+def edit_category_product(category_id):
+    """
+    A function to render a page for the purpose of
+    the editing categories.
+    """
+    if request.method == "POST":
+
+        submit = {'$set': {
+            "category": request.form.get("category").lower(),
+        }}
+
+        mongo.db.product_categories.update_one(
+            {"_id": ObjectId(category_id)}, submit)
+        flash("Category Updated Successfully", "success")
+        return redirect(url_for('admin', username=session["user"]))
+
+    category = mongo.db.product_categories.find_one(
+        {"_id": ObjectId(category_id)})
+
+    context = {
+        "category": category,
+    }
+
+    return render_template("edit-category-product.html", **context)
+
+
 @app.route("/add-recipe", methods=["GET", "POST"])
 @login_required
 def add_recipe():
@@ -904,6 +957,38 @@ def edit_recipe(recipe_id):
     }
 
     return render_template("edit-recipe.html", **context)
+
+
+@app.route("/edit-product/<product_id>", methods=["GET", "POST"])
+@login_required
+def edit_product(product_id):
+    """
+    A function to render a page for the purpose of
+    the editing a product.
+    """
+    if request.method == "POST":
+        product = {'$set': {
+            "name": request.form.get("productname").lower(),
+            "category": request.form.get("category").lower(),
+            "description": request.form.get("productdesc").lower(),
+            "image_url": request.form.get("imageurl").lower(),
+            "purchase": request.form.get("purchaseurl").lower(),
+        }}
+
+        mongo.db.products.update_one({"_id": ObjectId(product_id)}, product)
+        flash("Product Updated Successfully", "success")
+        return redirect(url_for('admin', username=session["user"]))
+
+    product = mongo.db.products.find_one({"_id": ObjectId(product_id)})
+
+    categories = mongo.db.product_categories.find().sort("category", 1)
+
+    context = {
+        "categories": categories,
+        "product": product,
+    }
+
+    return render_template("edit-product.html", **context)
 
 
 @app.route("/recipe/<recipe_id>")
