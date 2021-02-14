@@ -219,28 +219,24 @@ def recipes():
             next_url = None
         else:
             next_url = "?page=" + str(page + 1) + "&q=" + str(search_key)
-    elif category:
-        if offset + limit >= total_recipes:
-            next_url = None
-        else:
-            next_url = "?page=" + str(page + 1) + "&category=" + str(category)
-    else:
-        if offset + limit >= total_recipes:
-            next_url = None
-        else:
-            next_url = "?page=" + str(page + 1)
-
-    if search_key:
         if offset == 0:
             prev_url = None
         else:
             prev_url = "?page=" + str(page - 1) + "&q=" + str(search_key)
     elif category:
+        if offset + limit >= total_recipes:
+            next_url = None
+        else:
+            next_url = "?page=" + str(page + 1) + "&category=" + str(category)
         if offset == 0:
             prev_url = None
         else:
             prev_url = "?page=" + str(page - 1) + "&category=" + str(category)
     else:
+        if offset + limit >= total_recipes:
+            next_url = None
+        else:
+            next_url = "?page=" + str(page + 1)
         if offset == 0:
             prev_url = None
         else:
