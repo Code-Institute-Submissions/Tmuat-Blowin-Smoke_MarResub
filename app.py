@@ -1139,8 +1139,12 @@ def delete_recipe(recipe_id):
 
 
 def get_current_year():
-    """
-    Function to return the current year, for use with copyright in footer
+    """get_current_year: \n
+    * This function returns the current year to avoid having to
+        yearly update the copyright year. \n
+    \n
+    \n Returns: \n
+    * It returns the current year. \n
     """
     current_datetime = datetime.now()
     return current_datetime.year
