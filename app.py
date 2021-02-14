@@ -652,6 +652,21 @@ def edit_recipe(recipe_id):
     return render_template("edit-recipe.html", **context)
 
 
+@app.route("/recipe/<recipe_id>")
+def view_recipe(recipe_id):
+    """
+    This view displays an individual recipe for site
+    visitors to view.
+    """
+
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+    context = {
+        "recipe": recipe,
+    }
+    return render_template("view_recipe.html", **context)
+
+
 def get_current_year():
     """
     Function to return the current year, for use with copyright in footer
