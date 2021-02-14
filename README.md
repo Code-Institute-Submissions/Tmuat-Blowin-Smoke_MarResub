@@ -94,7 +94,13 @@ The main font used on the site is ************. It was chosen after experimentin
 
 ### Wireframes
 
-The wireframes for phone, tablet and desktop can be found by clicking .
+The wireframes for phone, tablet and desktop can be found by clicking [here](https://github.com/Tmuat/blowin-smoke/tree/master/assets/wireframes).
+
+[Desktop](https://github.com/Tmuat/blowin-smoke/blob/master/assets/wireframes/Desktop.pdf)
+
+[Tablet](https://github.com/Tmuat/blowin-smoke/blob/master/assets/wireframes/Tablet.pdf)
+
+[Mobile](https://github.com/Tmuat/blowin-smoke/blob/master/assets/wireframes/Mobile.pdf)
 
 [Return to Contents](#contents)
 
