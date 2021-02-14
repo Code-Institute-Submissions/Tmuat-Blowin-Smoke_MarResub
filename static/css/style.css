@@ -374,6 +374,10 @@ html {
     border-right: 1px solid #cccccc;
 }
 
+.card-body-height {
+    height: 260px;
+}
+
 /* --------------------- Form Styling start */
 
 /* CSS transition from https://www.youtube.com/watch?v=PTGnpXbMU1U */
@@ -493,6 +497,9 @@ html {
     .recipe-title {
         font-size: 50px;
     }
+    .image-landing-text {
+        font-size: 70px;
+    }
 }
 
 /* Small & down */
@@ -523,6 +530,9 @@ html {
     }
     .recipe-title {
         font-size: 40px;
+    }
+    .image-landing-text {
+        font-size: 50px;
     }
 }
 

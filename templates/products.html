@@ -16,23 +16,17 @@
     </section>
     <!-- Landing Image end -->
 
-    <!-- Recipes Section -->
-    <section id="recipe-header" class="bg-off-white">
+    <!-- Products Section -->
+    <section id="products-header" class="bg-off-white">
         <div class="container">
             <div class="row w-100 m-0">
-                <div class="col-12 text-center filter mt-4 mb-3">
+                <div class="col-12 col-md-8 offset-md-2 text-center filter mt-4 mb-3">
                     <h5 class="pt-3 title-font filter-title">Select A Filter</h5>
                     <div class="inner-filter pt-2 pb-3">
                         <div class="filter-group pb-3">
-                            <a href="" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">Rub</a>
-                            <a href="" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">Utensils</a>
-                        </div>
-                        <h5 class="title-font filter-title">Or...</h5>
-                        <div class=" mx-auto input-group custom-width mb-3">
-                            <input type="text" class="form-control custom-input" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn bg-custom-orange text-white custom-input search" type="button"><i class="fas fa-search"></i></button>
-                            </div>
+                            {% for obj in categories %}
+                                <a href="{{ url_for('products_filter', category=obj.category)}}" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ obj.category|title }}</a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -40,45 +34,125 @@
         </div>
         <div class="container">
             <div class="row mx-1 mt-3">
-                <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
-                    <div class="card-outer card-shadow">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-light">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <p class="font-italic">Card Category</p>
-                                <a href="#" class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Click To Buy</a>
+                <div class="col-12 text-center">
+
+                    <!-- Filter Options start -->
+                    {% if filter %}
+                        <h5 class="title-font">Filter: {{ filter|title }} <a href="{{ url_for('products') }}"><i class="fas fa-times-circle pl-1 text-danger"></i></a></h5>
+                    {% endif %}
+                    <h5 class="title-font">Number of products: {{ results }}</h5>
+                    <!-- Filter Options end -->
+
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation" class="pt-2">
+                        <ul class="pagination justify-content-center">
+                        {% if prev %}
+                            {% if request.path == url_for('products_filter', category=filter) %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('products_filter', category=filter) }}{{ prev }}" aria-label="Previous">
+                                    <span aria-hidden="true" class="text-body">&laquo;</span>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('products') }}{{ prev }}" aria-label="Previous">
+                                    <span aria-hidden="true" class="text-body">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                        {% if page %}
+                        <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
+                        {% endif %}
+                        {% if next %}
+                            {% if request.path == url_for('products_filter', category=filter) %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('products_filter', category=filter) }}{{ next }}" aria-label="Next">
+                                        <span aria-hidden="true" class="text-body">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('products') }}{{ next }}" aria-label="Next">
+                                        <span aria-hidden="true" class="text-body">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        </ul>
+                    </nav>
+                    <!-- Pagination end -->
+
+                </div>
+
+                <!-- Product for loop start -->
+                {% if products|length > 0 %}
+                    {% for product in products %}
+                        <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
+                            <div class="card-outer box-shadow">
+                                <div class="card">
+                                    <img src="{{ product.image_url }}"
+                                            onerror="this.src='{{ url_for('static', filename='media/images/default_product.jpg') }}'"
+                                            class="card-img-top custom-card-image"
+                                            alt="{{ product.name }}">
+                                    <div class="card-body card-body-height text-center bg-light">
+                                        <h5 class="card-title font-weight-bold">{{ product.name|title }}</h5>
+                                        <h5 class="card-title font-weight-bold font-italic"><small>{{ product.category|title }}</small></h5>
+                                        <p>{{ product.description|capitalize }}</p>
+                                        <a href="{{ product.purchase }}"
+                                            class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4"
+                                            target="_blank">Buy This!</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
-                    <div class="card-outer card-shadow">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-light">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <p class="font-italic">Card Category</p>
-                                <a href="#" class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Click To Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 mb-3 mb-md-5 ">
-                    <div class="card-outer card-shadow">
-                        <div class="card">
-                            <img src="https://placeimg.com/200/150/any" class="card-img-top" alt="...">
-                            <div class="card-body text-center bg-light">
-                                <h5 class="card-title font-weight-bold">Card title 1</h5>
-                                <p class="font-italic">Card Category</p>
-                                <a href="#" class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Click To Buy</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    {% endfor %}
+                {% endif %}
+                <!-- Product for loop end -->
+
+                <!-- Pagination -->
+                <nav aria-label="Page navigation" class="pt-2 col-12">
+                    <ul class="pagination justify-content-center">
+                    {% if prev %}
+                        {% if request.path == url_for('products_filter', category=filter) %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('products_filter', category=filter) }}{{ prev }}" aria-label="Previous">
+                                <span aria-hidden="true" class="text-body">&laquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('products') }}{{ prev }}" aria-label="Previous">
+                                <span aria-hidden="true" class="text-body">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+                    {% if page %}
+                    <li class="page-item"><a class="page-link text-body font-weight-bold" href="#">{{ page }}</a></li>
+                    {% endif %}
+                    {% if next %}
+                        {% if request.path == url_for('products_filter', category=filter) %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('products_filter', category=filter) }}{{ next }}" aria-label="Next">
+                                    <span aria-hidden="true" class="text-body">&raquo;</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('products') }}{{ next }}" aria-label="Next">
+                                    <span aria-hidden="true" class="text-body">&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    </ul>
+                </nav>
+                <!-- Pagination end -->
+
             </div>
         </div>
     </section>
-    <!-- Recipes Section end -->
+    <!-- Products Section end -->
 
 {% endblock %}
