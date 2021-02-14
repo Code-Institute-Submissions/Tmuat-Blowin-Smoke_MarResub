@@ -105,7 +105,7 @@
                                     <img src="{{ recipe.image_url }}" onerror="this.src='{{ url_for('static', filename='media/images/default.jpg') }}'" class="card-img-top custom-card-image" alt="{{ recipe.name }}">
                                     <div class="card-body text-center bg-light">
                                         <h5 class="card-title font-weight-bold">{{ recipe.name|title }}</h5>
-                                        <a href="#"
+                                        <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}"
                                             class="btn title-font custom-btn bg-custom-orange individual-item-btn box-shadow text-white pl-4 pr-4">Lets Start Cooking</a>
                                     </div>
                                 </div>
