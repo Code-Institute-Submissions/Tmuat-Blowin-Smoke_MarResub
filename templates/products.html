@@ -27,7 +27,7 @@
                     <div class="inner-filter pt-2 pb-3">
                         <div class="filter-group pb-3">
                             {% for obj in categories %}
-                                <a href="{{ url_for('products_filter', category=obj.category)}}" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ obj.category|title }}</a>
+                                <a href="{{ url_for('products', category=obj.category)}}" class="btn custom-btn bg-custom-orange box-shadow text-white font-weight-bold pl-3 pr-3 ml-2 mr-2">{{ obj.category|title }}</a>
                             {% endfor %}
                         </div>
                         <!-- Filter Selected start -->
@@ -86,10 +86,10 @@
                         {% endif %}
                         {% if next %}
                             <li class="page-item">
-                                    <a class="page-link" href="{{ url_for('products') }}{{ next }}" aria-label="Next">
-                                        <span aria-hidden="true" class="text-body">&raquo;</span>
-                                    </a>
-                                </li>
+                                <a class="page-link" href="{{ url_for('products') }}{{ next }}" aria-label="Next">
+                                    <span aria-hidden="true" class="text-body">&raquo;</span>
+                                </a>
+                            </li>
                         {% endif %}
                         </ul>
                     </nav>
