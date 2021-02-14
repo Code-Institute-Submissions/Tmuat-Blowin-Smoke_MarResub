@@ -501,9 +501,15 @@ def login():
 @app.route("/logout")
 @login_required
 def logout():
-    """
-    A function to logout a user; removing the username
-    from session cookies.
+    """logout: \n
+    * It removes the 'user' variable from the session. \n
+    * If the user is an admin, it also removes the 'admin'
+        session variable. \n
+    * It returns a toast to let the user know they have
+        logged out. \n
+    \n
+    \n Returns: \n
+    * It returns the user to the login page.' \n
     """
     flash("You have been logged out.", "success")
     session.pop("user")
