@@ -806,6 +806,32 @@ def edit_category_recipe(category_id):
     return render_template("edit-category.html", **context)
 
 
+@app.route("/add-category/", methods=["GET", "POST"])
+@is_admin
+def add_category_recipe():
+    """
+    A function to render a page for the purpose of
+    the adding recipe categories.
+    """
+    if request.method == "POST":
+
+        submit = {
+            "category": request.form.get("category").lower(),
+        }
+
+        mongo.db.categories.insert_one(submit)
+        flash("Category Successfully Added", "success")
+        return redirect(url_for('admin', username=session["user"]))
+
+    categories = mongo.db.product_categories.find().sort("category", 1)
+
+    context = {
+        "categories": categories,
+    }
+
+    return render_template("add-category.html", **context)
+
+
 @app.route("/edit-category/product/<category_id>", methods=["GET", "POST"])
 @is_admin
 def edit_category_product(category_id):
