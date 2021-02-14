@@ -60,10 +60,6 @@ If the user is an admin, he/she can add, edit and delete their recipes; along wi
 
 ### Purpose
 
-As briefly stated in the description; the purpose of this site is to provide Kingston Upon Thames, 
-Surrey with a website for individuals looking to visit the town; with key information on Food & Drink, Places To Stay & Attractions. 
-Each area included a number of suggestions with links to external sites should the site visitor require more information.
-
 - The purpose of this site was to create a full-stack responsive site that allows all users to access and manage a dataset stored in a database.
 - Create a site using HTML, CSS, Javascript, Python (Flask) and MongoDB working together.
 - Create a site that allows users to find recipes and share their own (READ).
