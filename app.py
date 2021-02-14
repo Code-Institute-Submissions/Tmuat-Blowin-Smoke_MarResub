@@ -823,13 +823,7 @@ def add_category_recipe():
         flash("Category Successfully Added", "success")
         return redirect(url_for('admin', username=session["user"]))
 
-    categories = mongo.db.product_categories.find().sort("category", 1)
-
-    context = {
-        "categories": categories,
-    }
-
-    return render_template("add-category.html", **context)
+    return render_template("add-category.html")
 
 
 @app.route("/edit-category/product/<category_id>", methods=["GET", "POST"])
@@ -858,6 +852,26 @@ def edit_category_product(category_id):
     }
 
     return render_template("edit-category-product.html", **context)
+
+
+@app.route("/add-category/product", methods=["GET", "POST"])
+@is_admin
+def add_category_product():
+    """
+    A function to render a page for the purpose of
+    the adding product categories.
+    """
+    if request.method == "POST":
+
+        submit = {
+            "category": request.form.get("category").lower(),
+        }
+
+        mongo.db.product_categories.insert_one(submit)
+        flash("Category Successfully Added", "success")
+        return redirect(url_for('admin', username=session["user"]))
+
+    return render_template("add-category-product.html")
 
 
 @app.route("/add-recipe", methods=["GET", "POST"])

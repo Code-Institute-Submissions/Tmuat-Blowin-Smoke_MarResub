@@ -37,8 +37,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="card white-grey-card p-3">
-                                    <h3 class="title-font text-body mb-4">Product Categories</h3>
+                                    <h3 class="title-font text-body mb-1">Product Categories</h3>
                                     <div class="container text-body">
+                                        <a href="{{ url_for('add_category_product') }}" class="btn title-font custom-btn bg-custom-orange box-shadow text-white pl-3 pr-3 mb-2">Add Category!</a>
                                         {% if product_categories|length > 0 %}
                                         <table class="table table-hover table-borderless table-striped mb-1">
                                             <tbody>

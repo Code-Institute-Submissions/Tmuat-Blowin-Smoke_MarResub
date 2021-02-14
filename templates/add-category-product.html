@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block extra_title %}| Add Category{% endblock %}
+
+{% block content %}
+    <!-- Category Section -->
+    <section id="category-page">
+        <div class="landing-image">
+            <div class="container">
+                <div class="row align-items-center custom-form-row">
+                    <!-- Category Form start -->
+                    <form class="col-12 col-md-8 offset-md-2 text-center" method="POST" action="{{ url_for('add_category_product') }}"
+                        name="category">
+                        <div class="card white-grey-card p-3">
+                            <h3 class="title-font text-body card-title-font mb-4">Add Category</h3>
+                            <div class="container text-body">
+                                <div class="form-row mx-auto">
+                                    <!-- Category -->
+                                    <div class="col-12 col-md-10 input-box mx-auto">
+                                        <input id="category" name="category" type="text" class="form-control custom-input valid-border" required>
+                                        <span class="">Category</span>
+                                    </div>
+                                </div>
+                                <a href="{{ url_for('admin', username=session['user']) }}" class="btn custom-btn-danger box-shadow text-white pl-3 pr-3">Cancel</a>
+                                <button type="submit" class="btn bg-custom-orange custom-btn box-shadow text-white pl-3 pr-3">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Category Form end -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Category Section end -->
+{% endblock %}
