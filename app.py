@@ -1163,9 +1163,19 @@ def edit_recipe(recipe_id):
 @app.route("/add-product", methods=["GET", "POST"])
 @is_admin
 def add_product():
-    """
-    A function to render a page for the purpose of
-    the adding a product.
+    """add_product: \n
+    * This function renders the add-product.html template. \n
+    * The function checks if the request method is 'POST'. \n
+    * It then enters the input information into MongoDB. \n
+    * If successful it redirects the user to the admin page, whilst
+        also showing a toast. \n
+    * It gets all product categories from the database, to be passed
+        to the template to create a strict input for product category. \n
+    \n
+    \n Returns: \n
+    * It renders the add-product.html \n
+    * It redirects the user back to the profile page if request
+        method is 'POST' and the recipe has been added. \n
     """
 
     if request.method == "POST":
