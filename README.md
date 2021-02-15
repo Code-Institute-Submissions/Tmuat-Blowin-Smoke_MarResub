@@ -124,10 +124,10 @@ to key features a off coloured orange was used.
 
 The hex codes for the main colours used are:
 
-Black #070707
-White #FFFFFF
-Off-white #D8CFCB
-Orange #D95E16
+- Black #070707
+- White #FFFFFF
+- Off-white #D8CFCB
+- Orange #D95E16
 
 ---
 
