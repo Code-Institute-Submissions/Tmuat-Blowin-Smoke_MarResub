@@ -181,14 +181,17 @@ The wireframes for phone, tablet and desktop can be found by clicking [here](htt
 
 ---
 
-Across the site 3 languages were used:
+Across the site 4 languages were used:
 
 - HTML5
     - This was used to form the structure of each page
 - CSS3
     - This was used to add syling to all html elements
 - JavaScript
-    - This was was to make pages interactive (e.g. google maps)
+    - This was was to add classes and validate forms.
+- Python 3
+    - Python provided the backend language of the project.
+
 
 ---
 
@@ -198,10 +201,13 @@ Across the site 3 languages were used:
 
 A number of external frameworks, code libraries and programs were incorportated into the Visit Kingston site. These are listed below with code attribution within each segment of the live site and in the credits section towards the end of this README.
 
-- [Bootstrap 4.5.2](https://getbootstrap.com/)
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+    - Flask was the python framework used to build the application
+
+- [Bootstrap 4.5.3](https://getbootstrap.com/)
     - Bootstrap formed the skeleton of the website; the bootstrap grid system and classes formed the underlying structure of the site
 
-- [Font Awesome 4.7.0](https://fontawesome.com/)
+- [Font Awesome 5.15.1](https://fontawesome.com/)
     - Font Awesome was used to add icons across the site for a more intuitive user experience
 
 - [JQuery 3.5.1](https://jquery.com/)
@@ -210,17 +216,8 @@ A number of external frameworks, code libraries and programs were incorportated 
 - [Popper.js 1.16.1](https://popper.js.org/)
     - Popper was used with Bootstrap to create a responsive navbar element
 
-- [Google Maps API](https://developers.google.com/maps/documentation/)
-    - The Google Maps API was used to create a map with markers of places to eat & drink, stay overnight and attractions to see
-
 - [Animate On Scroll 2.3.1](https://michalsnik.github.io/aos/)
     - Animate on scroll was used on the 'About Kingston' page to add affects to titles and dividers
-
-- [EmailJS](https://www.emailjs.com/)
-    - EmailJS was used to automate the sending of emails in the contact section
-
-- [Hover.css](https://ianlunn.github.io/Hover/)
-    - Hover.css was used to create hover affects for the menu items in the navbar. The license can be found [here](https://github.com/Tmuat/milestone-project-2/blob/master/assets/licenses/hover-css.txt)
 
 - [Gitpod](https://gitpod.io/)
     - Gitpod was the development environment used to code this site, gitpods terminal was used to synchronise with Github
@@ -245,6 +242,10 @@ A number of external frameworks, code libraries and programs were incorportated 
 
 - [JSHint](https://jshint.com/)
     - Was used to validate all Javascript codes
+
+- [Pep8Online](http://pep8online.com/checkresult)
+    - Along with the fact that Pep8 compliance is built into the coding environment, this external site was also used to
+        check the python code
 
 - [Responsivley](https://responsively.app/)
     - Responsivley was used to check the responsiveness of the site (see testing below)
