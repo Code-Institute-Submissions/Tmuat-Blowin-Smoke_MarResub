@@ -189,7 +189,7 @@ Across the site 4 languages were used:
     - This was used to add syling to all html elements
 - JavaScript
     - This was was to add classes and validate forms.
-- Python 3
+- Python 3.8.7
     - Python provided the backend language of the project.
 
 
