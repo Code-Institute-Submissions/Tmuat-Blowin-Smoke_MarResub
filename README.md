@@ -122,7 +122,11 @@ If the user is an admin, he/she can add, edit and delete their recipes; along wi
 
 #### Fonts
 
-The main font used on the site is ************. It was chosen after experimenting with a number of fonts on [google fonts](fonts.google.com).
+Their are two main fonts which have been incorporated into the site. A title font of 
+['Lily Script One'](https://fonts.google.com/specimen/Lily+Script+One?query=lily&preview.text_type=custom) from google 
+fonts and then a secondary font of ['Raleway'](https://fonts.google.com/specimen/Raleway?query=rale&preview.text_type=custom).
+
+The fonts were listed as popular pairing on google fonts.
 
 ---
 
