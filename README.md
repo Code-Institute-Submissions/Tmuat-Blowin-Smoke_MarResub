@@ -393,8 +393,6 @@ python3 app.py
 
 ***
 
----
-
 ### Deploying to Heroku
 
 ---
