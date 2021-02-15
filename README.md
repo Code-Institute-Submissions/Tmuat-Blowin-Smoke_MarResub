@@ -387,6 +387,9 @@ Should you wish to fork the project, please follow the below steps.
 
 ---
 
+I would like to thank my mentor Oluwafemi Medale for his help keeping me on the 
+right lines and being there to help me with my pagination woes. I would like to thank 
+all the people that kindly sat and reviewed my site through production.
 
 ---
 
