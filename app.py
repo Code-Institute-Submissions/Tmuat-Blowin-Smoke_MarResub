@@ -553,9 +553,24 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 @anonymous_required
 def register():
-    """
-    A function to render a page for the purpose of
-    registering a user.
+    """register: \n
+    * The function is used to register a new user. \n
+    * The function initially checks if the username being
+        passed in as a new user against current users in the
+        database. \n
+    * It then checks if the email entered into the form is
+        already in the database. \n
+    * It then double checks (after client side validation) that
+        password 1 and password 2 match. \n
+    * If all the checks pass, it enters the user into the MongoDB
+        database. \n
+    * Once entered, it returns the user to the home page with a toast
+        letting them know they are registered. \n
+    * It also logs the user in, by adding 'user' into session. \n
+    \n
+    \n Returns: \n
+    * It returns 'login.html' \n
+    \n
     """
     if request.method == "POST":
         # Check if user is in db
@@ -582,6 +597,7 @@ def register():
             flash("Both passwords must match!", "error")
             return redirect(url_for("register"))
 
+        # Get the form variables to be entered into MongoDB
         register = {
             "username": request.form.get("username").lower(),
             "first_name": request.form.get("firstname").lower(),
