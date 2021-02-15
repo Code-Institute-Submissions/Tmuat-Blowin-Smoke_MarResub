@@ -352,9 +352,14 @@ A number of external frameworks, code libraries and programs were incorportated 
 
 ---
 
-In order to check that all the HTML & CSS were in compliance of the recognised standards, all code was passed through the [W3C](https://www.w3.org/) validators. Specifically the [HTML validator](https://validator.w3.org/) and the [CSS validator](https://jigsaw.w3.org/css-validator/validator.html.en). The results of these tests can be found in the links below:
+In order to check that all the HTML & CSS were in compliance of the recognised standards, all code was passed through the [W3C](https://www.w3.org/) validators. Specifically the [HTML validator](https://validator.w3.org/) and the [CSS validator](https://jigsaw.w3.org/css-validator/validator.html.en). The results of the css is below:
 
-- ![CSS](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/css.png "CSS Output")
+- [CSS](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/css.png "CSS Output")
+
+The HTML was checked but failed with some flask specific contents such as "Bad value {{ url_for('products') }} for attribute href on element a: Illegal character in path segment: { is not allowed."
+
+The validator outputs were gone through to check for normal HTML errors.
+
 ---
 
 ### Lighthouse Accessibility
@@ -362,6 +367,10 @@ In order to check that all the HTML & CSS were in compliance of the recognised s
 ---
 
 [Google Lighthouse](https://developers.google.com/web/tools/lighthouse#devtools)
+
+![lighthouse desktop](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/desktop/desktop%20overview.png "Desktop Overview")
+
+![lighthouse mobile](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/mobile/mobile%20overview.png "Desktop Mobile")
 
 ---
 
@@ -440,6 +449,9 @@ Testing the user stories from the [UX Section](#ux).
 - Delete
     - Whilst not specifically a bug in the code, at the moment there is no submission check when deleting an item (be it product, recipe or category). This
         may lead to items being accidently deleted.
+
+- Lighthouse Scores
+    - At the moment the site doesn't have great lighthouse scores, improving these is a must.
 
 [Return to Contents](#contents)
 
