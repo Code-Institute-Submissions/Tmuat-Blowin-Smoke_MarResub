@@ -471,6 +471,21 @@ Testing the user stories from the [UX Section](#ux).
     - From the users profile page they can see a list of all their recipes, displayed next to the recipe is a link to 'edit' their recipe. They can fill out the form and the recipe will be updated.
 - As a **registered user**, I want to be able to delete my recipes if I no longer want to share them
     - From the same profile page, next to the edit button, the user has the ability to delete any recipes they no longer want.
+
+#### Admin User:
+**The goals of the previous two user's apply to the admin user with the exception of being able to register.**
+- As a **admin user**, I want to be able to add categories for recipes to aid with filtering and searching
+    - Once logged in as an admin user, a link to the admin page is displayed in the navbar. From here they are shown 2 cards (products and recipes) displaying 2 sets of categories with the ability to add additional categories.
+- As a **admin user**, I want to be manage recipe categories, should I want to update or delete them
+    - From the admin page, the admin user can see buttons to either 'edit' or 'delete' a category. 
+- As a **admin user**, I want to be able to add products for users to potentially buy
+    - On the admin page, the admin user has the option to list products for users to see. The products have a purchase url which can be filled with a referral link from sites such as amazon. 
+- As a **admin user**, I want to be able to add categories for products to aid with filtering
+    - The same as for recipe categories, the admin user is presented with options to add a product category
+- As a **admin user**, I want to be able to update or delete product categories
+    - On the same card that the product categories are listed, there are options to edit and delete the said category.
+- As a **admin user**, I want to be able to update or delete products
+    - On the admin page a pagninated list of all products from the database are displayed. Next to each categories name is an 'edit' and 'delete' button.
 ---
 
 ### Fixed Bugs
