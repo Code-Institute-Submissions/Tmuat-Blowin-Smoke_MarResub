@@ -347,7 +347,18 @@ Testing the user stories from the [UX Section](#ux).
 
 ---
 
-- Blank
+- Pagination
+    - Currently the way the pagination works it queries for a full queryset(qs) before using a limit and offset to trim the qs to the objects needed
+        for that page. This currently defeats the object of pagination as the page is still querying a full dataset. Whilst not a problem now with the
+        current size of the data, this will present a problem as the dataset grows.
+
+- Categories
+    - Currently you can remove a product or recipe category, even if there are products or recipes in the database with that specific category. If deleted, 
+        it doesn't effect the recipes or products but does mean a filter is not displayed. This could be addressed with a relational database model.
+
+- Delete
+    - Whilst not specifically a bug in the code, at the moment there is no submission check when deleting an item (be it product, recipe or category). This
+        may lead to items being accidently deleted.
 
 [Return to Contents](#contents)
 
