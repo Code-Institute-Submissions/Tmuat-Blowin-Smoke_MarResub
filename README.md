@@ -358,7 +358,27 @@ Should you wish to fork the project, please follow the below steps.
 
 ---
 
-- Blank
+- Code for the navbar on the site came from [Bootstrap](https://getbootstrap.com/docs/4.5/components/navbar/).
+- Code for the footer on the site came from [Bootstrap](https://mdbootstrap.com/docs/standard/navigation/footer/).
+- Code for the Landing Video came from [Web Dev Simplified](https://codepen.io/WebDevSimplified/pen/oaxjQb).
+- Code for the tiny sliders used for recipes and products came from [Tiny Slider](https://github.com/ganlanyuan/tiny-slider).
+- Code for the toasts came from [Bootstrap](https://getbootstrap.com/docs/4.5/components/toasts/).
+- Code for the form label float came from [Online Tutorials](https://www.youtube.com/watch?v=PTGnpXbMU1U).
+- Code for the index.html card animation came from [Animate On Scroll](https://michalsnik.github.io/aos/).
+- Code for the JQuery validate came from [JQuery Validate](https://www.sitepoint.com/basic-jquery-form-validation-tutorial/).
+- Code for the JQuery to allow users to manipulate the amount of fields on the recipe form came from [JSFiddle](https://jsfiddle.net/jnwrc5ay/592/).
+- Code for the Facebook social media icon came from [Font Awesome](https://fontawesome.com/icons/facebook-square?style=brands).
+- Code for the Youtube social media icon came from [Font Awesome](https://fontawesome.com/icons/youtube-square?style=brands).
+- Code for the Twitter social media icon came from [Font Awesome](https://fontawesome.com/icons/twitter-square?style=brands).
+- Code for the left and right arrows for the card carousel came from [Font Awesome](https://fontawesome.com/icons/caret-left?style=solid) and [Font Awesome](https://fontawesome.com/icons/caret-right?style=solid).
+- Code for the HTML pagination came from [Bootstrap](https://getbootstrap.com/docs/4.5/components/pagination/).
+- Code for the python pagination came from [Pretty Printed](https://www.youtube.com/watch?v=Lnt6JqtzM7I).
+- Code for the modal form on the profile page came from [Bootstrap](https://getbootstrap.com/docs/4.0/components/modal/).
+- Code for the python decorators came from [Flask](https://flask.palletsprojects.com/en/1.1.x/patterns/viewdecorators/).
+- Code for the python random choices/samples came from [W3Schools](https://www.w3schools.com/python/ref_random_choices.asp).
+- Code for interacting with MongoDB came from [Code Institute](https://codeinstitute.net/).
+- Code for the context processors came from [Flask](https://flask.palletsprojects.com/en/1.1.x/templating/#context-processors).
+
 
 ---
 

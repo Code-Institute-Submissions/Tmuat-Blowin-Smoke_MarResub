@@ -69,7 +69,7 @@ def is_admin(f):
     """is_admin: \n
     * This function creates a decorator to check if a user is logged in and
         also if the user is a registered admin. \n
-    * It performs a number of checks, if 'user' is in the session, 
+    * It performs a number of checks, if 'user' is in the session,
         if the session user is registered in the database. If these are true,
         it moves on to check if the user is an admin and then if admin
         is in the session variables. \n
@@ -77,7 +77,7 @@ def is_admin(f):
         solely on the session variables. \n
     \n
     \n Returns: \n
-    * If the user is logged in, recognised and an admin, it allows 
+    * If the user is logged in, recognised and an admin, it allows
         the user to access the view they were trying to access. \n
     * If the user is not recognised or logged in, they are redirected
         to the home page with a toast appearing. \n
@@ -117,7 +117,7 @@ def anonymous_required(f):
     \n Returns: \n
     * If the user is not logged in it allows them access to the view
         they were trying to access. \n
-    * If the user is in the session, they are redirected to the home 
+    * If the user is in the session, they are redirected to the home
         page with a toast appearing. \n
     \n
     \n Reference: \n
