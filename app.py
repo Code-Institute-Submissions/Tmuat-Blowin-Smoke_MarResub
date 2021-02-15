@@ -634,7 +634,7 @@ def profile(username):
         checks if 'user is in the session and if not redirects to the login. \n
     \n
     \n Args: \n
-    * username (str): The username from the session variable 'user.
+    * username (str): The username from the session variable 'user'.
     \n
     \n Returns: \n
     * It returns the profile.html. \n
@@ -738,9 +738,30 @@ def profile(username):
 @app.route("/admin/<username>", methods=["GET", "POST"])
 @is_admin
 def admin(username):
-    """
-    A function to render an admin page; including
-    categories & products.
+    """admin: \n
+    * This function renders the users admin page (admin.html). \n
+    * It firstly uses the session 'user' variable to find the specific
+        user in MongoDB. \n
+    * It then checks if the user is designated as admin in the database. \n
+    * If they are, it gets all the products from the database before
+        paginating in the same way as previous functions. \n
+    * It queries the database for two lists, product categories and recipe
+        categories to be passed to the template. \n
+    * Whilst also have a is admin decorator, the function also double
+        checks if 'user is in the session and if 'admin' is in the session;
+        if not redirects to the login. \n
+    \n
+    \n Args: \n
+    * username (str): The username from the session variable 'user'.
+    \n
+    \n Returns: \n
+    * It returns the admin.html. \n
+    * It returns a list of all the products. \n
+    * It returns a list of both recipe and product categories. \n
+    * It returns the 3 pagination variables. \n
+    \n
+    \n Reference: \n
+    * Pagination code - https://www.youtube.com/watch?v=Lnt6JqtzM7I
     """
 
     # grab the session user's username from db
@@ -751,31 +772,27 @@ def admin(username):
         flash("This page is for admin only!", "error")
         return redirect(url_for('index'))
 
-    """
-    The below is to populate the products with pagination.
-    """
-
     # Number of items per page
     limit = 6
 
     # get all the products
-    starting_id = list(mongo.db.products.find().sort("_id", -1))
+    all_products = list(mongo.db.products.find().sort("_id", -1))
 
     # Getting the length of the all the products to display total
-    total_products = len(starting_id)
+    total_products = len(all_products)
 
     # Getting the offset (page number)
-    if 'p' in request.args:
-        if int(request.args['p']) <= 1:
+    if 'page' in request.args:
+        if int(request.args['page']) <= 1:
             page = 1
             offset = 0
             redirect(url_for("products"))
-        elif ((int(request.args['p']) * limit) - limit) > total_products:
+        elif ((int(request.args['page']) * limit) - limit) > total_products:
             page = math.ceil((total_products/limit))
             offset = limit * (page - 1)
             flash("Page out of range", "error")
         else:
-            page = int(request.args['p'])
+            page = int(request.args['page'])
             offset = limit * (page - 1)
     else:
         page = 1
@@ -783,7 +800,7 @@ def admin(username):
 
     if total_products > 0:
         # Getting the last id to with the offset used
-        last_id = starting_id[offset]["_id"]
+        last_id = all_products[offset]["_id"]
 
         # Getting the page products using the last ID to offset and
         # limit to get set amount of results
@@ -797,12 +814,12 @@ def admin(username):
     if offset + limit >= total_products:
         next_url = None
     else:
-        next_url = "?p=" + str(page + 1)
+        next_url = "?page=" + str(page + 1)
 
     if offset == 0:
         prev_url = None
     else:
-        prev_url = "?p=" + str(page - 1)
+        prev_url = "?page=" + str(page - 1)
 
     product_categories = list(
         mongo.db.product_categories.find().sort("category", 1)
