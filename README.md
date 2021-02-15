@@ -25,10 +25,12 @@ If the user is an admin, he/she can add, edit and delete their recipes; along wi
     - [User Stories](#user-stories)
         - [First Time User](#first-time-user)
         - [Registered User](#registered-user)
+        - [Landing Imagery](#landing-imagery)
         - [Admin User](#admin-user)
     - [Design](#design)
         - [Colour Scheme](#colour-scheme)
         - [Fonts](#fonts)
+        - [Information Architecture](#information-architecture)
     - [Wireframes](#wireframes)
 - [Features](#features)
     - [Existing Features](#existing-features)
@@ -142,6 +144,13 @@ The fonts were listed as popular pairing on google fonts.
 ---
 
 #### Landing Imagery
+
+In keeping with the theme of the site, a billowing smoke video was used as the landing image of the site.
+
+---
+#### Information Architecture
+
+
 
 ---
 
