@@ -979,21 +979,44 @@ def add_category_product():
 @app.route("/add-recipe", methods=["GET", "POST"])
 @login_required
 def add_recipe():
-    """
-    A function to render a page for the purpose of
-    the user adding recipes.
+    """add_recipe: \n
+    * This function renders the add-recipe.html template. \n
+    * The function checks if the request method is 'POST'. \n
+    * In order to create one variable 'ingridients' and one
+        variable 'steps' a for loop is used to join all inputs
+        with the required startswith text into a string seperated
+        by ' ~ '.\n
+    * It then enters the input information into the database. \n
+    * If successful it redirects the user to the profile page, whilst
+        also showing a toast. \n
+    * It gets all recipe categories from the database, to be passed
+        to the template to create a strict input for recipe category. \n
+    \n
+    \n Returns: \n
+    * It renders the add-recipe.html \n
+    * It redirects the user back to the profile page if request
+        method is 'POST' and the recipe has been added. \n
     """
     if request.method == "POST":
         """
         As the recipe form allows a dynamic amount of
         ingridients and steps, the below loops through
         the ingridients/steps creating a string split
-        by the character "~".
+        by the character " ~ ". This is done so there is
+        only one ingridient and one steps field in the
+        database.
         """
+        # Sets blank strings
         ingridients = ""
         steps = ""
+
+        # Sets the for loop indexes
         for_loop_idx_ing = 0
         for_loop_idx_steps = 0
+
+        # for loops of keys and values, checking if the
+        # keys start with either 'ingridients' or 'steps'.
+        # If they do it creates a string seperated by ' ~ '.
         for key, val in request.form.items():
             if key.startswith("ingridients"):
                 if for_loop_idx_ing > 0:
@@ -1010,6 +1033,9 @@ def add_recipe():
                     steps += val.lower()
                     for_loop_idx_steps += 1
 
+        # Creates a variable of all the information to be
+        # added to the database. Including adding the user
+        # and the date it was created.
         recipe = {
             "name": request.form.get("recipename").lower(),
             "category": request.form.get("category").lower(),
