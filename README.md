@@ -42,6 +42,7 @@ If the user is an admin, he/she can add, edit and delete their recipes; along wi
     - [WC3 Validation](#wc3-validation)
     - [Lighthouse Accessibility](#lighthouse-accessibility)
     - [JSHint](#jshint)
+    - [Google Dev Tools](#google-dev-tools)
     - [Responsivley](#responsivley)
     - [Manual Testing](#manual-testing)
     - [User Story Testing](#user-story-testing)
@@ -386,6 +387,22 @@ All Javascript codes were passed through the [JSHint](https://jshint.com/) valid
 
 ---
 
+### Google Dev Tools
+
+---
+
+Chrome DevTools was used from start to finish when building and testing this site. Throughout the build it served several purposes:
+
+- Throughout the build it was used to quickly test responsiveness for all elements and design
+
+- When constructing pages and elements, it was used to quickly and visually check for any padding and margin issues. Unicorn Revealer also provided a lot of help with this.
+
+- Dev tools was used to identify and errors and warnings; I was reminded to utilise a favicon. Once created a link tag was added into the head of the base template.
+
+- It was used vigorously to adjust css for hover, focus and active classes. 
+
+---
+
 ### Responsivley
 
 ---
@@ -400,9 +417,15 @@ All Javascript codes were passed through the [JSHint](https://jshint.com/) valid
 
 Along with the automated testing, the site was put through a whole selection of manual user testing. A brief summary of this manual testing can be found below:
 
-- Blank
-    - Blank
-        - Blank
+- Each page has been tested individually to check that:
+    - Images load properly and are the correct sizes
+    - Navigation buttons work and also link to the correct pages on the site
+    - Any external links on the site (footer & products page) are set to target="_blank" to open on a new page
+    - On top of this testing, with the number of forms on the site they were also checked for:
+        - Client side & server side validation works
+        - Any errors or successes coming from the server side flashes appear in toasts with appropriate messages:
+    - Checked the navbar is visible on all pages. 
+        - On the recipe page the navbar was given a background on page load to make it visible
 ---
 
 ### User Story Testing
