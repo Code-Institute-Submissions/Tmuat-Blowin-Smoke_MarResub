@@ -150,7 +150,9 @@ In keeping with the theme of the site, a billowing smoke video was used as the l
 ---
 #### Information Architecture
 
+The MongoDB database consists of 6 collections within one database. Below is the structure of all 6 collections.
 
+![Information Architecture](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/information.png "Information Architecture")
 
 ---
 
