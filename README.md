@@ -372,14 +372,26 @@ Should you wish to fork the project, please follow the below steps.
 ---
 
 - #### Content
-    - Blank
+    - The current recipes on the site have come from a mix of [Pitboss](https://pitboss-grills.com/recipes/beef/) and [Hot Smoked](https://hotsmoked.co.uk/hot-smoking-recipes-and-tips).
+    - All other content was the work of the developer.
 
 ---
 
-- #### Images
-  The images used on this site came from a vaiety of sources.
+- #### Images & Video
+  The main images used as headers came from [unspash](https://unsplash.com/), whilst recipe and product
+  images are allowed from user input so come from a variety of sources.
   
-    - Blank
+    - Landing video (billowing smoke) came from [Motion Array](https://motionarray.com/); 
+        I have a subscription and am therefore allowed to use the video for my own projects
+        per their [license](https://github.com/Tmuat/blowin-smoke/blob/master/assets/licenses/motion-array.txt).
+    - The 3 main images used on the site come from [unspash](https://unsplash.com/). The images are for the 
+        recipe page, products page and then the smokey background for most other pages.
+        - [Smoke](https://unsplash.com/@honeyyanibel)
+        - [Recipe](https://unsplash.com/@emersonvieira)
+        - [Products](https://unsplash.com/@zgrillsaustralia)
+        - [Default Recipe](https://unsplash.com/@markusspiske)
+    - Most of the card & recipe images were sourced from google images.
+    - The loading gif was created at [favicon.io](https://favicon.io/favicon-generator/).
 
 ---
 
