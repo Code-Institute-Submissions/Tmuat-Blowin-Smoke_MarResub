@@ -619,10 +619,31 @@ def register():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 @login_required
 def profile(username):
-    """
-    A function to render a user profile page; including
-    profile & users recipes. A modal is included to edit
-    the users profile.
+    """profile: \n
+    * This function renders the users profile page (profile.html). \n
+    * It firstly uses the session 'user' variable to find the specific
+        user in MongoDB
+    * As this varibale will be passed back to the template, a for loop
+        is performed to pop the password variable out of the dict; whilst
+        also setting the database username variable to its own variable. \n
+    * The function then follows the same logic as the products & recipes
+        page to paginate the queryset to be displayed on the profile page.
+    * The function checks for a request method of post and updates the
+        session users database entry before reloading the profile page. \n
+    * Whilst also have a login required decorator, the function also double
+        checks if 'user is in the session and if not redirects to the login. \n
+    \n
+    \n Args: \n
+    * username (str): The username from the session variable 'user.
+    \n
+    \n Returns: \n
+    * It returns the profile.html. \n
+    * It returns a list of the users recipes. \n
+    * It returns the total of the users recipes. \n
+    * It returns the 3 pagination variables. \n
+    \n
+    \n Reference: \n
+    * Pagination code - https://www.youtube.com/watch?v=Lnt6JqtzM7I
     """
 
     # grab the session user's username from db
@@ -638,10 +659,6 @@ def profile(username):
         if key == "username":
             username = values
 
-    """
-    The below is to populate the recipes with pagination.
-    """
-
     # Number of items per page
     limit = 6
 
@@ -653,17 +670,17 @@ def profile(username):
     total_recipes = len(user_recipes)
 
     # Getting the offset (page number)
-    if 'p' in request.args:
-        if int(request.args['p']) <= 1:
+    if 'page' in request.args:
+        if int(request.args['page']) <= 1:
             page = 1
             offset = 0
             redirect(url_for("profile", username=user["username"]))
-        elif ((int(request.args['p']) * limit) - limit) > total_recipes:
+        elif ((int(request.args['page']) * limit) - limit) > total_recipes:
             page = math.ceil((total_recipes/limit))
             offset = limit * (page - 1)
             flash("Page out of range", "error")
         else:
-            page = int(request.args['p'])
+            page = int(request.args['page'])
             offset = limit * (page - 1)
     else:
         page = 1
@@ -675,28 +692,21 @@ def profile(username):
 
         # Getting the page recipes using the last ID to offset and
         # limit to get set amount of results
-        all_recipes_username = list(mongo.db.recipes.find(
-                                    {'_id': {'$lte': last_id}})
-                                    .sort("_id", -1))
-
-        filtering_recipes = [
-            key for key in all_recipes_username if key[
-                'created_by'] == username
-        ]
-        recipes = filtering_recipes[:limit]
-    else:
-        recipes = []
+        query = {"$and": [
+            {"created_by": username}, {'_id': {'$lte': last_id}}]}
+        recipes = list(
+            mongo.db.recipes.find(query).sort("_id", -1).limit(limit))
 
     # Getting the next & prev url
     if offset + limit >= total_recipes:
         next_url = None
     else:
-        next_url = "?p=" + str(page + 1)
+        next_url = "?page=" + str(page + 1)
 
     if offset == 0:
         prev_url = None
     else:
-        prev_url = "?p=" + str(page - 1)
+        prev_url = "?page=" + str(page - 1)
 
     # Function for updating the user profile
     if request.method == "POST":
