@@ -249,6 +249,9 @@ The wireframes for phone, tablet and desktop can be found by clicking [here](htt
     - At the moment I do not have custom error pages, with this site specifically a 403, 404 and 500 error pages would be essential. It would also be good to
         add some logging to be able to identify any errors that come up.
 
+- Password Change 
+    - Currently there isn't a process to change passwords. Also passwords should be verified by an email.
+
 ---
 
 [Return to Contents](#contents)
@@ -454,6 +457,20 @@ Testing the user stories from the [UX Section](#ux).
 - As a **first time visitor**, I want to be able to filter to only see products of certain categories
     - On the product page there is a filter section underneath the landing image which is visible on all screen sizes. This allows the user to filter to product types.
 
+#### Registered User:
+**The goals of the first time visitor apply to the registered user with the exception of being able to register.**
+- As a **registered user**, I want to be able to login and logout with ease
+    - In both the navbar and footer are links to the login page and once logged in these change to logout.
+- As a **registered user**, I want to be able to view my profile information
+    - Once logged in, the user has a link in the navbar to their profile. Within it they can view any recipes they have added as well as their user information.
+- As a **registered user**, I want to update my profile information
+    - From the profile page, the user can click a link to edit their profile. This loads a modal with options to edit their first name, last name and email. 
+- As a **registered user**, I want to be able to add my own recipes for all to see
+    - Once logged in, users have the option of adding a recipe in the navbar. From this page the user can add a recipe with a dynamic amount of ingridients and steps.
+- As a **registered user**, I want to be able to update my recipes that I have already added
+    - From the users profile page they can see a list of all their recipes, displayed next to the recipe is a link to 'edit' their recipe. They can fill out the form and the recipe will be updated.
+- As a **registered user**, I want to be able to delete my recipes if I no longer want to share them
+    - From the same profile page, next to the edit button, the user has the ability to delete any recipes they no longer want.
 ---
 
 ### Fixed Bugs
