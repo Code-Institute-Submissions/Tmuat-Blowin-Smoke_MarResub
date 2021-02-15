@@ -354,6 +354,7 @@ A number of external frameworks, code libraries and programs were incorportated 
 
 In order to check that all the HTML & CSS were in compliance of the recognised standards, all code was passed through the [W3C](https://www.w3.org/) validators. Specifically the [HTML validator](https://validator.w3.org/) and the [CSS validator](https://jigsaw.w3.org/css-validator/validator.html.en). The results of these tests can be found in the links below:
 
+- ![CSS](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/css.png "CSS Output")
 ---
 
 ### Lighthouse Accessibility
@@ -368,7 +369,7 @@ In order to check that all the HTML & CSS were in compliance of the recognised s
 
 ---
 
-JSHint](https://jshint.com/)
+All Javascript codes were passed through the [JSHint](https://jshint.com/) validator with all corrections made.
 
 ---
 
