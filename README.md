@@ -308,6 +308,10 @@ JSHint](https://jshint.com/)
 
 ---
 
+[Responsivley](https://responsively.app/) was used used to check the responsiveness of the site across multiple devices at the same time.
+
+![responsiveness testing](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/responsively.gif "responsiveness testing")
+
 ---
 
 ### Manual Testing
