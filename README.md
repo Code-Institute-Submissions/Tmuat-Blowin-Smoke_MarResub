@@ -434,8 +434,25 @@ Along with the automated testing, the site was put through a whole selection of 
 
 Testing the user stories from the [UX Section](#ux).
 
-- Blank
-    - Blank
+#### First Time User:
+- As a **first time visitor**, I want to visit a responsive site
+    - The site works on all screen sizes having followed a mobile first design and build process
+- As a **first time visitor**, I want to understand the main purpose of the site
+    - At the bottom of the landing video, is a short description regarding looking for recipes. Also, on every page is a short description of the site in the footer.
+- As a **first time visitor**, I want to be able to easily navigate through the site
+    - The site features a navbar fixed on every page, with links updating dependent on user authentication
+- As a **first time visitor**, I want to be able to find recipes to cook for myself
+    - On the home page is a random sample of 6 recipes and links in the nav bar and below the sample take the user to the recipe page. Here they are able to filter and search for different recipes.
+- As a **first time visitor**, I want to be able to filter to only see recipes of particular meats
+    - Above the recipe cards on the recipes page is a filter section visible on all screen sizes. Here you can text search or select a meat filter.
+- As a **first time visitor**, I want to be able to search to find particular recipes
+    - As stated above, there is a text search field to search, name, category and description for searched words/
+- As a **first time visitor**, I want to be able to register with the site
+    - The site features a register link in the navbar taking the user to a form for site registration.
+- As a **first time visitor**, I want to be able to view featured products which I may like to purchase
+    - As with recipes, a sample of 6 products are displayed on the home screen with a link to an all products page. On this page the user is presented with a paginated section of all products in the database.
+- As a **first time visitor**, I want to be able to filter to only see products of certain categories
+    - On the product page there is a filter section underneath the landing image which is visible on all screen sizes. This allows the user to filter to product types.
 
 ---
 
