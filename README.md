@@ -176,9 +176,73 @@ The wireframes for phone, tablet and desktop can be found by clicking [here](htt
 
 ---
 
+#### Design
+
+- Favicon
+    - The favicon matches the colour scheme and text used on the site.
+
+- Navbar 
+    - The site features a consistent navbar across all pages. It includes the site title along with links to pages; the links update with the active class and also if the user is logged in.
+        The navbar collapses into a hamburger icon on smaller screens to maximise screen space.
+    - The navbar is stuck to the top of the screen, meaning however far down the page the user scrolls they can always access the sites navigation links.
+    - The navbar is given a background on page scroll.
+
+- Footer
+    - The site features a consistent footer across all screen sizes; it includes links the main pages along with a small description of the website. 
+    - The footer also has 3 social media links styled as the respective sites logo.
+    - The footer lastly highlights the developer.
+
+- Interaction
+    - Flask flashes have been used to show toasts to inform the user of site events such as login/logout, add/update/deletion of objects. 
+    - The toasts have different styles dependent on 'error' or 'success' categories.
+
+- Overall Design
+    - The site features a consistent colour scheme and styling across all pages; offering the user simple yet attractive layout.
+    - The user can quickly find either products or recipes to buy or try.
+    - The site is responsive on all devices with a mobile-first design using the recognised Bootstrap framework
+
+#### Users
+- User functionality
+    - The site allows users to register, login and logout in clear fashions as the menu's change dependent on user authentication
+    - The site allows the user to access their profile and update certain criteria
+
+#### Recipes
+- Recipe Overview
+    - Visitors to the site can search, filter and view all recipes (READ). They can then follow the instructions to cook the recipe themselves.
+    - Recipes can be created, updated and deleted (the remaining three from CRUD) but only users can perform actions on their recipes. 
+    - Recipes can be sorted by categories with pagination.
+    - Visitors can also search for recipes and view results with pagination. 
+    - When users access their profile they can view a list of all recipes they have created.
+
 ---
 
 ### Features Left to Implement
+
+- Quote Change
+    - At the moment the landing page quotes are set in the database. It would be nice for the admin to be able to CRUD the quotes database.
+
+- Rating
+    - It would be nice for users to be able to rate the recipes, thus allowing other users to search based on a 1/5 or star rating and view the
+        most popular recipes.
+
+- Comments
+    - Much like the rating, it would be nice for users to be able to comment on recipes. As recipes can only be updated by the recipe owner, if someone
+        had an improvement they cannot add it.
+    
+- Favorites
+    - Allow the user to create their own list of favourite recipes to quickly access.
+
+- Contact Page
+    - Currently visitors to the site cannot contact the sites owners. This is a must for the site going forward.
+
+- Ingridient Calculation
+    - The ability to update the ingredients amounts based on the number of people you wish to cook for.
+
+- Recipe & Card Image
+    - Currently the only way to add images for recipes or products is to add an external url. It would be nice in the future to have an upload option.
+
+- User Deletion
+    - Allow the user to delete their profile should they not wish to be a part of the website anymore.
 
 ---
 
