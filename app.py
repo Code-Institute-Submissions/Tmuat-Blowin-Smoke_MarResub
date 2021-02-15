@@ -1250,9 +1250,25 @@ def edit_product(product_id):
 
 @app.route("/recipe/<recipe_id>")
 def view_recipe(recipe_id):
-    """
-    This view displays an individual recipe for site
-    visitors to view.
+    """view_recipe: \n
+    * This function renders the view-recipe.html template. \n
+    * Gets the recipe from the database using the recipe_id from
+        the args. \n
+    * As the steps and ingridients are both combined strings split
+        by ' ~ '. The strings are split down again to form lists
+        of individual ingridients and steps.
+    * To capitalize the start of each sentence in steps, further
+        for loops are used to capitalize and then re join the
+        individual sentences together.
+    \n
+    \n Args: \n
+    * recipe_id (str): A id of the obj to be edited from the
+        database.\n
+    \n
+    \n Returns: \n
+    * It renders the view-recipe.html \n
+    * It passes the recipe variable and two split lists to the
+        template. \n
     """
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -1276,7 +1292,7 @@ def view_recipe(recipe_id):
         "recipe_steps": recipe_steps_formatted,
         "recipe_ings": recipe_ings
     }
-    return render_template("view_recipe.html", **context)
+    return render_template("view-recipe.html", **context)
 
 
 @app.route("/delete-category/<category_id>")
