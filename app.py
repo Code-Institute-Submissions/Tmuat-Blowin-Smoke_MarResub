@@ -853,7 +853,7 @@ def edit_category_recipe(category_id):
         the form input and updates the record in the database. \n
     * If successful it redirects the user back to the admin page. \n
     * In order to edit the category, it passes the category to the
-        template. \n 
+        template. \n
     \n
     \n Args: \n
     * category_id (str): A id of the obj to be edited from the
@@ -913,9 +913,21 @@ def add_category_recipe():
 @app.route("/edit-category/product/<category_id>", methods=["GET", "POST"])
 @is_admin
 def edit_category_product(category_id):
-    """
-    A function to render a page for the purpose of
-    the editing categories.
+    """edit_category_product: \n
+    * This function allows the editing of a selected product category. \n
+    * If the request method is post, it takes the 'category' from
+        the form input and updates the record in the database. \n
+    * If successful it redirects the user back to the admin page. \n
+    * In order to edit the category, it passes the category to the
+        template. \n
+    \n
+    \n Args: \n
+    * category_id (str): A id of the obj to be edited from the
+        database.
+    \n
+    \n Returns: \n
+    * It redirects the user back to the admin page. \n
+    * It shows a toast to indicate the category has been edited. \n
     """
     if request.method == "POST":
 
