@@ -367,8 +367,8 @@ Should you wish to fork the project, please follow the below steps.
 ---
 
 - #### Misc
-    - Blank
-
+    - The favicon was produced using favicon.io](https://favicon.io/favicon-generator/), it incorporates the main colours of the site with the sites initials.
+    - The mockup at the start of the README.md was created using [Am I Responsive](http://ami.responsivedesign.is/) - I then created the gif myself.
 ---
 
 - #### Content
@@ -391,7 +391,6 @@ Should you wish to fork the project, please follow the below steps.
         - [Products](https://unsplash.com/@zgrillsaustralia)
         - [Default Recipe](https://unsplash.com/@markusspiske)
     - Most of the card & recipe images were sourced from google images.
-    - The loading gif was created at [favicon.io](https://favicon.io/favicon-generator/).
 
 ---
 
