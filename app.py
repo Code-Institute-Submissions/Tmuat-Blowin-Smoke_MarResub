@@ -1203,10 +1203,30 @@ def add_product():
 @app.route("/edit-product/<product_id>", methods=["GET", "POST"])
 @is_admin
 def edit_product(product_id):
+    """edit_product: \n
+    * This function renders the edit-product.html template. \n
+    * Gets the product from the database using the product_id from
+        the args. \n
+    * Gets the product categories to be used in select functions
+        on the edit form.\n
+    * The function checks if the request method is 'POST'. \n
+    * It then updates the databse with the new values.\n
+    \n
+    \n Args: \n
+    * product_id (str): A id of the obj to be edited from the
+        database.
+    \n
+    \n Returns: \n
+    * It renders the editt-product.html \n
+    * It passes the product variable and categories varible to the
+        template to be used for form values. \n
+    * It redirects the user back to the admin page if request
+        method is 'POST' and the product has been edited. \n
     """
-    A function to render a page for the purpose of
-    the editing a product.
-    """
+    product = mongo.db.products.find_one({"_id": ObjectId(product_id)})
+
+    categories = mongo.db.product_categories.find().sort("category", 1)
+
     if request.method == "POST":
         product = {'$set': {
             "name": request.form.get("productname").lower(),
@@ -1219,10 +1239,6 @@ def edit_product(product_id):
         mongo.db.products.update_one({"_id": ObjectId(product_id)}, product)
         flash("Product Updated Successfully", "success")
         return redirect(url_for('admin', username=session["user"]))
-
-    product = mongo.db.products.find_one({"_id": ObjectId(product_id)})
-
-    categories = mongo.db.product_categories.find().sort("category", 1)
 
     context = {
         "categories": categories,
