@@ -351,26 +351,74 @@ Testing the user stories from the [UX Section](#ux).
 
 ## Deployment
 
+### Local Deployment
 
----
+To run your own version of this project, it can be cloned or downloaded from Github
 
-### Github Deployment
+To clone this project:
 
----
+1. At the top the repository, click the green code button at the top of the screen.
+2. Click the clipboard icon to copy the URL.
+3. Open a new terminal window in your IDE of choice, and make sure the current working directory is the location where you want your cloned directory.
+4. In the command line, you need to paste the copied link mentioned above after 'git clone', to create your own local repository of the 'Blow'n Smoke' repository.
+```
+git clone https://github.com/Tmuat/blowin-smoke.git
+```
+5. This project uses [MongoDB](https://www.mongodb.com/), you will need to create a database that you will use for this project - you will also need to add the relevant collections later on.
+6. In the terminal window, install the required dependencies needed to successfully run the app. This can be done with:
+```
+pip3 install -r requirements.txt
+```
+7. At the root level of your application, create a file called env.py to contain your environmental variables. They are as follows:
+```
+import os
 
-To deploy this site to Github pages, the following steps were taken.
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY", "**User Inputted Secret Key**")
+os.environ.setdefault("MONGO_URI", "**Specific Link To MongoDB The User Has Created**")
+os.environ.setdefault("MONGO_DBNAME", "**Your MongoDB Name**")
 
-1. Blank
+```
 
----
+You will need to change the **MONGO_URI** and **MONGO_DBNAME** fields to those provided by your own version of the MongoDB database created. You must remeber to replace the necessary fields of 'username', 'password', 'cluste_name' and 'database_name' in the URI.
+You will also need to update the **SECRET_KEY**. The secret key can be of your own creation; you can generate one with [Random Keygen](https://randomkeygen.com/).
 
-### Clone
+8. You can now run the application locally, by typing in the terminal window: 
+```
+python3 app.py
+```
 
----
+***
 
-Should you wish to fork the project, please follow the below steps.
+### Deploying to Heroku
 
-1. Blank
+If you would like to deploy this site to Heroku, there are some additional steps that need to be taken:
+
+1. Sign in or create a [Heroku](https://www.heroku.com) account and create a new app (choosing a unique name). Ensure the region selected is the one closet to you.
+2. Once created, navigate to the 'Settings' tab, and click the 'Reveal Config Vars' button.
+3. Here you need to enter the **exact** same variables created in your env.py file:
+```
+IP = 0.0.0.0
+PORT = 5000
+SECRET_KEY = SECRET_KEY
+MONGO_URI = MONGO_URI
+MONGO_DBNAME = MONGO_DBNAME
+```
+4. In your local repository, create the requirements.txt if not already created. Heroku will use this to create the same environment as your IDE on heroku:
+```
+pip3 freeze > requirements.txt
+```
+5. Then create a Procfile, including the content in the creation:
+```
+echo web: python app.py > Procfile
+```
+6. Within the Heroku app you have made, navigate to the 'Deploy' tab, and under the 'Deployment method' section, select 'Connect to Github'.
+7. You may be required to link your Github but once it is done you can search for the repository you are storing this site in.
+8. Make sure to select the correct repository and click 'connect'.
+9. Now you should be able to deploy from the master branch. You have the option of setting automatic deploys, so that if you update any code it is automatically pushed to Heroku.
+10. Heroku will now start building the app, you can see the app being built. It will let you know when the build is complete. 
+11. When the build is complete, you should see that 'Your app was successfully deployed'. Click the 'View' button to to launch the app.
 
 [Return to Contents](#contents)
 
