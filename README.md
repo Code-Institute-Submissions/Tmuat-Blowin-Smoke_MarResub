@@ -353,6 +353,8 @@ Testing the user stories from the [UX Section](#ux).
 
 ### Local Deployment
 
+---
+
 To run your own version of this project, it can be cloned or downloaded from Github
 
 To clone this project:
@@ -391,7 +393,11 @@ python3 app.py
 
 ***
 
+---
+
 ### Deploying to Heroku
+
+---
 
 If you would like to deploy this site to Heroku, there are some additional steps that need to be taken:
 
