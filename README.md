@@ -244,6 +244,10 @@ The wireframes for phone, tablet and desktop can be found by clicking [here](htt
 - User Deletion
     - Allow the user to delete their profile should they not wish to be a part of the website anymore.
 
+- Custom Error Pages
+    - At the moment I do not have custom error pages, with this site specifically a 403, 404 and 500 error pages would be essential. It would also be good to
+        add some logging to be able to identify any errors that come up.
+
 ---
 
 [Return to Contents](#contents)
@@ -402,8 +406,20 @@ Testing the user stories from the [UX Section](#ux).
 
 ---
 
-- Blank
-    - Blank
+- Index Out of Range
+    - Fixed the error on the home page whereby if there was less than 6 products or recipes it caused the index to be out of range and throw
+        a server error.
+
+- Category/Page
+    - With pagination I fixed an error whereby if a user directly changed the url they could search for categories or pages that don't exist. 
+        Server side, the request arguement is checked first with redirects and toasts should an error occur.
+
+- Fixed slow loading error of landing video
+    - The landing video was slow to load due to it's size. I was able to compress and shorten it to allow for quicker loading. There is tradeoff as the smaller
+        it becomes it also loses quality.
+
+- Div error for dynamically adding and deleting forms fields
+    - Due to a html error when writing the code, the html fields weren't being added or removed correctly. This was also causing the inputs to not be correctly identified.
 
 ---
 
