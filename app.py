@@ -1065,21 +1065,58 @@ def add_recipe():
 @app.route("/edit-recipe/<recipe_id>", methods=["GET", "POST"])
 @login_required
 def edit_recipe(recipe_id):
+    """edit_recipe: \n
+    * This function renders the edit-recipe.html template. \n
+    * Gets the recipe from the database using the recipe_id from
+        the args. \n
+    * Gets the recipe categories to be used in select functions
+        on the edit form.\n
+    * Creates two lists by splitting the two joined strings down
+        to the original inputs. \n
+    * The function checks if the request method is 'POST'. \n
+    * It recreates the one string needed for both ingridients
+        and steps from the dynamic inputs.\n
+    * It then updates the databse with the new values.\n
+    \n
+    \n Args: \n
+    * recipe_id (str): A id of the obj to be edited from the
+        database.
+    \n
+    \n Returns: \n
+    * It renders the eidt-recipe.html \n
+    * It passes the recipe variable and categories varible to the
+        template to be used for form values. \n
+    * It redirects the user back to the profile page if request
+        method is 'POST' and the recipe has been edited. \n
     """
-    A function to render a page for the purpose of
-    the editing recipes.
-    """
+    # Gets the recipe to be passed to the template for the form values
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+    # Splits the two joined string values back into a list of all
+    # individual steps and ingridients
+    recipe_ings = recipe["ingridients"].split(" ~ ")
+    recipe_steps = recipe["steps"].split(" ~ ")
+
+    categories = mongo.db.categories.find().sort("category", 1)
+
     if request.method == "POST":
         """
-        As the recipe form allows a dynamic amount of
-        ingridients and steps, the below loops through
-        the ingridients/steps creating a string split
-        by the character "~".
+        As the recipe form for add recipe allows for a
+        dynamic amount of ingridients and steps, the below
+        loops through the ingridients/steps creating a string
+        split by the character " ~ " once edited.
         """
+        # Empty strings
         ingridients = ""
         steps = ""
+
+        # For loop indexes
         for_loop_idx_ing = 0
         for_loop_idx_steps = 0
+
+        # Loops the keys and values of all request form items
+        # looking for the inputs starting with the specific values.
+        # It then combines these into a string seperated by ' ~ ',
         for key, val in request.form.items():
             if key.startswith("ingridients"):
                 if for_loop_idx_ing > 0:
@@ -1096,6 +1133,8 @@ def edit_recipe(recipe_id):
                     steps += val.lower()
                     for_loop_idx_steps += 1
 
+        # Creates the variables to be updated, it uses $set to only
+        # update these variables and not delete created_by and created.
         recipe = {'$set': {
             "name": request.form.get("recipename").lower(),
             "category": request.form.get("category").lower(),
@@ -1110,12 +1149,6 @@ def edit_recipe(recipe_id):
         mongo.db.recipes.update_one({"_id": ObjectId(recipe_id)}, recipe)
         flash("Recipe Updated Successfully", "success")
         return redirect(url_for('profile', username=session["user"]))
-
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    recipe_ings = recipe["ingridients"].split(" ~ ")
-    recipe_steps = recipe["steps"].split(" ~ ")
-
-    categories = mongo.db.categories.find().sort("category", 1)
 
     context = {
         "categories": categories,
