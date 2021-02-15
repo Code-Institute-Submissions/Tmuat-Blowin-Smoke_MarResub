@@ -191,7 +191,7 @@ def index():
 def recipes():
     """recipes: \n
     * This function renders the recipes page (recipes.html). \n
-    * It sets a limit of products to be displayed per page (9). \n
+    * It sets a limit of recipes to be displayed per page (9). \n
     * It checks if either 'q' for a search query or 'category' for a category
         filter are in the request arguements to filter the queryset from
         MongoDB. \n
@@ -236,7 +236,7 @@ def recipes():
         search_key = None
 
     # Gets the filtered lists or by default all recipes. It then checks
-    # if the len is == 0 to avoid server errors if it doesn't exist.
+    # if the len is == 0 to avoid server errors if their are none.
     if category:
         all_recipes = list(mongo.db.recipes.find(
             {"category": category}).sort("_id", -1))
@@ -259,7 +259,8 @@ def recipes():
 
     # Setting the offset of the queryset dependent on current page
     # from request args. Defensive programming to ensure the user
-    # can't force a page out of the queryset range
+    # can't force a page out of the queryset range causing a server
+    # error.
     if 'page' in request.args:
         if int(request.args['page']) <= 1:
             page = 1
@@ -295,7 +296,7 @@ def recipes():
             mongo.db.recipes.find(
                 {'_id': {'$lte': last_id}}).sort("_id", -1).limit(limit))
 
-    # Getting the next & prev url dependent on which parameters are in 
+    # Getting the next & prev url dependent on which parameters are in
     # the request arguements.
     if search_key:
         if offset + limit >= total_recipes:
@@ -343,22 +344,47 @@ def recipes():
 
 @app.route("/products")
 def products():
-    """
-    A function to render a page of all products, with options
-    to filter and search.
-
-    This code allows pagination of results
-    Code from https://www.youtube.com/watch?v=Lnt6JqtzM7I
+    """products: \n
+    * This function renders the products page (products.html). \n
+    * It sets a limit of products to be displayed per page (6). \n
+    * It checks if 'category' for a category filter are in the
+        request arguements to filter the queryset from MongoDB. \n
+    * If category is in the args, it adjusts the filters sent to
+        MongoDB prior to pagination. \n
+    * It gets the total length of the MongoDB queryset based on the
+        filters or if there aren't any filters. This part of the pagination
+        is a known bug as this produces two database queries (original query
+        & the filtered query). The total products returned are passed to the
+        template as 'total_products'. \n
+    * It gets the filtered queryset to be passed to the template as
+        'products'. \n
+    * From the current page, offset and any filters it calulates strings
+        for next and previous paginated pages. \n
+    * It accesses MongoDB to get all the products categories to be
+        used as filters. They are passed to the template as 'categories'. \n
+    \n
+    \n Returns: \n
+    * It returns 'products.html' \n
+    * It returns all products or filtered products \n
+    * It returns all products categories \n
+    * It returns an integer of the total length of the product list \n
+    * It returns the filter or query if there was one \n
+    * It returns the pagination info of next_url, prev_url and page.
+    \n
+    \n Reference: \n
+    * Pagination code - https://www.youtube.com/watch?v=Lnt6JqtzM7I
     """
     # Number of items per page
     limit = 6
 
+    # Checks if 'category' in request arguements, if not sets a default
     if 'category' in request.args:
         category = request.args.get('category')
     else:
         category = None
 
-    # Getting the total number of products
+    # Gets the filtered lists or by default all products. It then checks
+    # if the len is == 0 to avoid server errors if their are none.
     if category:
         all_products = list(mongo.db.products.find(
             {"category": category}).sort("_id", -1))
@@ -369,9 +395,13 @@ def products():
     else:
         all_products = list(mongo.db.products.find().sort("_id", -1))
 
+    # Gets the length of the list being sent to the template
     total_products = len(all_products)
 
-    # Getting the offset (page number)
+    # Setting the offset of the queryset dependent on current page
+    # from request args. Defensive programming to ensure the user
+    # can't force a page out of the queryset range causing a server
+    # error.
     if 'page' in request.args:
         if int(request.args['page']) <= 1:
             page = 1
@@ -388,20 +418,22 @@ def products():
         page = 1
         offset = 0
 
-    # Getting the last id to with the offset used
+    # Getting the last id to with the offset being passed in
     last_id = all_products[offset]["_id"]
 
-    # Getting the first id in the filtered queryset
+    # Getting the filtered queryset including the offset using 'lte'
+    # It then uses the set page limit (6) to get the page recipes.
     if category:
         query = {"$and": [{"category": category}, {'_id': {'$lte': last_id}}]}
-        products = list(
+        products_qs = list(
             mongo.db.products.find(query).sort("_id", -1).limit(limit))
     else:
-        products = list(
+        products_qs = list(
             mongo.db.products.find(
                 {'_id': {'$lte': last_id}}).sort("_id", -1).limit(limit))
 
-    # Getting the next & prev url
+    # Getting the next & prev url dependent on which parameters are in
+    # the request arguements.
     if category:
         if offset + limit >= total_products:
             next_url = None
@@ -425,7 +457,7 @@ def products():
     categories = list(mongo.db.product_categories.find().sort("category", 1))
 
     context = {
-        "products": products,
+        "products": products_qs,
         "categories": categories,
         "results": total_products,
         "filter": category,
