@@ -366,11 +366,15 @@ The validator outputs were gone through to check for normal HTML errors.
 
 ---
 
-[Google Lighthouse](https://developers.google.com/web/tools/lighthouse#devtools)
+[Google Lighthouse](https://developers.google.com/web/tools/lighthouse#devtools) testing was used to ensure the Blow'n Smoke was accessible for all users. The scores for the home page can be seen below with the results linked beneath that:
 
 ![lighthouse desktop](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/desktop/desktop%20overview.png "Desktop Overview")
 
 ![lighthouse mobile](https://github.com/Tmuat/blowin-smoke/blob/master/assets/readme_images/mobile/mobile%20overview.png "Desktop Mobile")
+
+[lighthouse Desktop](https://github.com/Tmuat/blowin-smoke/tree/master/assets/readme_images/desktop)
+
+[lighthouse Mobile](https://github.com/Tmuat/blowin-smoke/tree/master/assets/readme_images/mobile)
 
 ---
 
