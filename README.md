@@ -118,6 +118,17 @@ If the user is an admin, he/she can add, edit and delete their recipes; along wi
 
 #### Colour Scheme
 
+The site predominantly has a black and white theme, owing to the overall site aim being about 
+smoking and the black & white nature of smoke. To add an element of colour and draw the users eye 
+to key features a off coloured orange was used.
+
+The hex codes for the main colours used are:
+
+Black #070707
+White #FFFFFF
+Off-white #D8CFCB
+Orange #D95E16
+
 ---
 
 #### Fonts
