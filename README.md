@@ -234,6 +234,18 @@ A number of external frameworks, code libraries and programs were incorportated 
 - [Google Fonts](https://fonts.google.com/)
     - Google Fonts was used to find and import the selected font for the site
 
+- [Jinja](https://jinja.palletsprojects.com/en/2.11.x/)
+    - Was used as the templating language to pass variables from python to html
+
+- [Werkzeug](https://werkzeug.palletsprojects.com/en/1.0.x/)
+    - Was used within Flask to hash passwords for entry into the database
+
+- [MongoDB](https://www.mongodb.com/)
+    - MongoDB was used as the database for the project.
+
+- [Heroku](https://www.heroku.com)
+    - Heroku was used to host the website online.
+
 - WC3 [HTML](https://validator.w3.org/) & [CSS](https://jigsaw.w3.org/css-validator/) Validator
     - Both the CSS & HTML validators were used to check code for compliance with recognised standards
 
