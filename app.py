@@ -686,6 +686,8 @@ def profile(username):
         page = 1
         offset = 0
 
+    recipes = ()
+
     if total_recipes > 0:
         # Getting the last id to with the offset used
         last_id = user_recipes[offset]["_id"]
@@ -1400,4 +1402,4 @@ def context_processor():
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)
